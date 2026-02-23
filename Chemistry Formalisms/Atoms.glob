@@ -1,0 +1,1637 @@
+DIGEST 23881087a4907ca0c75c1d9a30924d2f
+FAtoms
+R186:200 Stdlib.Reals.Reals <> <> lib
+R218:234 Stdlib.ZArith.ZArith <> <> lib
+R252:265 Stdlib.Lists.List <> <> lib
+R283:299 Stdlib.micromega.Lia <> <> lib
+R317:333 Stdlib.micromega.Lra <> <> lib
+R343:355 Stdlib.Lists.List ListNotations <> mod
+ind 439:445 <> Element
+constr 478:478 <> H
+constr 483:484 <> He
+constr 507:508 <> Li
+constr 512:513 <> Be
+constr 517:517 <> B
+constr 522:522 <> C
+constr 527:527 <> N
+constr 532:532 <> O
+constr 537:537 <> F
+constr 542:543 <> Ne
+constr 566:567 <> Na
+constr 571:572 <> Mg
+constr 576:577 <> Al
+constr 581:582 <> Si
+constr 586:586 <> P
+constr 591:591 <> S
+constr 596:597 <> Cl
+constr 601:602 <> Ar
+constr 625:625 <> K
+constr 630:631 <> Ca
+constr 635:636 <> Sc
+constr 640:641 <> Ti
+constr 645:645 <> V
+constr 650:651 <> Cr
+constr 655:656 <> Mn
+constr 660:661 <> Fe
+constr 665:666 <> Co
+constr 670:671 <> Ni
+constr 675:676 <> Cu
+constr 680:681 <> Zn
+constr 687:688 <> Ga
+constr 692:693 <> Ge
+constr 697:698 <> As
+constr 702:703 <> Se
+constr 707:708 <> Br
+constr 712:713 <> Kr
+constr 736:737 <> Rb
+constr 741:742 <> Sr
+constr 746:746 <> Y
+constr 751:752 <> Zr
+constr 756:757 <> Nb
+constr 761:762 <> Mo
+constr 766:767 <> Tc
+constr 771:772 <> Ru
+constr 776:777 <> Rh
+constr 781:782 <> Pd
+constr 786:787 <> Ag
+constr 791:792 <> Cd
+constr 798:799 <> In
+constr 803:804 <> Sn
+constr 808:809 <> Sb
+constr 813:814 <> Te
+constr 818:818 <> I
+constr 823:824 <> Xe
+constr 847:848 <> Cs
+constr 852:853 <> Ba
+constr 879:880 <> La
+constr 884:885 <> Ce
+constr 889:890 <> Pr
+constr 894:895 <> Nd
+constr 899:900 <> Pm
+constr 904:905 <> Sm
+constr 909:910 <> Eu
+constr 914:915 <> Gd
+constr 919:920 <> Tb
+constr 924:925 <> Dy
+constr 929:930 <> Ho
+constr 934:935 <> Er
+constr 939:940 <> Tm
+constr 944:945 <> Yb
+constr 949:950 <> Lu
+constr 981:982 <> Hf
+constr 986:987 <> Ta
+constr 991:991 <> W
+constr 996:997 <> Re
+constr 1001:1002 <> Os
+constr 1006:1007 <> Ir
+constr 1011:1012 <> Pt
+constr 1016:1017 <> Au
+constr 1021:1022 <> Hg
+constr 1028:1029 <> Tl
+constr 1033:1034 <> Pb
+constr 1038:1039 <> Bi
+constr 1043:1044 <> Po
+constr 1048:1049 <> At
+constr 1053:1054 <> Rn
+constr 1077:1078 <> Fr
+constr 1082:1083 <> Ra
+constr 1107:1108 <> Ac
+constr 1112:1113 <> Th
+constr 1117:1118 <> Pa
+constr 1122:1122 <> U
+constr 1127:1128 <> Np
+constr 1132:1133 <> Pu
+constr 1137:1138 <> Am
+constr 1142:1143 <> Cm
+constr 1147:1148 <> Bk
+constr 1152:1153 <> Cf
+constr 1157:1158 <> Es
+constr 1162:1163 <> Fm
+constr 1167:1168 <> Md
+constr 1172:1173 <> No
+constr 1177:1178 <> Lr
+constr 1209:1210 <> Rf
+constr 1214:1215 <> Db
+constr 1219:1220 <> Sg
+constr 1224:1225 <> Bh
+constr 1229:1230 <> Hs
+constr 1234:1235 <> Mt
+constr 1239:1240 <> Ds
+constr 1244:1245 <> Rg
+constr 1249:1250 <> Cn
+constr 1256:1257 <> Nh
+constr 1261:1262 <> Fl
+constr 1266:1267 <> Mc
+constr 1271:1272 <> Lv
+constr 1276:1277 <> Ts
+constr 1281:1282 <> Og
+scheme 439:445 <> Element_rect
+scheme 439:445 <> Element_ind
+scheme 439:445 <> Element_rec
+scheme 439:445 <> Element_sind
+def 1325:1337 <> atomic_number
+R1344:1350 Atoms <> Element ind
+binder 1340:1340 <> e:3
+R1355:1357 Corelib.Init.Datatypes <> nat ind
+R1370:1370 Atoms <> e:3 var
+R1381:1381 Atoms <> H constr
+R1392:1393 Atoms <> He constr
+R1404:1405 Atoms <> Li constr
+R1415:1416 Atoms <> Be constr
+R1426:1426 Atoms <> B constr
+R1437:1437 Atoms <> C constr
+R1448:1448 Atoms <> N constr
+R1460:1460 Atoms <> O constr
+R1471:1471 Atoms <> F constr
+R1482:1483 Atoms <> Ne constr
+R1495:1496 Atoms <> Na constr
+R1506:1507 Atoms <> Mg constr
+R1517:1518 Atoms <> Al constr
+R1528:1529 Atoms <> Si constr
+R1539:1539 Atoms <> P constr
+R1552:1552 Atoms <> S constr
+R1563:1564 Atoms <> Cl constr
+R1574:1575 Atoms <> Ar constr
+R1587:1587 Atoms <> K constr
+R1598:1599 Atoms <> Ca constr
+R1609:1610 Atoms <> Sc constr
+R1620:1621 Atoms <> Ti constr
+R1631:1631 Atoms <> V constr
+R1644:1645 Atoms <> Cr constr
+R1655:1656 Atoms <> Mn constr
+R1666:1667 Atoms <> Fe constr
+R1677:1678 Atoms <> Co constr
+R1688:1689 Atoms <> Ni constr
+R1701:1702 Atoms <> Cu constr
+R1712:1713 Atoms <> Zn constr
+R1723:1724 Atoms <> Ga constr
+R1734:1735 Atoms <> Ge constr
+R1745:1746 Atoms <> As constr
+R1758:1759 Atoms <> Se constr
+R1769:1770 Atoms <> Br constr
+R1780:1781 Atoms <> Kr constr
+R1793:1794 Atoms <> Rb constr
+R1804:1805 Atoms <> Sr constr
+R1815:1815 Atoms <> Y constr
+R1826:1827 Atoms <> Zr constr
+R1837:1838 Atoms <> Nb constr
+R1850:1851 Atoms <> Mo constr
+R1861:1862 Atoms <> Tc constr
+R1872:1873 Atoms <> Ru constr
+R1883:1884 Atoms <> Rh constr
+R1894:1895 Atoms <> Pd constr
+R1907:1908 Atoms <> Ag constr
+R1918:1919 Atoms <> Cd constr
+R1929:1930 Atoms <> In constr
+R1940:1941 Atoms <> Sn constr
+R1951:1952 Atoms <> Sb constr
+R1964:1965 Atoms <> Te constr
+R1975:1975 Atoms <> I constr
+R1986:1987 Atoms <> Xe constr
+R1999:2000 Atoms <> Cs constr
+R2010:2011 Atoms <> Ba constr
+R2023:2024 Atoms <> La constr
+R2034:2035 Atoms <> Ce constr
+R2045:2046 Atoms <> Pr constr
+R2056:2057 Atoms <> Nd constr
+R2067:2068 Atoms <> Pm constr
+R2080:2081 Atoms <> Sm constr
+R2091:2092 Atoms <> Eu constr
+R2102:2103 Atoms <> Gd constr
+R2113:2114 Atoms <> Tb constr
+R2124:2125 Atoms <> Dy constr
+R2137:2138 Atoms <> Ho constr
+R2148:2149 Atoms <> Er constr
+R2159:2160 Atoms <> Tm constr
+R2170:2171 Atoms <> Yb constr
+R2181:2182 Atoms <> Lu constr
+R2194:2195 Atoms <> Hf constr
+R2205:2206 Atoms <> Ta constr
+R2216:2216 Atoms <> W constr
+R2227:2228 Atoms <> Re constr
+R2238:2239 Atoms <> Os constr
+R2251:2252 Atoms <> Ir constr
+R2262:2263 Atoms <> Pt constr
+R2273:2274 Atoms <> Au constr
+R2284:2285 Atoms <> Hg constr
+R2297:2298 Atoms <> Tl constr
+R2308:2309 Atoms <> Pb constr
+R2319:2320 Atoms <> Bi constr
+R2330:2331 Atoms <> Po constr
+R2341:2342 Atoms <> At constr
+R2352:2353 Atoms <> Rn constr
+R2365:2366 Atoms <> Fr constr
+R2376:2377 Atoms <> Ra constr
+R2389:2390 Atoms <> Ac constr
+R2400:2401 Atoms <> Th constr
+R2411:2412 Atoms <> Pa constr
+R2422:2422 Atoms <> U constr
+R2433:2434 Atoms <> Np constr
+R2446:2447 Atoms <> Pu constr
+R2457:2458 Atoms <> Am constr
+R2468:2469 Atoms <> Cm constr
+R2479:2480 Atoms <> Bk constr
+R2490:2491 Atoms <> Cf constr
+R2503:2504 Atoms <> Es constr
+R2514:2515 Atoms <> Fm constr
+R2525:2526 Atoms <> Md constr
+R2536:2537 Atoms <> No constr
+R2547:2548 Atoms <> Lr constr
+R2561:2562 Atoms <> Rf constr
+R2572:2573 Atoms <> Db constr
+R2583:2584 Atoms <> Sg constr
+R2594:2595 Atoms <> Bh constr
+R2605:2606 Atoms <> Hs constr
+R2619:2620 Atoms <> Mt constr
+R2630:2631 Atoms <> Ds constr
+R2641:2642 Atoms <> Rg constr
+R2652:2653 Atoms <> Cn constr
+R2666:2667 Atoms <> Nh constr
+R2677:2678 Atoms <> Fl constr
+R2688:2689 Atoms <> Mc constr
+R2699:2700 Atoms <> Lv constr
+R2710:2711 Atoms <> Ts constr
+R2721:2722 Atoms <> Og constr
+def 2792:2802 <> atomic_mass
+R2809:2815 Atoms <> Element ind
+binder 2805:2805 <> e:5
+R2820:2820 Stdlib.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R2833:2833 Atoms <> e:5 var
+R2844:2844 Atoms <> H constr
+R2860:2861 Atoms <> He constr
+R2877:2878 Atoms <> Li constr
+R2893:2894 Atoms <> Be constr
+R2909:2909 Atoms <> B constr
+R2925:2925 Atoms <> C constr
+R2942:2942 Atoms <> N constr
+R2958:2958 Atoms <> O constr
+R2974:2974 Atoms <> F constr
+R2990:2991 Atoms <> Ne constr
+R3007:3008 Atoms <> Na constr
+R3023:3024 Atoms <> Mg constr
+R3039:3040 Atoms <> Al constr
+R3055:3056 Atoms <> Si constr
+R3072:3072 Atoms <> P constr
+R3088:3088 Atoms <> S constr
+R3104:3105 Atoms <> Cl constr
+R3120:3121 Atoms <> Ar constr
+R3137:3137 Atoms <> K constr
+R3153:3154 Atoms <> Ca constr
+R3169:3170 Atoms <> Sc constr
+R3185:3186 Atoms <> Ti constr
+R3202:3202 Atoms <> V constr
+R3218:3219 Atoms <> Cr constr
+R3234:3235 Atoms <> Mn constr
+R3250:3251 Atoms <> Fe constr
+R3267:3268 Atoms <> Co constr
+R3283:3284 Atoms <> Ni constr
+R3299:3300 Atoms <> Cu constr
+R3315:3316 Atoms <> Zn constr
+R3331:3332 Atoms <> Ga constr
+R3347:3348 Atoms <> Ge constr
+R3363:3364 Atoms <> As constr
+R3379:3380 Atoms <> Se constr
+R3396:3397 Atoms <> Br constr
+R3412:3413 Atoms <> Kr constr
+R3429:3430 Atoms <> Rb constr
+R3445:3446 Atoms <> Sr constr
+R3461:3461 Atoms <> Y constr
+R3477:3478 Atoms <> Zr constr
+R3494:3495 Atoms <> Nb constr
+R3510:3511 Atoms <> Mo constr
+R3526:3527 Atoms <> Tc constr
+R3542:3543 Atoms <> Ru constr
+R3559:3560 Atoms <> Rh constr
+R3575:3576 Atoms <> Pd constr
+R3591:3592 Atoms <> Ag constr
+R3607:3608 Atoms <> Cd constr
+R3624:3625 Atoms <> In constr
+R3640:3641 Atoms <> Sn constr
+R3656:3657 Atoms <> Sb constr
+R3672:3673 Atoms <> Te constr
+R3689:3689 Atoms <> I constr
+R3705:3706 Atoms <> Xe constr
+R3722:3723 Atoms <> Cs constr
+R3738:3739 Atoms <> Ba constr
+R3755:3756 Atoms <> La constr
+R3771:3772 Atoms <> Ce constr
+R3787:3788 Atoms <> Pr constr
+R3803:3804 Atoms <> Nd constr
+R3820:3821 Atoms <> Pm constr
+R3836:3837 Atoms <> Sm constr
+R3852:3853 Atoms <> Eu constr
+R3868:3869 Atoms <> Gd constr
+R3885:3886 Atoms <> Tb constr
+R3901:3902 Atoms <> Dy constr
+R3917:3918 Atoms <> Ho constr
+R3933:3934 Atoms <> Er constr
+R3950:3951 Atoms <> Tm constr
+R3966:3967 Atoms <> Yb constr
+R3982:3983 Atoms <> Lu constr
+R3999:4000 Atoms <> Hf constr
+R4015:4016 Atoms <> Ta constr
+R4031:4031 Atoms <> W constr
+R4047:4048 Atoms <> Re constr
+R4064:4065 Atoms <> Os constr
+R4080:4081 Atoms <> Ir constr
+R4096:4097 Atoms <> Pt constr
+R4112:4113 Atoms <> Au constr
+R4129:4130 Atoms <> Hg constr
+R4146:4147 Atoms <> Tl constr
+R4162:4163 Atoms <> Pb constr
+R4178:4179 Atoms <> Bi constr
+R4194:4195 Atoms <> Po constr
+R4210:4211 Atoms <> At constr
+R4226:4227 Atoms <> Rn constr
+R4242:4243 Atoms <> Fr constr
+R4258:4259 Atoms <> Ra constr
+R4274:4275 Atoms <> Ac constr
+R4290:4291 Atoms <> Th constr
+R4306:4307 Atoms <> Pa constr
+R4322:4322 Atoms <> U constr
+R4339:4340 Atoms <> Np constr
+R4355:4356 Atoms <> Pu constr
+R4371:4372 Atoms <> Am constr
+R4387:4388 Atoms <> Cm constr
+R4403:4404 Atoms <> Bk constr
+R4419:4420 Atoms <> Cf constr
+R4435:4436 Atoms <> Es constr
+R4451:4452 Atoms <> Fm constr
+R4467:4468 Atoms <> Md constr
+R4483:4484 Atoms <> No constr
+R4499:4500 Atoms <> Lr constr
+R4515:4516 Atoms <> Rf constr
+R4531:4532 Atoms <> Db constr
+R4547:4548 Atoms <> Sg constr
+R4563:4564 Atoms <> Bh constr
+R4579:4580 Atoms <> Hs constr
+R4595:4596 Atoms <> Mt constr
+R4611:4612 Atoms <> Ds constr
+R4627:4628 Atoms <> Rg constr
+R4643:4644 Atoms <> Cn constr
+R4659:4660 Atoms <> Nh constr
+R4675:4676 Atoms <> Fl constr
+R4691:4692 Atoms <> Mc constr
+R4707:4708 Atoms <> Lv constr
+R4723:4724 Atoms <> Ts constr
+R4739:4740 Atoms <> Og constr
+def 4824:4843 <> van_der_waals_radius
+R4850:4856 Atoms <> Element ind
+binder 4846:4846 <> e:7
+R4861:4861 Stdlib.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R4874:4874 Atoms <> e:7 var
+R4885:4885 Atoms <> H constr
+R4898:4899 Atoms <> He constr
+R4913:4914 Atoms <> Li constr
+R4926:4927 Atoms <> Be constr
+R4939:4939 Atoms <> B constr
+R4952:4952 Atoms <> C constr
+R4967:4967 Atoms <> N constr
+R4980:4980 Atoms <> O constr
+R4993:4993 Atoms <> F constr
+R5006:5007 Atoms <> Ne constr
+R5021:5022 Atoms <> Na constr
+R5034:5035 Atoms <> Mg constr
+R5047:5048 Atoms <> Al constr
+R5060:5061 Atoms <> Si constr
+R5075:5075 Atoms <> P constr
+R5088:5088 Atoms <> S constr
+R5101:5102 Atoms <> Cl constr
+R5114:5115 Atoms <> Ar constr
+R5129:5129 Atoms <> K constr
+R5142:5143 Atoms <> Ca constr
+R5155:5156 Atoms <> Sc constr
+R5168:5169 Atoms <> Ti constr
+R5183:5183 Atoms <> V constr
+R5196:5197 Atoms <> Cr constr
+R5209:5210 Atoms <> Mn constr
+R5222:5223 Atoms <> Fe constr
+R5237:5238 Atoms <> Co constr
+R5250:5251 Atoms <> Ni constr
+R5263:5264 Atoms <> Cu constr
+R5276:5277 Atoms <> Zn constr
+R5291:5292 Atoms <> Ga constr
+R5304:5305 Atoms <> Ge constr
+R5317:5318 Atoms <> As constr
+R5330:5331 Atoms <> Se constr
+R5345:5346 Atoms <> Br constr
+R5358:5359 Atoms <> Kr constr
+R5373:5374 Atoms <> Rb constr
+R5386:5387 Atoms <> Sr constr
+R5399:5399 Atoms <> Y constr
+R5412:5413 Atoms <> Zr constr
+R5427:5428 Atoms <> Nb constr
+R5440:5441 Atoms <> Mo constr
+R5453:5454 Atoms <> Tc constr
+R5466:5467 Atoms <> Ru constr
+R5481:5482 Atoms <> Rh constr
+R5494:5495 Atoms <> Pd constr
+R5507:5508 Atoms <> Ag constr
+R5520:5521 Atoms <> Cd constr
+R5535:5536 Atoms <> In constr
+R5548:5549 Atoms <> Sn constr
+R5561:5562 Atoms <> Sb constr
+R5574:5575 Atoms <> Te constr
+R5589:5589 Atoms <> I constr
+R5602:5603 Atoms <> Xe constr
+R5617:5618 Atoms <> Cs constr
+R5630:5631 Atoms <> Ba constr
+R5645:5646 Atoms <> La constr
+R5658:5659 Atoms <> Ce constr
+R5671:5672 Atoms <> Pr constr
+R5684:5685 Atoms <> Nd constr
+R5699:5700 Atoms <> Pm constr
+R5712:5713 Atoms <> Sm constr
+R5725:5726 Atoms <> Eu constr
+R5738:5739 Atoms <> Gd constr
+R5753:5754 Atoms <> Tb constr
+R5766:5767 Atoms <> Dy constr
+R5779:5780 Atoms <> Ho constr
+R5792:5793 Atoms <> Er constr
+R5807:5808 Atoms <> Tm constr
+R5820:5821 Atoms <> Yb constr
+R5833:5834 Atoms <> Lu constr
+R5848:5849 Atoms <> Hf constr
+R5861:5862 Atoms <> Ta constr
+R5874:5874 Atoms <> W constr
+R5887:5888 Atoms <> Re constr
+R5902:5903 Atoms <> Os constr
+R5915:5916 Atoms <> Ir constr
+R5928:5929 Atoms <> Pt constr
+R5941:5942 Atoms <> Au constr
+R5956:5957 Atoms <> Hg constr
+R5969:5970 Atoms <> Tl constr
+R5982:5983 Atoms <> Pb constr
+R5995:5996 Atoms <> Bi constr
+R6010:6011 Atoms <> Po constr
+R6023:6024 Atoms <> At constr
+R6036:6037 Atoms <> Rn constr
+R6051:6052 Atoms <> Fr constr
+R6064:6065 Atoms <> Ra constr
+R6079:6080 Atoms <> Ac constr
+R6092:6093 Atoms <> Th constr
+R6105:6106 Atoms <> Pa constr
+R6118:6118 Atoms <> U constr
+R6133:6134 Atoms <> Np constr
+R6146:6147 Atoms <> Pu constr
+R6159:6160 Atoms <> Am constr
+R6172:6173 Atoms <> Cm constr
+R6187:6188 Atoms <> Bk constr
+R6200:6201 Atoms <> Cf constr
+R6213:6214 Atoms <> Es constr
+R6226:6227 Atoms <> Fm constr
+R6241:6242 Atoms <> Md constr
+R6254:6255 Atoms <> No constr
+R6267:6268 Atoms <> Lr constr
+R6282:6283 Atoms <> Rf constr
+R6295:6296 Atoms <> Db constr
+R6308:6309 Atoms <> Sg constr
+R6321:6322 Atoms <> Bh constr
+R6336:6337 Atoms <> Hs constr
+R6349:6350 Atoms <> Mt constr
+R6362:6363 Atoms <> Ds constr
+R6375:6376 Atoms <> Rg constr
+R6390:6391 Atoms <> Cn constr
+R6403:6404 Atoms <> Nh constr
+R6416:6417 Atoms <> Fl constr
+R6429:6430 Atoms <> Mc constr
+R6444:6445 Atoms <> Lv constr
+R6457:6458 Atoms <> Ts constr
+R6470:6471 Atoms <> Og constr
+def 6549:6563 <> covalent_radius
+R6570:6576 Atoms <> Element ind
+binder 6566:6566 <> e:9
+R6581:6581 Stdlib.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R6594:6594 Atoms <> e:9 var
+R6605:6605 Atoms <> H constr
+R6618:6619 Atoms <> He constr
+R6633:6634 Atoms <> Li constr
+R6646:6647 Atoms <> Be constr
+R6659:6659 Atoms <> B constr
+R6672:6672 Atoms <> C constr
+R6687:6687 Atoms <> N constr
+R6700:6700 Atoms <> O constr
+R6713:6713 Atoms <> F constr
+R6726:6727 Atoms <> Ne constr
+R6741:6742 Atoms <> Na constr
+R6754:6755 Atoms <> Mg constr
+R6767:6768 Atoms <> Al constr
+R6780:6781 Atoms <> Si constr
+R6795:6795 Atoms <> P constr
+R6808:6808 Atoms <> S constr
+R6821:6822 Atoms <> Cl constr
+R6834:6835 Atoms <> Ar constr
+R6849:6849 Atoms <> K constr
+R6862:6863 Atoms <> Ca constr
+R6875:6876 Atoms <> Sc constr
+R6888:6889 Atoms <> Ti constr
+R6903:6903 Atoms <> V constr
+R6916:6917 Atoms <> Cr constr
+R6929:6930 Atoms <> Mn constr
+R6942:6943 Atoms <> Fe constr
+R6957:6958 Atoms <> Co constr
+R6970:6971 Atoms <> Ni constr
+R6983:6984 Atoms <> Cu constr
+R6996:6997 Atoms <> Zn constr
+R7011:7012 Atoms <> Ga constr
+R7024:7025 Atoms <> Ge constr
+R7037:7038 Atoms <> As constr
+R7050:7051 Atoms <> Se constr
+R7065:7066 Atoms <> Br constr
+R7078:7079 Atoms <> Kr constr
+R7093:7094 Atoms <> Rb constr
+R7106:7107 Atoms <> Sr constr
+R7119:7119 Atoms <> Y constr
+R7132:7133 Atoms <> Zr constr
+R7147:7148 Atoms <> Nb constr
+R7160:7161 Atoms <> Mo constr
+R7173:7174 Atoms <> Tc constr
+R7186:7187 Atoms <> Ru constr
+R7201:7202 Atoms <> Rh constr
+R7214:7215 Atoms <> Pd constr
+R7227:7228 Atoms <> Ag constr
+R7240:7241 Atoms <> Cd constr
+R7255:7256 Atoms <> In constr
+R7268:7269 Atoms <> Sn constr
+R7281:7282 Atoms <> Sb constr
+R7294:7295 Atoms <> Te constr
+R7309:7309 Atoms <> I constr
+R7322:7323 Atoms <> Xe constr
+R7337:7338 Atoms <> Cs constr
+R7350:7351 Atoms <> Ba constr
+R7365:7366 Atoms <> La constr
+R7378:7379 Atoms <> Ce constr
+R7391:7392 Atoms <> Pr constr
+R7404:7405 Atoms <> Nd constr
+R7419:7420 Atoms <> Pm constr
+R7432:7433 Atoms <> Sm constr
+R7445:7446 Atoms <> Eu constr
+R7458:7459 Atoms <> Gd constr
+R7473:7474 Atoms <> Tb constr
+R7486:7487 Atoms <> Dy constr
+R7499:7500 Atoms <> Ho constr
+R7512:7513 Atoms <> Er constr
+R7527:7528 Atoms <> Tm constr
+R7540:7541 Atoms <> Yb constr
+R7553:7554 Atoms <> Lu constr
+R7568:7569 Atoms <> Hf constr
+R7581:7582 Atoms <> Ta constr
+R7594:7594 Atoms <> W constr
+R7607:7608 Atoms <> Re constr
+R7622:7623 Atoms <> Os constr
+R7635:7636 Atoms <> Ir constr
+R7648:7649 Atoms <> Pt constr
+R7661:7662 Atoms <> Au constr
+R7676:7677 Atoms <> Hg constr
+R7689:7690 Atoms <> Tl constr
+R7702:7703 Atoms <> Pb constr
+R7715:7716 Atoms <> Bi constr
+R7730:7731 Atoms <> Po constr
+R7743:7744 Atoms <> At constr
+R7756:7757 Atoms <> Rn constr
+R7771:7772 Atoms <> Fr constr
+R7784:7785 Atoms <> Ra constr
+R7799:7800 Atoms <> Ac constr
+R7812:7813 Atoms <> Th constr
+R7825:7826 Atoms <> Pa constr
+R7838:7838 Atoms <> U constr
+R7853:7854 Atoms <> Np constr
+R7866:7867 Atoms <> Pu constr
+R7879:7880 Atoms <> Am constr
+R7892:7893 Atoms <> Cm constr
+R7907:7908 Atoms <> Bk constr
+R7920:7921 Atoms <> Cf constr
+R7933:7934 Atoms <> Es constr
+R7946:7947 Atoms <> Fm constr
+R7961:7962 Atoms <> Md constr
+R7974:7975 Atoms <> No constr
+R7987:7988 Atoms <> Lr constr
+R8002:8003 Atoms <> Rf constr
+R8015:8016 Atoms <> Db constr
+R8028:8029 Atoms <> Sg constr
+R8041:8042 Atoms <> Bh constr
+R8056:8057 Atoms <> Hs constr
+R8069:8070 Atoms <> Mt constr
+R8082:8083 Atoms <> Ds constr
+R8095:8096 Atoms <> Rg constr
+R8110:8111 Atoms <> Cn constr
+R8123:8124 Atoms <> Nh constr
+R8136:8137 Atoms <> Fl constr
+R8149:8150 Atoms <> Mc constr
+R8164:8165 Atoms <> Lv constr
+R8177:8178 Atoms <> Ts constr
+R8190:8191 Atoms <> Og constr
+def 8399:8415 <> electronegativity
+R8422:8428 Atoms <> Element ind
+binder 8418:8418 <> e:11
+R8433:8433 Stdlib.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R8446:8446 Atoms <> e:11 var
+R8457:8457 Atoms <> H constr
+R8470:8471 Atoms <> He constr
+R8485:8486 Atoms <> Li constr
+R8498:8499 Atoms <> Be constr
+R8511:8511 Atoms <> B constr
+R8524:8524 Atoms <> C constr
+R8539:8539 Atoms <> N constr
+R8552:8552 Atoms <> O constr
+R8565:8565 Atoms <> F constr
+R8578:8579 Atoms <> Ne constr
+R8593:8594 Atoms <> Na constr
+R8606:8607 Atoms <> Mg constr
+R8619:8620 Atoms <> Al constr
+R8632:8633 Atoms <> Si constr
+R8647:8647 Atoms <> P constr
+R8660:8660 Atoms <> S constr
+R8673:8674 Atoms <> Cl constr
+R8686:8687 Atoms <> Ar constr
+R8701:8701 Atoms <> K constr
+R8714:8715 Atoms <> Ca constr
+R8727:8728 Atoms <> Sc constr
+R8740:8741 Atoms <> Ti constr
+R8755:8755 Atoms <> V constr
+R8768:8769 Atoms <> Cr constr
+R8781:8782 Atoms <> Mn constr
+R8794:8795 Atoms <> Fe constr
+R8809:8810 Atoms <> Co constr
+R8822:8823 Atoms <> Ni constr
+R8835:8836 Atoms <> Cu constr
+R8848:8849 Atoms <> Zn constr
+R8863:8864 Atoms <> Ga constr
+R8876:8877 Atoms <> Ge constr
+R8889:8890 Atoms <> As constr
+R8902:8903 Atoms <> Se constr
+R8917:8918 Atoms <> Br constr
+R8930:8931 Atoms <> Kr constr
+R8945:8946 Atoms <> Rb constr
+R8958:8959 Atoms <> Sr constr
+R8971:8971 Atoms <> Y constr
+R8984:8985 Atoms <> Zr constr
+R8999:9000 Atoms <> Nb constr
+R9012:9013 Atoms <> Mo constr
+R9025:9026 Atoms <> Tc constr
+R9038:9039 Atoms <> Ru constr
+R9053:9054 Atoms <> Rh constr
+R9066:9067 Atoms <> Pd constr
+R9079:9080 Atoms <> Ag constr
+R9092:9093 Atoms <> Cd constr
+R9107:9108 Atoms <> In constr
+R9120:9121 Atoms <> Sn constr
+R9133:9134 Atoms <> Sb constr
+R9146:9147 Atoms <> Te constr
+R9161:9161 Atoms <> I constr
+R9174:9175 Atoms <> Xe constr
+R9189:9190 Atoms <> Cs constr
+R9202:9203 Atoms <> Ba constr
+R9217:9218 Atoms <> La constr
+R9230:9231 Atoms <> Ce constr
+R9243:9244 Atoms <> Pr constr
+R9256:9257 Atoms <> Nd constr
+R9271:9272 Atoms <> Pm constr
+R9284:9285 Atoms <> Sm constr
+R9297:9298 Atoms <> Eu constr
+R9310:9311 Atoms <> Gd constr
+R9325:9326 Atoms <> Tb constr
+R9338:9339 Atoms <> Dy constr
+R9351:9352 Atoms <> Ho constr
+R9364:9365 Atoms <> Er constr
+R9379:9380 Atoms <> Tm constr
+R9392:9393 Atoms <> Yb constr
+R9405:9406 Atoms <> Lu constr
+R9420:9421 Atoms <> Hf constr
+R9433:9434 Atoms <> Ta constr
+R9446:9446 Atoms <> W constr
+R9459:9460 Atoms <> Re constr
+R9474:9475 Atoms <> Os constr
+R9487:9488 Atoms <> Ir constr
+R9500:9501 Atoms <> Pt constr
+R9513:9514 Atoms <> Au constr
+R9528:9529 Atoms <> Hg constr
+R9541:9542 Atoms <> Tl constr
+R9554:9555 Atoms <> Pb constr
+R9567:9568 Atoms <> Bi constr
+R9582:9583 Atoms <> Po constr
+R9595:9596 Atoms <> At constr
+R9608:9609 Atoms <> Rn constr
+R9623:9624 Atoms <> Fr constr
+R9636:9637 Atoms <> Ra constr
+R9651:9652 Atoms <> Ac constr
+R9664:9665 Atoms <> Th constr
+R9677:9678 Atoms <> Pa constr
+R9690:9690 Atoms <> U constr
+R9705:9706 Atoms <> Np constr
+R9718:9719 Atoms <> Pu constr
+R9731:9732 Atoms <> Am constr
+R9744:9745 Atoms <> Cm constr
+R9759:9760 Atoms <> Bk constr
+R9772:9773 Atoms <> Cf constr
+R9785:9786 Atoms <> Es constr
+R9798:9799 Atoms <> Fm constr
+R9813:9814 Atoms <> Md constr
+R9826:9827 Atoms <> No constr
+R9839:9840 Atoms <> Lr constr
+def 9931:9947 <> ionization_energy
+R9954:9960 Atoms <> Element ind
+binder 9950:9950 <> e:13
+R9965:9965 Stdlib.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R9978:9978 Atoms <> e:13 var
+R9989:9989 Atoms <> H constr
+R10004:10005 Atoms <> He constr
+R10021:10022 Atoms <> Li constr
+R10036:10037 Atoms <> Be constr
+R10051:10051 Atoms <> B constr
+R10066:10066 Atoms <> C constr
+R10083:10083 Atoms <> N constr
+R10098:10098 Atoms <> O constr
+R10113:10113 Atoms <> F constr
+R10128:10129 Atoms <> Ne constr
+R10145:10146 Atoms <> Na constr
+R10160:10161 Atoms <> Mg constr
+R10175:10176 Atoms <> Al constr
+R10190:10191 Atoms <> Si constr
+R10206:10206 Atoms <> P constr
+R10221:10221 Atoms <> S constr
+R10236:10237 Atoms <> Cl constr
+R10251:10252 Atoms <> Ar constr
+R10268:10268 Atoms <> K constr
+R10283:10284 Atoms <> Ca constr
+R10298:10299 Atoms <> Sc constr
+R10313:10314 Atoms <> Ti constr
+R10329:10329 Atoms <> V constr
+R10344:10345 Atoms <> Cr constr
+R10359:10360 Atoms <> Mn constr
+R10374:10375 Atoms <> Fe constr
+R10390:10391 Atoms <> Co constr
+R10405:10406 Atoms <> Ni constr
+R10420:10421 Atoms <> Cu constr
+R10435:10436 Atoms <> Zn constr
+R10451:10452 Atoms <> Ga constr
+R10466:10467 Atoms <> Ge constr
+R10481:10482 Atoms <> As constr
+R10496:10497 Atoms <> Se constr
+R10512:10513 Atoms <> Br constr
+R10527:10528 Atoms <> Kr constr
+R10544:10545 Atoms <> Rb constr
+R10559:10560 Atoms <> Sr constr
+R10574:10574 Atoms <> Y constr
+R10589:10590 Atoms <> Zr constr
+R10605:10606 Atoms <> Nb constr
+R10620:10621 Atoms <> Mo constr
+R10635:10636 Atoms <> Tc constr
+R10650:10651 Atoms <> Ru constr
+R10666:10667 Atoms <> Rh constr
+R10681:10682 Atoms <> Pd constr
+R10696:10697 Atoms <> Ag constr
+R10711:10712 Atoms <> Cd constr
+R10727:10728 Atoms <> In constr
+R10742:10743 Atoms <> Sn constr
+R10757:10758 Atoms <> Sb constr
+R10772:10773 Atoms <> Te constr
+R10788:10788 Atoms <> I constr
+R10803:10804 Atoms <> Xe constr
+R10820:10821 Atoms <> Cs constr
+R10835:10836 Atoms <> Ba constr
+R10851:10852 Atoms <> La constr
+R10866:10867 Atoms <> Ce constr
+R10881:10882 Atoms <> Pr constr
+R10896:10897 Atoms <> Nd constr
+R10912:10913 Atoms <> Pm constr
+R10927:10928 Atoms <> Sm constr
+R10942:10943 Atoms <> Eu constr
+R10957:10958 Atoms <> Gd constr
+R10973:10974 Atoms <> Tb constr
+R10988:10989 Atoms <> Dy constr
+R11003:11004 Atoms <> Ho constr
+R11018:11019 Atoms <> Er constr
+R11034:11035 Atoms <> Tm constr
+R11049:11050 Atoms <> Yb constr
+R11064:11065 Atoms <> Lu constr
+R11080:11081 Atoms <> Hf constr
+R11095:11096 Atoms <> Ta constr
+R11110:11110 Atoms <> W constr
+R11125:11126 Atoms <> Re constr
+R11141:11142 Atoms <> Os constr
+R11156:11157 Atoms <> Ir constr
+R11171:11172 Atoms <> Pt constr
+R11186:11187 Atoms <> Au constr
+R11202:11203 Atoms <> Hg constr
+R11217:11218 Atoms <> Tl constr
+R11232:11233 Atoms <> Pb constr
+R11247:11248 Atoms <> Bi constr
+R11263:11264 Atoms <> Po constr
+R11278:11279 Atoms <> At constr
+R11293:11294 Atoms <> Rn constr
+R11310:11311 Atoms <> Fr constr
+R11325:11326 Atoms <> Ra constr
+R11341:11342 Atoms <> Ac constr
+R11356:11357 Atoms <> Th constr
+R11371:11372 Atoms <> Pa constr
+R11386:11386 Atoms <> U constr
+R11402:11403 Atoms <> Np constr
+R11417:11418 Atoms <> Pu constr
+R11432:11433 Atoms <> Am constr
+R11447:11448 Atoms <> Cm constr
+R11463:11464 Atoms <> Bk constr
+R11478:11479 Atoms <> Cf constr
+R11493:11494 Atoms <> Es constr
+R11508:11509 Atoms <> Fm constr
+R11524:11525 Atoms <> Md constr
+R11539:11540 Atoms <> No constr
+R11554:11555 Atoms <> Lr constr
+def 11663:11679 <> electron_affinity
+R11686:11692 Atoms <> Element ind
+binder 11682:11682 <> e:15
+R11697:11697 Stdlib.Reals.Rdefinitions RbaseSymbolsImpl R defax
+R11710:11710 Atoms <> e:15 var
+R11721:11721 Atoms <> H constr
+R11736:11737 Atoms <> He constr
+R11750:11751 Atoms <> Li constr
+R11765:11766 Atoms <> Be constr
+R11780:11780 Atoms <> B constr
+R11795:11795 Atoms <> C constr
+R11811:11811 Atoms <> N constr
+R11826:11826 Atoms <> O constr
+R11841:11841 Atoms <> F constr
+R11856:11857 Atoms <> Ne constr
+R11870:11871 Atoms <> Na constr
+R11885:11886 Atoms <> Mg constr
+R11900:11901 Atoms <> Al constr
+R11915:11916 Atoms <> Si constr
+R11931:11931 Atoms <> P constr
+R11946:11946 Atoms <> S constr
+R11961:11962 Atoms <> Cl constr
+R11976:11977 Atoms <> Ar constr
+R11990:11990 Atoms <> K constr
+R12005:12006 Atoms <> Ca constr
+R12020:12021 Atoms <> Sc constr
+R12035:12036 Atoms <> Ti constr
+R12049:12049 Atoms <> V constr
+R12064:12065 Atoms <> Cr constr
+R12079:12080 Atoms <> Mn constr
+R12094:12095 Atoms <> Fe constr
+R12109:12110 Atoms <> Co constr
+R12124:12125 Atoms <> Ni constr
+R12139:12140 Atoms <> Cu constr
+R12154:12155 Atoms <> Zn constr
+R12168:12169 Atoms <> Ga constr
+R12183:12184 Atoms <> Ge constr
+R12198:12199 Atoms <> As constr
+R12213:12214 Atoms <> Se constr
+R12229:12230 Atoms <> Br constr
+R12244:12245 Atoms <> Kr constr
+R12258:12259 Atoms <> Rb constr
+R12273:12274 Atoms <> Sr constr
+R12288:12288 Atoms <> Y constr
+R12303:12304 Atoms <> Zr constr
+R12318:12319 Atoms <> Nb constr
+R12333:12334 Atoms <> Mo constr
+R12348:12349 Atoms <> Tc constr
+R12363:12364 Atoms <> Ru constr
+R12379:12380 Atoms <> Rh constr
+R12394:12395 Atoms <> Pd constr
+R12409:12410 Atoms <> Ag constr
+R12424:12425 Atoms <> Cd constr
+R12438:12439 Atoms <> In constr
+R12453:12454 Atoms <> Sn constr
+R12468:12469 Atoms <> Sb constr
+R12483:12484 Atoms <> Te constr
+R12499:12499 Atoms <> I constr
+R12514:12515 Atoms <> Xe constr
+def 12602:12607 <> period
+R12614:12620 Atoms <> Element ind
+binder 12610:12610 <> e:17
+R12625:12627 Corelib.Init.Datatypes <> nat ind
+R12640:12640 Atoms <> e:17 var
+R12651:12651 Atoms <> H constr
+R12656:12657 Atoms <> He constr
+R12668:12669 Atoms <> Li constr
+R12673:12674 Atoms <> Be constr
+R12678:12678 Atoms <> B constr
+R12683:12683 Atoms <> C constr
+R12688:12688 Atoms <> N constr
+R12693:12693 Atoms <> O constr
+R12698:12698 Atoms <> F constr
+R12703:12704 Atoms <> Ne constr
+R12715:12716 Atoms <> Na constr
+R12720:12721 Atoms <> Mg constr
+R12725:12726 Atoms <> Al constr
+R12730:12731 Atoms <> Si constr
+R12735:12735 Atoms <> P constr
+R12740:12740 Atoms <> S constr
+R12745:12746 Atoms <> Cl constr
+R12750:12751 Atoms <> Ar constr
+R12762:12762 Atoms <> K constr
+R12767:12768 Atoms <> Ca constr
+R12772:12773 Atoms <> Sc constr
+R12777:12778 Atoms <> Ti constr
+R12782:12782 Atoms <> V constr
+R12787:12788 Atoms <> Cr constr
+R12792:12793 Atoms <> Mn constr
+R12797:12798 Atoms <> Fe constr
+R12802:12803 Atoms <> Co constr
+R12807:12808 Atoms <> Ni constr
+R12812:12813 Atoms <> Cu constr
+R12817:12818 Atoms <> Zn constr
+R12824:12825 Atoms <> Ga constr
+R12829:12830 Atoms <> Ge constr
+R12834:12835 Atoms <> As constr
+R12839:12840 Atoms <> Se constr
+R12844:12845 Atoms <> Br constr
+R12849:12850 Atoms <> Kr constr
+R12861:12862 Atoms <> Rb constr
+R12866:12867 Atoms <> Sr constr
+R12871:12871 Atoms <> Y constr
+R12876:12877 Atoms <> Zr constr
+R12881:12882 Atoms <> Nb constr
+R12886:12887 Atoms <> Mo constr
+R12891:12892 Atoms <> Tc constr
+R12896:12897 Atoms <> Ru constr
+R12901:12902 Atoms <> Rh constr
+R12906:12907 Atoms <> Pd constr
+R12911:12912 Atoms <> Ag constr
+R12916:12917 Atoms <> Cd constr
+R12923:12924 Atoms <> In constr
+R12928:12929 Atoms <> Sn constr
+R12933:12934 Atoms <> Sb constr
+R12938:12939 Atoms <> Te constr
+R12943:12943 Atoms <> I constr
+R12948:12949 Atoms <> Xe constr
+R12960:12961 Atoms <> Cs constr
+R12965:12966 Atoms <> Ba constr
+R12970:12971 Atoms <> La constr
+R12975:12976 Atoms <> Ce constr
+R12980:12981 Atoms <> Pr constr
+R12985:12986 Atoms <> Nd constr
+R12990:12991 Atoms <> Pm constr
+R12995:12996 Atoms <> Sm constr
+R13000:13001 Atoms <> Eu constr
+R13005:13006 Atoms <> Gd constr
+R13010:13011 Atoms <> Tb constr
+R13015:13016 Atoms <> Dy constr
+R13022:13023 Atoms <> Ho constr
+R13027:13028 Atoms <> Er constr
+R13032:13033 Atoms <> Tm constr
+R13037:13038 Atoms <> Yb constr
+R13042:13043 Atoms <> Lu constr
+R13047:13048 Atoms <> Hf constr
+R13052:13053 Atoms <> Ta constr
+R13057:13057 Atoms <> W constr
+R13062:13063 Atoms <> Re constr
+R13067:13068 Atoms <> Os constr
+R13072:13073 Atoms <> Ir constr
+R13077:13078 Atoms <> Pt constr
+R13084:13085 Atoms <> Au constr
+R13089:13090 Atoms <> Hg constr
+R13094:13095 Atoms <> Tl constr
+R13099:13100 Atoms <> Pb constr
+R13104:13105 Atoms <> Bi constr
+R13109:13110 Atoms <> Po constr
+R13114:13115 Atoms <> At constr
+R13119:13120 Atoms <> Rn constr
+R13131:13132 Atoms <> Fr constr
+R13136:13137 Atoms <> Ra constr
+R13141:13142 Atoms <> Ac constr
+R13146:13147 Atoms <> Th constr
+R13151:13152 Atoms <> Pa constr
+R13156:13156 Atoms <> U constr
+R13161:13162 Atoms <> Np constr
+R13166:13167 Atoms <> Pu constr
+R13171:13172 Atoms <> Am constr
+R13176:13177 Atoms <> Cm constr
+R13181:13182 Atoms <> Bk constr
+R13186:13187 Atoms <> Cf constr
+R13193:13194 Atoms <> Es constr
+R13198:13199 Atoms <> Fm constr
+R13203:13204 Atoms <> Md constr
+R13208:13209 Atoms <> No constr
+R13213:13214 Atoms <> Lr constr
+R13218:13219 Atoms <> Rf constr
+R13223:13224 Atoms <> Db constr
+R13228:13229 Atoms <> Sg constr
+R13233:13234 Atoms <> Bh constr
+R13238:13239 Atoms <> Hs constr
+R13243:13244 Atoms <> Mt constr
+R13248:13249 Atoms <> Ds constr
+R13255:13256 Atoms <> Rg constr
+R13260:13261 Atoms <> Cn constr
+R13265:13266 Atoms <> Nh constr
+R13270:13271 Atoms <> Fl constr
+R13275:13276 Atoms <> Mc constr
+R13280:13281 Atoms <> Lv constr
+R13285:13286 Atoms <> Ts constr
+R13290:13291 Atoms <> Og constr
+def 13395:13399 <> group
+R13406:13412 Atoms <> Element ind
+binder 13402:13402 <> e:19
+R13417:13419 Corelib.Init.Datatypes <> nat ind
+R13432:13432 Atoms <> e:19 var
+R13443:13443 Atoms <> H constr
+R13448:13449 Atoms <> Li constr
+R13453:13454 Atoms <> Na constr
+R13458:13458 Atoms <> K constr
+R13463:13464 Atoms <> Rb constr
+R13468:13469 Atoms <> Cs constr
+R13473:13474 Atoms <> Fr constr
+R13485:13486 Atoms <> He constr
+R13490:13491 Atoms <> Ne constr
+R13495:13496 Atoms <> Ar constr
+R13500:13501 Atoms <> Kr constr
+R13505:13506 Atoms <> Xe constr
+R13510:13511 Atoms <> Rn constr
+R13515:13516 Atoms <> Og constr
+R13528:13529 Atoms <> Be constr
+R13533:13534 Atoms <> Mg constr
+R13538:13539 Atoms <> Ca constr
+R13543:13544 Atoms <> Sr constr
+R13548:13549 Atoms <> Ba constr
+R13553:13554 Atoms <> Ra constr
+R13565:13565 Atoms <> B constr
+R13570:13571 Atoms <> Al constr
+R13575:13576 Atoms <> Ga constr
+R13580:13581 Atoms <> In constr
+R13585:13586 Atoms <> Tl constr
+R13590:13591 Atoms <> Nh constr
+R13603:13603 Atoms <> C constr
+R13608:13609 Atoms <> Si constr
+R13613:13614 Atoms <> Ge constr
+R13618:13619 Atoms <> Sn constr
+R13623:13624 Atoms <> Pb constr
+R13628:13629 Atoms <> Fl constr
+R13641:13641 Atoms <> N constr
+R13646:13646 Atoms <> P constr
+R13651:13652 Atoms <> As constr
+R13656:13657 Atoms <> Sb constr
+R13661:13662 Atoms <> Bi constr
+R13666:13667 Atoms <> Mc constr
+R13679:13679 Atoms <> O constr
+R13684:13684 Atoms <> S constr
+R13689:13690 Atoms <> Se constr
+R13694:13695 Atoms <> Te constr
+R13699:13700 Atoms <> Po constr
+R13704:13705 Atoms <> Lv constr
+R13717:13717 Atoms <> F constr
+R13722:13723 Atoms <> Cl constr
+R13727:13728 Atoms <> Br constr
+R13732:13732 Atoms <> I constr
+R13737:13738 Atoms <> At constr
+R13742:13743 Atoms <> Ts constr
+R13755:13756 Atoms <> Sc constr
+R13760:13760 Atoms <> Y constr
+R13765:13766 Atoms <> La constr
+R13770:13771 Atoms <> Ac constr
+R13782:13783 Atoms <> Ti constr
+R13787:13788 Atoms <> Zr constr
+R13792:13793 Atoms <> Hf constr
+R13797:13798 Atoms <> Rf constr
+R13809:13809 Atoms <> V constr
+R13814:13815 Atoms <> Nb constr
+R13819:13820 Atoms <> Ta constr
+R13824:13825 Atoms <> Db constr
+R13836:13837 Atoms <> Cr constr
+R13841:13842 Atoms <> Mo constr
+R13846:13846 Atoms <> W constr
+R13851:13852 Atoms <> Sg constr
+R13863:13864 Atoms <> Mn constr
+R13868:13869 Atoms <> Tc constr
+R13873:13874 Atoms <> Re constr
+R13878:13879 Atoms <> Bh constr
+R13890:13891 Atoms <> Fe constr
+R13895:13896 Atoms <> Ru constr
+R13900:13901 Atoms <> Os constr
+R13905:13906 Atoms <> Hs constr
+R13917:13918 Atoms <> Co constr
+R13922:13923 Atoms <> Rh constr
+R13927:13928 Atoms <> Ir constr
+R13932:13933 Atoms <> Mt constr
+R13944:13945 Atoms <> Ni constr
+R13949:13950 Atoms <> Pd constr
+R13954:13955 Atoms <> Pt constr
+R13959:13960 Atoms <> Ds constr
+R13972:13973 Atoms <> Cu constr
+R13977:13978 Atoms <> Ag constr
+R13982:13983 Atoms <> Au constr
+R13987:13988 Atoms <> Rg constr
+R14000:14001 Atoms <> Zn constr
+R14005:14006 Atoms <> Cd constr
+R14010:14011 Atoms <> Hg constr
+R14015:14016 Atoms <> Cn constr
+R14101:14102 Atoms <> Ce constr
+R14106:14107 Atoms <> Pr constr
+R14111:14112 Atoms <> Nd constr
+R14116:14117 Atoms <> Pm constr
+R14121:14122 Atoms <> Sm constr
+R14126:14127 Atoms <> Eu constr
+R14131:14132 Atoms <> Gd constr
+R14136:14137 Atoms <> Tb constr
+R14141:14142 Atoms <> Dy constr
+R14146:14147 Atoms <> Ho constr
+R14151:14152 Atoms <> Er constr
+R14156:14157 Atoms <> Tm constr
+R14161:14162 Atoms <> Yb constr
+R14166:14167 Atoms <> Lu constr
+R14178:14179 Atoms <> Th constr
+R14183:14184 Atoms <> Pa constr
+R14188:14188 Atoms <> U constr
+R14193:14194 Atoms <> Np constr
+R14198:14199 Atoms <> Pu constr
+R14203:14204 Atoms <> Am constr
+R14208:14209 Atoms <> Cm constr
+R14213:14214 Atoms <> Bk constr
+R14218:14219 Atoms <> Cf constr
+R14223:14224 Atoms <> Es constr
+R14228:14229 Atoms <> Fm constr
+R14233:14234 Atoms <> Md constr
+R14238:14239 Atoms <> No constr
+R14243:14244 Atoms <> Lr constr
+def 14303:14319 <> valence_electrons
+R14326:14332 Atoms <> Element ind
+binder 14322:14322 <> e:21
+R14337:14339 Corelib.Init.Datatypes <> nat ind
+R14352:14352 Atoms <> e:21 var
+R14363:14363 Atoms <> H constr
+R14373:14374 Atoms <> He constr
+R14385:14386 Atoms <> Li constr
+R14395:14396 Atoms <> Be constr
+R14405:14405 Atoms <> B constr
+R14415:14415 Atoms <> C constr
+R14425:14425 Atoms <> N constr
+R14435:14435 Atoms <> O constr
+R14445:14445 Atoms <> F constr
+R14455:14456 Atoms <> Ne constr
+R14467:14468 Atoms <> Na constr
+R14477:14478 Atoms <> Mg constr
+R14487:14488 Atoms <> Al constr
+R14497:14498 Atoms <> Si constr
+R14507:14507 Atoms <> P constr
+R14517:14517 Atoms <> S constr
+R14527:14528 Atoms <> Cl constr
+R14537:14538 Atoms <> Ar constr
+R14549:14549 Atoms <> K constr
+R14559:14560 Atoms <> Ca constr
+R14571:14572 Atoms <> Sc constr
+R14581:14582 Atoms <> Ti constr
+R14591:14591 Atoms <> V constr
+R14601:14602 Atoms <> Cr constr
+R14611:14612 Atoms <> Mn constr
+R14621:14622 Atoms <> Fe constr
+R14631:14632 Atoms <> Co constr
+R14641:14642 Atoms <> Ni constr
+R14654:14655 Atoms <> Cu constr
+R14664:14665 Atoms <> Zn constr
+R14674:14675 Atoms <> Ga constr
+R14684:14685 Atoms <> Ge constr
+R14694:14695 Atoms <> As constr
+R14704:14705 Atoms <> Se constr
+R14714:14715 Atoms <> Br constr
+R14724:14725 Atoms <> Kr constr
+R14736:14737 Atoms <> Rb constr
+R14746:14747 Atoms <> Sr constr
+R14758:14758 Atoms <> Y constr
+R14768:14769 Atoms <> Zr constr
+R14778:14779 Atoms <> Nb constr
+R14788:14789 Atoms <> Mo constr
+R14798:14799 Atoms <> Tc constr
+R14808:14809 Atoms <> Ru constr
+R14818:14819 Atoms <> Rh constr
+R14828:14829 Atoms <> Pd constr
+R14841:14842 Atoms <> Ag constr
+R14851:14852 Atoms <> Cd constr
+R14861:14862 Atoms <> In constr
+R14871:14872 Atoms <> Sn constr
+R14881:14882 Atoms <> Sb constr
+R14891:14892 Atoms <> Te constr
+R14901:14901 Atoms <> I constr
+R14911:14912 Atoms <> Xe constr
+R14923:14924 Atoms <> Cs constr
+R14933:14934 Atoms <> Ba constr
+R14945:14946 Atoms <> La constr
+R14955:14956 Atoms <> Ce constr
+R14965:14966 Atoms <> Pr constr
+R14975:14976 Atoms <> Nd constr
+R14985:14986 Atoms <> Pm constr
+R14995:14996 Atoms <> Sm constr
+R15005:15006 Atoms <> Eu constr
+R15015:15016 Atoms <> Gd constr
+R15028:15029 Atoms <> Tb constr
+R15038:15039 Atoms <> Dy constr
+R15048:15049 Atoms <> Ho constr
+R15058:15059 Atoms <> Er constr
+R15068:15069 Atoms <> Tm constr
+R15078:15079 Atoms <> Yb constr
+R15088:15089 Atoms <> Lu constr
+R15100:15101 Atoms <> Hf constr
+R15110:15111 Atoms <> Ta constr
+R15120:15120 Atoms <> W constr
+R15130:15131 Atoms <> Re constr
+R15140:15141 Atoms <> Os constr
+R15150:15151 Atoms <> Ir constr
+R15160:15161 Atoms <> Pt constr
+R15170:15171 Atoms <> Au constr
+R15183:15184 Atoms <> Hg constr
+R15193:15194 Atoms <> Tl constr
+R15203:15204 Atoms <> Pb constr
+R15213:15214 Atoms <> Bi constr
+R15223:15224 Atoms <> Po constr
+R15233:15234 Atoms <> At constr
+R15243:15244 Atoms <> Rn constr
+R15255:15256 Atoms <> Fr constr
+R15265:15266 Atoms <> Ra constr
+R15277:15278 Atoms <> Ac constr
+R15287:15288 Atoms <> Th constr
+R15297:15298 Atoms <> Pa constr
+R15307:15307 Atoms <> U constr
+R15317:15318 Atoms <> Np constr
+R15327:15328 Atoms <> Pu constr
+R15337:15338 Atoms <> Am constr
+R15347:15348 Atoms <> Cm constr
+R15360:15361 Atoms <> Bk constr
+R15370:15371 Atoms <> Cf constr
+R15380:15381 Atoms <> Es constr
+R15390:15391 Atoms <> Fm constr
+R15400:15401 Atoms <> Md constr
+R15410:15411 Atoms <> No constr
+R15420:15421 Atoms <> Lr constr
+R15432:15433 Atoms <> Rf constr
+R15442:15443 Atoms <> Db constr
+R15452:15453 Atoms <> Sg constr
+R15462:15463 Atoms <> Bh constr
+R15472:15473 Atoms <> Hs constr
+R15482:15483 Atoms <> Mt constr
+R15492:15493 Atoms <> Ds constr
+R15502:15503 Atoms <> Rg constr
+R15515:15516 Atoms <> Cn constr
+R15525:15526 Atoms <> Nh constr
+R15535:15536 Atoms <> Fl constr
+R15545:15546 Atoms <> Mc constr
+R15555:15556 Atoms <> Lv constr
+R15565:15566 Atoms <> Ts constr
+R15575:15576 Atoms <> Og constr
+def 15666:15676 <> max_valence
+R15683:15689 Atoms <> Element ind
+binder 15679:15679 <> e:23
+R15694:15696 Corelib.Init.Datatypes <> nat ind
+R15709:15709 Atoms <> e:23 var
+R15720:15720 Atoms <> H constr
+R15751:15752 Atoms <> He constr
+R15756:15757 Atoms <> Ne constr
+R15761:15762 Atoms <> Ar constr
+R15766:15767 Atoms <> Kr constr
+R15782:15783 Atoms <> Li constr
+R15787:15788 Atoms <> Na constr
+R15792:15792 Atoms <> K constr
+R15797:15798 Atoms <> Rb constr
+R15802:15803 Atoms <> Cs constr
+R15807:15808 Atoms <> Fr constr
+R15819:15820 Atoms <> Be constr
+R15824:15825 Atoms <> Mg constr
+R15829:15830 Atoms <> Ca constr
+R15834:15835 Atoms <> Sr constr
+R15839:15840 Atoms <> Ba constr
+R15844:15845 Atoms <> Ra constr
+R15856:15856 Atoms <> B constr
+R15887:15887 Atoms <> C constr
+R15918:15918 Atoms <> N constr
+R15949:15949 Atoms <> O constr
+R15980:15980 Atoms <> F constr
+R16011:16012 Atoms <> Al constr
+R16042:16043 Atoms <> Si constr
+R16073:16073 Atoms <> P constr
+R16132:16132 Atoms <> S constr
+R16190:16191 Atoms <> Cl constr
+R16239:16240 Atoms <> Br constr
+R16270:16270 Atoms <> I constr
+R16301:16302 Atoms <> Xe constr
+def 16493:16515 <> is_hypervalent_possible
+R16522:16528 Atoms <> Element ind
+binder 16518:16518 <> e:25
+R16533:16536 Corelib.Init.Datatypes <> bool ind
+R16549:16554 Atoms <> period def
+R16556:16556 Atoms <> e:25 var
+R16580:16584 Corelib.Init.Datatypes <> false constr
+R16580:16584 Corelib.Init.Datatypes <> false constr
+R16580:16584 Corelib.Init.Datatypes <> false constr
+R16604:16607 Corelib.Init.Datatypes <> true constr
+ind 16687:16697 <> OrbitalType
+constr 16709:16713 <> S_orb
+constr 16717:16721 <> P_orb
+constr 16725:16729 <> D_orb
+constr 16733:16737 <> F_orb
+scheme 16687:16697 <> OrbitalType_rect
+scheme 16687:16697 <> OrbitalType_ind
+scheme 16687:16697 <> OrbitalType_rec
+scheme 16687:16697 <> OrbitalType_sind
+def 16819:16833 <> highest_orbital
+R16840:16846 Atoms <> Element ind
+binder 16836:16836 <> e:28
+R16851:16861 Atoms <> OrbitalType ind
+R16874:16874 Atoms <> e:28 var
+R16885:16885 Atoms <> H constr
+R16890:16891 Atoms <> He constr
+R16896:16900 Atoms <> S_orb constr
+R16896:16900 Atoms <> S_orb constr
+R16906:16907 Atoms <> Li constr
+R16911:16912 Atoms <> Be constr
+R16917:16921 Atoms <> S_orb constr
+R16917:16921 Atoms <> S_orb constr
+R16927:16927 Atoms <> B constr
+R16932:16932 Atoms <> C constr
+R16937:16937 Atoms <> N constr
+R16942:16942 Atoms <> O constr
+R16947:16947 Atoms <> F constr
+R16952:16953 Atoms <> Ne constr
+R16958:16962 Atoms <> P_orb constr
+R16958:16962 Atoms <> P_orb constr
+R16958:16962 Atoms <> P_orb constr
+R16958:16962 Atoms <> P_orb constr
+R16958:16962 Atoms <> P_orb constr
+R16958:16962 Atoms <> P_orb constr
+R16968:16969 Atoms <> Na constr
+R16973:16974 Atoms <> Mg constr
+R16979:16983 Atoms <> S_orb constr
+R16979:16983 Atoms <> S_orb constr
+R16989:16990 Atoms <> Al constr
+R16994:16995 Atoms <> Si constr
+R16999:16999 Atoms <> P constr
+R17004:17004 Atoms <> S constr
+R17009:17010 Atoms <> Cl constr
+R17014:17015 Atoms <> Ar constr
+R17020:17024 Atoms <> P_orb constr
+R17020:17024 Atoms <> P_orb constr
+R17020:17024 Atoms <> P_orb constr
+R17020:17024 Atoms <> P_orb constr
+R17020:17024 Atoms <> P_orb constr
+R17020:17024 Atoms <> P_orb constr
+R17030:17030 Atoms <> K constr
+R17035:17036 Atoms <> Ca constr
+R17041:17045 Atoms <> S_orb constr
+R17041:17045 Atoms <> S_orb constr
+R17051:17052 Atoms <> Sc constr
+R17056:17057 Atoms <> Ti constr
+R17061:17061 Atoms <> V constr
+R17066:17067 Atoms <> Cr constr
+R17071:17072 Atoms <> Mn constr
+R17076:17077 Atoms <> Fe constr
+R17081:17082 Atoms <> Co constr
+R17086:17087 Atoms <> Ni constr
+R17091:17092 Atoms <> Cu constr
+R17096:17097 Atoms <> Zn constr
+R17102:17106 Atoms <> D_orb constr
+R17102:17106 Atoms <> D_orb constr
+R17102:17106 Atoms <> D_orb constr
+R17102:17106 Atoms <> D_orb constr
+R17102:17106 Atoms <> D_orb constr
+R17102:17106 Atoms <> D_orb constr
+R17102:17106 Atoms <> D_orb constr
+R17102:17106 Atoms <> D_orb constr
+R17102:17106 Atoms <> D_orb constr
+R17102:17106 Atoms <> D_orb constr
+R17112:17113 Atoms <> Ga constr
+R17117:17118 Atoms <> Ge constr
+R17122:17123 Atoms <> As constr
+R17127:17128 Atoms <> Se constr
+R17132:17133 Atoms <> Br constr
+R17137:17138 Atoms <> Kr constr
+R17143:17147 Atoms <> P_orb constr
+R17143:17147 Atoms <> P_orb constr
+R17143:17147 Atoms <> P_orb constr
+R17143:17147 Atoms <> P_orb constr
+R17143:17147 Atoms <> P_orb constr
+R17143:17147 Atoms <> P_orb constr
+R17153:17154 Atoms <> Rb constr
+R17158:17159 Atoms <> Sr constr
+R17164:17168 Atoms <> S_orb constr
+R17164:17168 Atoms <> S_orb constr
+R17174:17174 Atoms <> Y constr
+R17179:17180 Atoms <> Zr constr
+R17184:17185 Atoms <> Nb constr
+R17189:17190 Atoms <> Mo constr
+R17194:17195 Atoms <> Tc constr
+R17199:17200 Atoms <> Ru constr
+R17204:17205 Atoms <> Rh constr
+R17209:17210 Atoms <> Pd constr
+R17214:17215 Atoms <> Ag constr
+R17219:17220 Atoms <> Cd constr
+R17225:17229 Atoms <> D_orb constr
+R17225:17229 Atoms <> D_orb constr
+R17225:17229 Atoms <> D_orb constr
+R17225:17229 Atoms <> D_orb constr
+R17225:17229 Atoms <> D_orb constr
+R17225:17229 Atoms <> D_orb constr
+R17225:17229 Atoms <> D_orb constr
+R17225:17229 Atoms <> D_orb constr
+R17225:17229 Atoms <> D_orb constr
+R17225:17229 Atoms <> D_orb constr
+R17235:17236 Atoms <> In constr
+R17240:17241 Atoms <> Sn constr
+R17245:17246 Atoms <> Sb constr
+R17250:17251 Atoms <> Te constr
+R17255:17255 Atoms <> I constr
+R17260:17261 Atoms <> Xe constr
+R17266:17270 Atoms <> P_orb constr
+R17266:17270 Atoms <> P_orb constr
+R17266:17270 Atoms <> P_orb constr
+R17266:17270 Atoms <> P_orb constr
+R17266:17270 Atoms <> P_orb constr
+R17266:17270 Atoms <> P_orb constr
+R17276:17277 Atoms <> Cs constr
+R17281:17282 Atoms <> Ba constr
+R17287:17291 Atoms <> S_orb constr
+R17287:17291 Atoms <> S_orb constr
+R17297:17298 Atoms <> La constr
+R17302:17303 Atoms <> Ce constr
+R17307:17308 Atoms <> Pr constr
+R17312:17313 Atoms <> Nd constr
+R17317:17318 Atoms <> Pm constr
+R17322:17323 Atoms <> Sm constr
+R17327:17328 Atoms <> Eu constr
+R17332:17333 Atoms <> Gd constr
+R17337:17338 Atoms <> Tb constr
+R17342:17343 Atoms <> Dy constr
+R17349:17350 Atoms <> Ho constr
+R17354:17355 Atoms <> Er constr
+R17359:17360 Atoms <> Tm constr
+R17364:17365 Atoms <> Yb constr
+R17369:17370 Atoms <> Lu constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17375:17379 Atoms <> F_orb constr
+R17385:17386 Atoms <> Hf constr
+R17390:17391 Atoms <> Ta constr
+R17395:17395 Atoms <> W constr
+R17400:17401 Atoms <> Re constr
+R17405:17406 Atoms <> Os constr
+R17410:17411 Atoms <> Ir constr
+R17415:17416 Atoms <> Pt constr
+R17420:17421 Atoms <> Au constr
+R17425:17426 Atoms <> Hg constr
+R17431:17435 Atoms <> D_orb constr
+R17431:17435 Atoms <> D_orb constr
+R17431:17435 Atoms <> D_orb constr
+R17431:17435 Atoms <> D_orb constr
+R17431:17435 Atoms <> D_orb constr
+R17431:17435 Atoms <> D_orb constr
+R17431:17435 Atoms <> D_orb constr
+R17431:17435 Atoms <> D_orb constr
+R17431:17435 Atoms <> D_orb constr
+R17441:17442 Atoms <> Tl constr
+R17446:17447 Atoms <> Pb constr
+R17451:17452 Atoms <> Bi constr
+R17456:17457 Atoms <> Po constr
+R17461:17462 Atoms <> At constr
+R17466:17467 Atoms <> Rn constr
+R17472:17476 Atoms <> P_orb constr
+R17472:17476 Atoms <> P_orb constr
+R17472:17476 Atoms <> P_orb constr
+R17472:17476 Atoms <> P_orb constr
+R17472:17476 Atoms <> P_orb constr
+R17472:17476 Atoms <> P_orb constr
+R17482:17483 Atoms <> Fr constr
+R17487:17488 Atoms <> Ra constr
+R17493:17497 Atoms <> S_orb constr
+R17493:17497 Atoms <> S_orb constr
+R17503:17504 Atoms <> Ac constr
+R17508:17509 Atoms <> Th constr
+R17513:17514 Atoms <> Pa constr
+R17518:17518 Atoms <> U constr
+R17523:17524 Atoms <> Np constr
+R17528:17529 Atoms <> Pu constr
+R17533:17534 Atoms <> Am constr
+R17538:17539 Atoms <> Cm constr
+R17543:17544 Atoms <> Bk constr
+R17548:17549 Atoms <> Cf constr
+R17555:17556 Atoms <> Es constr
+R17560:17561 Atoms <> Fm constr
+R17565:17566 Atoms <> Md constr
+R17570:17571 Atoms <> No constr
+R17575:17576 Atoms <> Lr constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17581:17585 Atoms <> F_orb constr
+R17591:17592 Atoms <> Rf constr
+R17596:17597 Atoms <> Db constr
+R17601:17602 Atoms <> Sg constr
+R17606:17607 Atoms <> Bh constr
+R17611:17612 Atoms <> Hs constr
+R17616:17617 Atoms <> Mt constr
+R17621:17622 Atoms <> Ds constr
+R17626:17627 Atoms <> Rg constr
+R17631:17632 Atoms <> Cn constr
+R17637:17641 Atoms <> D_orb constr
+R17637:17641 Atoms <> D_orb constr
+R17637:17641 Atoms <> D_orb constr
+R17637:17641 Atoms <> D_orb constr
+R17637:17641 Atoms <> D_orb constr
+R17637:17641 Atoms <> D_orb constr
+R17637:17641 Atoms <> D_orb constr
+R17637:17641 Atoms <> D_orb constr
+R17637:17641 Atoms <> D_orb constr
+R17647:17648 Atoms <> Nh constr
+R17652:17653 Atoms <> Fl constr
+R17657:17658 Atoms <> Mc constr
+R17662:17663 Atoms <> Lv constr
+R17667:17668 Atoms <> Ts constr
+R17672:17673 Atoms <> Og constr
+R17678:17682 Atoms <> P_orb constr
+R17678:17682 Atoms <> P_orb constr
+R17678:17682 Atoms <> P_orb constr
+R17678:17682 Atoms <> P_orb constr
+R17678:17682 Atoms <> P_orb constr
+R17678:17682 Atoms <> P_orb constr
+prf 17743:17756 <> element_eq_dec
+R17774:17780 Atoms <> Element ind
+binder 17768:17768 <> a:30
+binder 17770:17770 <> b:31
+R17784:17784 Corelib.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R17790:17794 Corelib.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R17801:17801 Corelib.Init.Specif <> ::type_scope:'{'_x_'}'_'+'_'{'_x_'}' not
+R17786:17788 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R17785:17785 Atoms <> a:30 var
+R17789:17789 Atoms <> b:31 var
+R17796:17799 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R17795:17795 Atoms <> a:30 var
+R17800:17800 Atoms <> b:31 var
+prf 17933:17954 <> atomic_number_positive
+R17969:17975 Atoms <> Element ind
+binder 17965:17965 <> e:32
+R17994:17997 Corelib.Init.Peano <> ::nat_scope:x_'>='_x not
+R17979:17991 Atoms <> atomic_number def
+R17993:17993 Atoms <> e:32 var
+prf 18096:18120 <> atomic_number_at_most_118
+R18135:18141 Atoms <> Element ind
+binder 18131:18131 <> e:33
+R18160:18163 Corelib.Init.Peano <> ::nat_scope:x_'<='_x not
+R18145:18157 Atoms <> atomic_number def
+R18159:18159 Atoms <> e:33 var
+prf 18259:18278 <> atomic_mass_positive
+R18293:18299 Atoms <> Element ind
+binder 18289:18289 <> e:34
+R18315:18317 Stdlib.Reals.Rdefinitions <> ::R_scope:x_'>'_x not
+R18302:18312 Atoms <> atomic_mass def
+R18314:18314 Atoms <> e:34 var
+prf 18415:18433 <> vdw_radius_positive
+R18448:18454 Atoms <> Element ind
+binder 18444:18444 <> e:35
+R18479:18481 Stdlib.Reals.Rdefinitions <> ::R_scope:x_'>'_x not
+R18457:18476 Atoms <> van_der_waals_radius def
+R18478:18478 Atoms <> e:35 var
+prf 18580:18603 <> electronegativity_nonneg
+R18618:18624 Atoms <> Element ind
+binder 18614:18614 <> e:36
+R18646:18649 Stdlib.Reals.Rdefinitions <> ::R_scope:x_'>='_x not
+R18627:18643 Atoms <> electronegativity def
+R18645:18645 Atoms <> e:36 var
+prf 18773:18802 <> fluorine_max_electronegativity
+R18819:18825 Atoms <> Element ind
+binder 18815:18815 <> e:37
+R18847:18850 Stdlib.Reals.Rdefinitions <> ::R_scope:x_'<='_x not
+R18828:18844 Atoms <> electronegativity def
+R18846:18846 Atoms <> e:37 var
+R18851:18867 Atoms <> electronegativity def
+R18869:18869 Atoms <> F constr
+prf 18959:18971 <> period_bounds
+R18986:18992 Atoms <> Element ind
+binder 18982:18982 <> e:38
+R19009:19012 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R18997:19000 Corelib.Init.Peano <> ::nat_scope:x_'<='_x not
+R19001:19006 Atoms <> period def
+R19008:19008 Atoms <> e:38 var
+R19021:19024 Corelib.Init.Peano <> ::nat_scope:x_'<='_x not
+R19013:19018 Atoms <> period def
+R19020:19020 Atoms <> e:38 var
+prf 19128:19156 <> hypervalent_requires_period_3
+R19173:19179 Atoms <> Element ind
+binder 19169:19169 <> e:39
+R19218:19221 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R19211:19213 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R19186:19208 Atoms <> is_hypervalent_possible def
+R19210:19210 Atoms <> e:39 var
+R19214:19217 Corelib.Init.Datatypes <> true constr
+R19231:19234 Corelib.Init.Peano <> ::nat_scope:x_'>='_x not
+R19223:19228 Atoms <> period def
+R19230:19230 Atoms <> e:39 var
+R19273:19295 Atoms <> is_hypervalent_possible def
+R19315:19320 Atoms <> period def
+R19315:19320 Atoms <> period def
