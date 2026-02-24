@@ -8,7 +8,7 @@ This should be the general template for the README. Ill create a separate folder
 ## Concept
 
 ## Pipeline
-
+```
 ┌─────────────────────────────────────────────────────────┐
 │          DRUG DISCOVERY ARCHITECTURE                    │
 └─────────────────────────────────────────────────────────┘
@@ -125,8 +125,11 @@ LEGEND:
 [    ]  Key Milestone/Output
 
 ───→   Process Flow
+
+```
 ## Architecture
 
+```
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║                    DRUG DISCOVERY ARCHITECTURE LAYERS                         ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
@@ -342,7 +345,7 @@ FEEDBACK-DEPENDENT:
   • L21 (error propagation) requires all simulation layers
 
 ═══════════════════════════════════════════════════════════════════════════════
-
+```
 ## Existing research
 
 ## Hypothetical Advantages
