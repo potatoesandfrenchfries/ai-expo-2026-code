@@ -54,10 +54,10 @@ This should be the general template for the README. Ill create a separate folder
 ╚═════════════════════════════════════════════════════════╝
     │
     ├─→ ╔════════════════════════════════════════╗
-    │   ║ FORMAL VERIFICATION (Rocq/Lean)      ║
-    │   ║ Build causal model of disease        ║
-    │   ║ Prove: modulating target reverses    ║
-    │   ║        disease phenotype              ║
+    │   ║ COMPUTATIONAL TARGET CONFIDENCE      ║
+    │   ║ Probabilistic causal modeling        ║
+    │   ║ Estimate likelihood of reversal      ║
+    │   ║ Cross-reference literature & omics   ║
     │   ╚════════════════════════════════════════╝
     │            ↓
     ├─→ Generate billions of candidate molecules
@@ -66,15 +66,15 @@ This should be the general template for the README. Ill create a separate folder
     ├─→ Predict binding affinity (GNN/ML)
     │            ↓
     ├─→ ╔════════════════════════════════════════╗
-    │   ║ FORMAL VERIFICATION                   ║
-    │   ║ Prove molecules satisfy:              ║
+    │   ║ COMPUTATIONAL DRUG VALIDATION         ║
+    │   ║ Filter molecules that satisfy:        ║
     │   ║ • Valid chemistry (bonds, valence)    ║
     │   ║ • Drug-like properties                ║
     │   ║ • Synthesizable                       ║
     │   ║ • No toxic groups                     ║
     │   ╚════════════════════════════════════════╝
     │            ↓
-    └─→ [FILTERED VALID MOLECULES + PROOF CERTIFICATES]
+    └─→ [FILTERED VALID MOLECULES + CONFIDENCE SCORES]
                 ↓
 ╔═════════════════════════════════════════════════════════╗
 ║  5. LEAD OPTIMIZATION                                   ║
@@ -118,8 +118,8 @@ LEGEND:
 ║    ║  
 ╚════╝  
 
-╔════╗  Formal Verification Step
-║    ║  (Mathematical proof in Rocq/Lean)
+╔════╗  Validation Step
+║    ║  (Computational / Heuristic checks)
 ╚════╝
 
 [    ]  Key Milestone/Output
@@ -151,10 +151,10 @@ LEGEND:
                                         │
                                         ↓
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 3: GENOTYPE-TO-PHENOTYPE SIMULATION               [SIMULATION LAYER]    │
+│ LAYER 3: GENOTYPE-TO-PHENOTYPE ASSOCIATION              [DATA/ML LAYER]       │
 │                                                                               │
-│ Simulates how genetic variants affect protein function                        │
-│ and cellular behavior to identify molecular disease mechanism                 │
+│ Maps genetic variants to protein function using GWAS, QTLs,                   │
+│ and sequence-based variant effect predictors (e.g., ESM-variants)             │
 └───────────────────────────────────────┬───────────────────────────────────────┘
                                         │
                                         ↓
@@ -175,14 +175,14 @@ LEGEND:
                                         │
                                         ↓
 ╔═══════════════════════════════════════════════════════════════════════════════╗
-║ LAYER 6: TARGET VALIDATION WITH FORMAL VERIFICATION   [VERIFICATION LAYER]    ║
+║ LAYER 6: TARGET CONFIDENCE SCORING                    [VALIDATION LAYER]      ║
 ║                                                                               ║
-║ Proves mathematically (Rocq/Lean) that modulating target reverses disease;    ║
-║ outputs proof certificate guaranteeing target validity                        ║
+║ Aggregates multi-omics, literature, and causal graph metrics to score target  ║
+║ viability; flags high-confidence targets for downstream generation            ║
 ╚═══════════════════════════════════════┬═══════════════════════════════════════╝
                                         │
                                         ↓
-┌───────────────────────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────────���────────────┐
 │ LAYER 7: MOLECULAR GENERATION (AI)                      [ML LAYER]            │
 │                                                                               │
 │ Generative models (VAE/diffusion/RL) create billions of candidate             │
@@ -199,11 +199,11 @@ LEGEND:
                                         │
                                         ↓
 ╔═══════════════════════════════════════════════════════════════════════════════╗
-║ LAYER 9: FORMAL CHEMICAL VERIFICATION                [VERIFICATION LAYER]     ║
+║ LAYER 9: COMPUTATIONAL DRUG VALIDATION               [VALIDATION LAYER]       ║
 ║                                                                               ║
-║ Theorem prover checks molecules satisfy:                                      ║
-║  • Valid bonds/angles/valence  • Drug-likeness (Lipinski)                     ║
-║  • No toxic substructures      • Synthesizable                                ║
+║ Cheminformatics pipeline (RDKit) filters molecules to ensure:                 ║
+║  • Valid chemistry/valency       • Drug-likeness (Lipinski rules)             ║
+║  • Substructure toxicity alerts  • Basic synthesizability (SA score)          ║
 ╚═══════════════════════════════════════┬═══════════════════════════════════════╝
                                         │
                                         ↓
@@ -232,10 +232,10 @@ LEGEND:
                                         │
                                         ↓
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 13: CELLULAR SIMULATION                        [SIMULATION LAYER]       │
+│ LAYER 13: TRANSCRIPTOMIC PERTURBATION PREDICTION     [ML LAYER]               │
 │                                                                               │
-│ Simulates drug effects on cells (signaling, gene expression, phenotype)       │
-│ to predict efficacy and toxicity                                              │
+│ Predicts gene expression changes (e.g., using Graph-based models)             │
+│ in response to drug binding to estimate cellular-level effects                │
 └───────────────────────────────────────┬───────────────────────────────────────┘
                                         │
                                         ↓
@@ -248,10 +248,10 @@ LEGEND:
                                         │
                                         ↓
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 15: DIGITAL TWIN GENERATION                    [SIMULATION LAYER]       │
+│ LAYER 15: PATIENT STRATIFICATION MODELING            [ML LAYER]               │
 │                                                                               │
-│ Creates personalized computational models of individual patients              │
-│ (genome, physiology) to simulate individual responses                         │
+│ Clusters patient multi-omics profiles to identify responsive subpopulations   │
+│ and predict variable drug efficacy across different demographic groups        │
 └───────────────────────────────────────┬───────────────────────────────────────┘
                                         │
                                         ↓
@@ -264,10 +264,10 @@ LEGEND:
                                         │
                                         ↓
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 17: CLINICAL TRIAL SIMULATION                  [SIMULATION LAYER]       │
+│ LAYER 17: VIRTUAL COHORT SCREENING                   [STATISTICAL LAYER]      │
 │                                                                               │
-│ Simulates thousands of virtual patients to predict trial outcomes,            │
-│ dosing, patient stratification, sample sizes                                  │
+│ Uses historical trial data and statistical models to optimize trial design,   │
+│ predict patient dropout rates, and estimate optimal sample sizes              │
 └───────────────────────────────────────┬───────────────────────────────────────┘
                                         │
                                         ↓
@@ -280,10 +280,10 @@ LEGEND:
                                         │
                                         ↓
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 19: EXPERIMENTAL INTEGRATION                   [INTEGRATION LAYER]      │
+│ LAYER 19: SEMI-AUTOMATED ASSAY INTEGRATION           [INTEGRATION LAYER]      │
 │                                                                               │
-│ Interfaces with robotic labs to execute selected experiments;                 │
-│ feeds results back to update all models                                       │
+│ Formats candidate lists for external CROs / automated HTS systems;            │
+│ standardizes returned assay results to update model priors                    │
 └────────────────┬──────────────────────┬───────────────────────────────────────┘
                  │                      │
                  │                      │ (Feedback loops)
@@ -291,10 +291,10 @@ LEGEND:
                  │                      │                │
                  ↓                      ↓                ↓
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 20: PROOF CERTIFICATE MANAGER                  [OUTPUT LAYER]           │
+│ LAYER 20: EVIDENCE & CONFIDENCE MANAGER              [OUTPUT LAYER]           │
 │                                                                               │
-│ Stores formal proofs from verification; generates reports showing             │
-│ which properties are mathematically guaranteed vs predicted                   │
+│ Aggregates all ML predictions, literature cross-references, and assay data    │
+│ into a unified confidence score for each lead candidate                       │
 └───────────────────────────────────────┬───────────────────────────────────────┘
                                         │
                                         ↓
@@ -307,10 +307,10 @@ LEGEND:
                                         │
                                         ↓
 ┌───────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 22: REGULATORY DOCUMENTATION GENERATOR         [OUTPUT LAYER]           │
+│ LAYER 22: IND PRE-FILING ASSISTANT                   [OUTPUT LAYER]           │
 │                                                                               │
-│ Compiles computational evidence, experimental data, proof certificates,       │
-│ simulations into FDA-compliant submission                                     │
+│ Uses LLMs to draft initial sections of Investigational New Drug (IND) reports │
+│ based on the collected computational and pre-clinical assay evidence          │
 └───────────────────────────────────────────────────────────────────────────────┘
 
 ═══════════════════════════════════════════════════════════════════════════════
@@ -321,7 +321,7 @@ LEGEND:
                   │
                   └──────→ Layer 8
 
-    Layer 19 ─────┐ (Refine digital twins)
+    Layer 19 ─────┐ (Refine stratification models)
                   │
                   └──────→ Layer 15
 
@@ -337,20 +337,11 @@ CRITICAL PATH (must be sequential):
 
 PARALLELIZABLE:
   • L7 (generation) can produce while L8 (prediction) scores previous batch
-  • L13-L17 (simulations) can run independently on different candidates
-  • L15 (digital twins) one per patient, fully parallel
+  • L13-L17 (simulations & predictions) can run independently on different candidates
+  • L15 (stratification) runs across patient populations parallel to drug design
 
 FEEDBACK-DEPENDENT:
   • L18 (active learning) requires L19 (experiments) results
-  • L21 (error propagation) requires all simulation layers
+  • L21 (error propagation) requires all prediction layers
 
 ═══════════════════════════════════════════════════════════════════════════════
-```
-## Existing research
-
-## Hypothetical Advantages
-
-## Requirements
-
-## References
-
