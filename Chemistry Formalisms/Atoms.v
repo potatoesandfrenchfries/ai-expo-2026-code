@@ -4,11 +4,11 @@
     physical and chemical properties as pure Rocq types.
 *)
 
-Require Import Coq.Reals.Reals.
-Require Import Coq.ZArith.ZArith.
-Require Import Coq.Lists.List.
-Require Import Coq.micromega.Lia.
-Require Import Coq.micromega.Lra.
+Require Import Stdlib.Reals.Reals.
+Require Import Stdlib.ZArith.ZArith.
+Require Import Stdlib.Lists.List.
+Require Import Stdlib.micromega.Lia.
+Require Import Stdlib.micromega.Lra.
 Import ListNotations.
 
 Open Scope R_scope.
