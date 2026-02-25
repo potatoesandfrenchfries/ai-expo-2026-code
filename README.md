@@ -1,5 +1,6 @@
 # ai-expo-2026-code
 
+We should hopefully be implementing a novel approach to phase one of drug discovery trials, and integrate it with existing systems. Not gonna be exceptionally complex. We should preferrably be having a working rocq system, and a barebones GNN that can utilise those files (can jump over to LLM based infrastructure if we dont have the time to).
 
 This should be the general template for the README. Ill create a separate folder for the actual research to go in. I'll also create a google docs to make copy pasting easier for citations and references. 
 
@@ -217,7 +218,8 @@ LEGEND:
                                         ↓
 ┌───────────────────────────────────────────────────────────────────────────────┐
 │ LAYER 11: LEAD OPTIMIZATION ENGINE                   [OPTIMIZATION LAYER]     │
-│                                                                               │
+│ If you read this, send me a message on insta saying "Potato". If not, I'll genuinely
+crash out considering you haven't read what I have written                                                                              │
 │ Generates molecular modifications, predicts property changes,                 │
 │ explores optimization landscape (potency/safety/solubility)                   │
 └───────────────────────────────────────┬───────────────────────────────────────┘
@@ -339,7 +341,6 @@ PARALLELIZABLE:
   • L7 (generation) can produce while L8 (prediction) scores previous batch
   • L13-L17 (simulations & predictions) can run independently on different candidates
   • L15 (stratification) runs across patient populations parallel to drug design
-
 FEEDBACK-DEPENDENT:
   • L18 (active learning) requires L19 (experiments) results
   • L21 (error propagation) requires all prediction layers
