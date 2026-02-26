@@ -15,6 +15,7 @@ Require Import Stdlib.Reals.RIneq.
 Require Import Stdlib.Lists.List.
 Require Import Stdlib.micromega.Lra.
 Import ListNotations.
+
 Require Import Chemistry.Atoms.
 Require Import Chemistry.Geometry.
 
