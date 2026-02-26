@@ -1,0 +1,825 @@
+[1mdiff --git a/src/rocq/Atoms.v b/src/rocq/Atoms.v[m
+[1mindex 8a5df20..6f0cef6 100644[m
+[1m--- a/src/rocq/Atoms.v[m
+[1m+++ b/src/rocq/Atoms.v[m
+[36m@@ -19,9 +19,9 @@[m [mInductive Element : Type :=[m
+   (* Period 1 *)[m
+   | eH  | eHe[m
+   (* Period 2 *)[m
+[31m-  | eLi | eBe | eB  | eC  | eN  | eO  | eF  | Ne[m
+[32m+[m[32m  | eLi | eBe | eB  | eC  | eN  | eO  | eF  | eNe[m
+   (* Period 3 *)[m
+[31m-  | eNa | eMg | eAl | eSi | eP  | eS  | eCl | Ar[m
+[32m+[m[32m  | eNa | eMg | eAl | eSi | eP  | eS  | eCl | eAr[m
+   (* Period 4 *)[m
+   | eK  | eCa | eSc | eTi | eV  | eCr | eMn | eFe | eCo | eNi | eCu | eZn[m
+   | eGa | eGe | eAs | eSe | eBr | eKr[m
+[36m@@ -86,112 +86,112 @@[m [mDefinition atomic_mass (e : Element) : R :=[m
+   | eNa => 22.990  | eMg => 24.305  | eAl => 26.982  | eSi => 28.086[m
+   | eP  => 30.974   | eS   => 32.065   | eCl => 35.453   | eAr => 39.948[m
+ [m
+[31m-  | V  => 50.942  | Cr => 51.996  | Mn => 54.938  | Fe => 55.845[m
+[31m-  | Co => 58.933  | Ni => 58.693  | Cu => 63.546  | Zn => 65.38[m
+[31m-  | Ga => 69.723  | Ge => 72.630  | As => 74.922  | Se => 78.971[m
+[31m-  | Br => 79.904  | Kr => 83.798[m
+[31m-  | Rb => 85.468  | Sr => 87.62   | Y  => 88.906  | Zr => 91.224[m
+[31m-  | Nb => 92.906  | Mo => 95.95   | Tc => 98.0    | Ru => 101.07[m
+[31m-  | Rh => 102.91  | Pd => 106.42  | Ag => 107.87  | Cd => 112.41[m
+[31m-  | In => 114.82  | Sn => 118.71  | Sb => 121.76  | Te => 127.60[m
+[31m-  | I  => 126.90  | Xe => 131.29[m
+[31m-  | Cs => 132.91  | Ba => 137.33[m
+[31m-  | La => 138.91  | Ce => 140.12  | Pr => 140.91  | Nd => 144.24[m
+[31m-  | Pm => 145.0   | Sm => 150.36  | Eu => 151.96  | Gd => 157.25[m
+[31m-  | Tb => 158.93  | Dy => 162.50  | Ho => 164.93  | Er => 167.26[m
+[31m-  | Tm => 168.93  | Yb => 173.05  | Lu => 174.97[m
+[31m-  | Hf => 178.49  | Ta => 180.95  | W  => 183.84  | Re => 186.21[m
+[31m-  | Os => 190.23  | Ir => 192.22  | Pt => 195.08  | Au => 196.97[m
+[31m-  | Hg => 200.59[m
+[31m-  | Tl => 204.38  | Pb => 207.2   | Bi => 208.98  | Po => 209.0[m
+[31m-  | At => 210.0   | Rn => 222.0[m
+[31m-  | Fr => 223.0   | Ra => 226.0[m
+[31m-  | Ac => 227.0   | Th => 232.04  | Pa => 231.04  | U  => 238.03[m
+[31m-  | Np => 237.0   | Pu => 244.0   | Am => 243.0   | Cm => 247.0[m
+[31m-  | Bk => 247.0   | Cf => 251.0   | Es => 252.0   | Fm => 257.0[m
+[31m-  | Md => 258.0   | No => 259.0   | Lr => 262.0[m
+[31m-  | Rf => 265.0   | Db => 268.0   | Sg => 271.0   | Bh => 270.0[m
+[31m-  | Hs => 277.0   | Mt => 276.0   | Ds => 281.0   | Rg => 280.0[m
+[31m-  | Cn => 285.0   | Nh => 284.0   | Fl => 289.0   | Mc => 288.0[m
+[31m-  | Lv => 293.0   | Ts => 294.0   | Og => 294.0[m
+[32m+[m[32m  | eV  => 50.942  | eCr => 51.996  | eMn => 54.938  | eFe => 55.845[m
+[32m+[m[32m  | eCo => 58.933  | eNi => 58.693  | eCu => 63.546  | eZn => 65.38[m
+[32m+[m[32m  | eGa => 69.723  | eGe => 72.630  | eAs => 74.922  | eSe => 78.971[m
+[32m+[m[32m  | eBr => 79.904  | eKr => 83.798[m
+[32m+[m[32m  | eRb => 85.468  | eSr => 87.62   | eY  => 88.906  | eZr => 91.224[m
+[32m+[m[32m  | eNb => 92.906  | eMo => 95.95   | eTc => 98.0    | eRu => 101.07[m
+[32m+[m[32m  | eRh => 102.91  | ePd => 106.42  | eAg => 107.87  | eCd => 112.41[m
+[32m+[m[32m  | eIn => 114.82  | eSn => 118.71  | eSb => 121.76  | eTe => 127.60[m
+[32m+[m[32m  | eI  => 126.90  | eXe => 131.29[m
+[32m+[m[32m  | eCs => 132.91  | eBa => 137.33[m
+[32m+[m[32m  | eLa => 138.91  | eCe => 140.12  | ePr => 140.91  | eNd => 144.24[m
+[32m+[m[32m  | ePm => 145.0   | eSm => 150.36  | eEu => 151.96  | eGd => 157.25[m
+[32m+[m[32m  | eTb => 158.93  | eDy => 162.50  | eHo => 164.93  | eEr => 167.26[m
+[32m+[m[32m  | eTm => 168.93  | eYb => 173.05  | eLu => 174.97[m
+[32m+[m[32m  | eHf => 178.49  | eTa => 180.95  | eW  => 183.84  | eRe => 186.21[m
+[32m+[m[32m  | eOs => 190.23  | eIr => 192.22  | ePt => 195.08  | eAu => 196.97[m
+[32m+[m[32m  | eHg => 200.59[m
+[32m+[m[32m  | eTl => 204.38  | ePb => 207.2   | eBi => 208.98  | ePo => 209.0[m
+[32m+[m[32m  | eAt => 210.0   | eRn => 222.0[m
+[32m+[m[32m  | eFr => 223.0   | eRa => 226.0[m
+[32m+[m[32m  | eAc => 227.0   | eTh => 232.04  | ePa => 231.04  | eU  => 238.03[m
+[32m+[m[32m  | eNp => 237.0   | ePu => 244.0   | eAm => 243.0   | eCm => 247.0[m
+[32m+[m[32m  | eBk => 247.0   | eCf => 251.0   | eEs => 252.0   | eFm => 257.0[m
+[32m+[m[32m  | eMd => 258.0   | eNo => 259.0   | eLr => 262.0[m
+[32m+[m[32m  | eRf => 265.0   | eDb => 268.0   | eSg => 271.0   | eBh => 270.0[m
+[32m+[m[32m  | eHs => 277.0   | eMt => 276.0   | eDs => 281.0   | eRg => 280.0[m
+[32m+[m[32m  | eCn => 285.0   | eNh => 284.0   | eFl => 289.0   | eMc => 288.0[m
+[32m+[m[32m  | eLv => 293.0   | eTs => 294.0   | eOg => 294.0[m
+   end.[m
+ [m
+ (** ** 4. Van der Waals Radius (in Angstroms, Å) *)[m
+ [m
+ Definition van_der_waals_radius (e : Element) : R :=[m
+   match e with[m
+[31m-  | H  => 1.20 | He => 1.40[m
+[31m-  | Li => 1.82 | Be => 1.53 | B  => 1.92 | C  => 1.70[m
+[31m-  | N  => 1.55 | O  => 1.52 | F  => 1.47 | Ne => 1.54[m
+[31m-  | Na => 2.27 | Mg => 1.73 | Al => 1.84 | Si => 2.10[m
+[31m-  | P  => 1.80 | S  => 1.80 | Cl => 1.75 | Ar => 1.88[m
+[31m-  | K  => 2.75 | Ca => 2.31 | Sc => 2.11 | Ti => 2.00[m
+[31m-  | V  => 2.00 | Cr => 2.00 | Mn => 2.00 | Fe => 2.00[m
+[31m-  | Co => 2.00 | Ni => 1.63 | Cu => 1.40 | Zn => 1.39[m
+[31m-  | Ga => 1.87 | Ge => 2.11 | As => 1.85 | Se => 1.90[m
+[31m-  | Br => 1.85 | Kr => 2.02[m
+[31m-  | Rb => 3.03 | Sr => 2.49 | Y  => 2.27 | Zr => 2.16[m
+[31m-  | Nb => 2.08 | Mo => 2.09 | Tc => 2.16 | Ru => 2.13[m
+[31m-  | Rh => 2.10 | Pd => 1.63 | Ag => 1.72 | Cd => 1.58[m
+[31m-  | In => 1.93 | Sn => 2.17 | Sb => 2.06 | Te => 2.06[m
+[31m-  | I  => 1.98 | Xe => 2.16[m
+[31m-  | Cs => 3.43 | Ba => 2.68[m
+[31m-  | La => 2.43 | Ce => 2.42 | Pr => 2.40 | Nd => 2.39[m
+[31m-  | Pm => 2.38 | Sm => 2.36 | Eu => 2.35 | Gd => 2.34[m
+[31m-  | Tb => 2.33 | Dy => 2.31 | Ho => 2.30 | Er => 2.29[m
+[31m-  | Tm => 2.27 | Yb => 2.26 | Lu => 2.24[m
+[31m-  | Hf => 2.23 | Ta => 2.22 | W  => 2.18 | Re => 2.16[m
+[31m-  | Os => 2.16 | Ir => 2.13 | Pt => 1.75 | Au => 1.66[m
+[31m-  | Hg => 1.55 | Tl => 1.96 | Pb => 2.02 | Bi => 2.07[m
+[31m-  | Po => 1.97 | At => 2.02 | Rn => 2.20[m
+[31m-  | Fr => 3.48 | Ra => 2.83[m
+[31m-  | Ac => 2.47 | Th => 2.45 | Pa => 2.43 | U  => 2.41[m
+[31m-  | Np => 2.39 | Pu => 2.43 | Am => 2.44 | Cm => 2.45[m
+[31m-  | Bk => 2.44 | Cf => 2.45 | Es => 2.45 | Fm => 2.45[m
+[31m-  | Md => 2.46 | No => 2.46 | Lr => 2.46[m
+[31m-  | Rf => 2.00 | Db => 2.00 | Sg => 2.00 | Bh => 2.00[m
+[31m-  | Hs => 2.00 | Mt => 2.00 | Ds => 2.00 | Rg => 2.00[m
+[31m-  | Cn => 2.00 | Nh => 2.00 | Fl => 2.00 | Mc => 2.00[m
+[31m-  | Lv => 2.00 | Ts => 2.00 | Og => 2.00[m
+[32m+[m[32m  | eH  => 1.20 | eHe => 1.40[m
+[32m+[m[32m  | eLi => 1.82 | eBe => 1.53 | eB  => 1.92 | eC  => 1.70[m
+[32m+[m[32m  | eN  => 1.55 | eO  => 1.52 | eF  => 1.47 | eNe => 1.54[m
+[32m+[m[32m  | eNa => 2.27 | eMg => 1.73 | eAl => 1.84 | eSi => 2.10[m
+[32m+[m[32m  | eP  => 1.80 | eS  => 1.80 | eCl => 1.75 | eAr => 1.88[m
+[32m+[m[32m  | eK  => 2.75 | eCa => 2.31 | eSc => 2.11 | eTi => 2.00[m
+[32m+[m[32m  | eV  => 2.00 | eCr => 2.00 | eMn => 2.00 | eFe => 2.00[m
+[32m+[m[32m  | eCo => 2.00 | eNi => 1.63 | eCu => 1.40 | eZn => 1.39[m
+[32m+[m[32m  | eGa => 1.87 | eGe => 2.11 | eAs => 1.85 | eSe => 1.90[m
+[32m+[m[32m  | eBr => 1.85 | eKr => 2.02[m
+[32m+[m[32m  | eRb => 3.03 | eSr => 2.49 | eY  => 2.27 | eZr => 2.16[m
+[32m+[m[32m  | eNb => 2.08 | eMo => 2.09 | eTc => 2.16 | eRu => 2.13[m
+[32m+[m[32m  | eRh => 2.10 | ePd => 1.63 | eAg => 1.72 | eCd => 1.58[m
+[32m+[m[32m  | eIn => 1.93 | eSn => 2.17 | eSb => 2.06 | eTe => 2.06[m
+[32m+[m[32m  | eI  => 1.98 | eXe => 2.16[m
+[32m+[m[32m  | eCs => 3.43 | eBa => 2.68[m
+[32m+[m[32m  | eLa => 2.43 | eCe => 2.42 | ePr => 2.40 | eNd => 2.39[m
+[32m+[m[32m  | ePm => 2.38 | eSm => 2.36 | eEu => 2.35 | eGd => 2.34[m
+[32m+[m[32m  | eTb => 2.33 | eDy => 2.31 | eHo => 2.30 | eEr => 2.29[m
+[32m+[m[32m  | eTm => 2.27 | eYb => 2.26 | eLu => 2.24[m
+[32m+[m[32m  | eHf => 2.23 | eTa => 2.22 | eW  => 2.18 | eRe => 2.16[m
+[32m+[m[32m  | eOs => 2.16 | eIr => 2.13 | ePt => 1.75 | eAu => 1.66[m
+[32m+[m[32m  | eHg => 1.55 | eTl => 1.96 | ePb => 2.02 | eBi => 2.07[m
+[32m+[m[32m  | ePo => 1.97 | eAt => 2.02 | eRn => 2.20[m
+[32m+[m[32m  | eFr => 3.48 | eRa => 2.83[m
+[32m+[m[32m  | eAc => 2.47 | eTh => 2.45 | ePa => 2.43 | eU  => 2.41[m
+[32m+[m[32m  | eNp => 2.39 | ePu => 2.43 | eAm => 2.44 | eCm => 2.45[m
+[32m+[m[32m  | eBk => 2.44 | eCf => 2.45 | eEs => 2.45 | eFm => 2.45[m
+[32m+[m[32m  | eMd => 2.46 | eNo => 2.46 | eLr => 2.46[m
+[32m+[m[32m  | eRf => 2.00 | eDb => 2.00 | eSg => 2.00 | eBh => 2.00[m
+[32m+[m[32m  | eHs => 2.00 | eMt => 2.00 | eDs => 2.00 | eRg => 2.00[m
+[32m+[m[32m  | eCn => 2.00 | eNh => 2.00 | eFl => 2.00 | eMc => 2.00[m
+[32m+[m[32m  | eLv => 2.00 | eTs => 2.00 | eOg => 2.00[m
+   end.[m
+ [m
+ (** ** 5. Covalent Radius (in Angstroms, Å) *)[m
+ [m
+ Definition covalent_radius (e : Element) : R :=[m
+   match e with[m
+[31m-  | H  => 0.31 | He => 0.28[m
+[31m-  | Li => 1.28 | Be => 0.96 | B  => 0.84 | C  => 0.77[m
+[31m-  | N  => 0.71 | O  => 0.66 | F  => 0.57 | Ne => 0.58[m
+[31m-  | Na => 1.66 | Mg => 1.41 | Al => 1.21 | Si => 1.11[m
+[31m-  | P  => 1.07 | S  => 1.05 | Cl => 1.02 | Ar => 1.06[m
+[31m-  | K  => 2.03 | Ca => 1.76 | Sc => 1.70 | Ti => 1.60[m
+[31m-  | V  => 1.53 | Cr => 1.39 | Mn => 1.61 | Fe => 1.52[m
+[31m-  | Co => 1.50 | Ni => 1.24 | Cu => 1.32 | Zn => 1.22[m
+[31m-  | Ga => 1.22 | Ge => 1.20 | As => 1.19 | Se => 1.20[m
+[31m-  | Br => 1.20 | Kr => 1.16[m
+[31m-  | Rb => 2.20 | Sr => 1.95 | Y  => 1.90 | Zr => 1.75[m
+[31m-  | Nb => 1.64 | Mo => 1.54 | Tc => 1.47 | Ru => 1.46[m
+[31m-  | Rh => 1.42 | Pd => 1.39 | Ag => 1.45 | Cd => 1.44[m
+[31m-  | In => 1.42 | Sn => 1.39 | Sb => 1.39 | Te => 1.38[m
+[31m-  | I  => 1.39 | Xe => 1.40[m
+[31m-  | Cs => 2.44 | Ba => 2.15[m
+[31m-  | La => 2.07 | Ce => 2.04 | Pr => 2.03 | Nd => 2.01[m
+[31m-  | Pm => 1.99 | Sm => 1.98 | Eu => 1.98 | Gd => 1.96[m
+[31m-  | Tb => 1.94 | Dy => 1.92 | Ho => 1.92 | Er => 1.89[m
+[31m-  | Tm => 1.90 | Yb => 1.87 | Lu => 1.87[m
+[31m-  | Hf => 1.75 | Ta => 1.70 | W  => 1.62 | Re => 1.51[m
+[31m-  | Os => 1.44 | Ir => 1.41 | Pt => 1.36 | Au => 1.36[m
+[31m-  | Hg => 1.32 | Tl => 1.45 | Pb => 1.46 | Bi => 1.48[m
+[31m-  | Po => 1.40 | At => 1.50 | Rn => 1.50[m
+[31m-  | Fr => 2.60 | Ra => 2.21[m
+[31m-  | Ac => 2.15 | Th => 2.06 | Pa => 2.00 | U  => 1.96[m
+[31m-  | Np => 1.90 | Pu => 1.87 | Am => 1.80 | Cm => 1.69[m
+[31m-  | Bk => 1.68 | Cf => 1.68 | Es => 1.65 | Fm => 1.67[m
+[31m-  | Md => 1.73 | No => 1.76 | Lr => 1.61[m
+[31m-  | Rf => 1.57 | Db => 1.49 | Sg => 1.43 | Bh => 1.41[m
+[31m-  | Hs => 1.34 | Mt => 1.29 | Ds => 1.28 | Rg => 1.21[m
+[31m-  | Cn => 1.22 | Nh => 1.36 | Fl => 1.43 | Mc => 1.62[m
+[31m-  | Lv => 1.75 | Ts => 1.65 | Og => 1.57[m
+[32m+[m[32m  | eH  => 0.31 | eHe => 0.28[m
+[32m+[m[32m  | eLi => 1.28 | eBe => 0.96 | eB  => 0.84 | eC  => 0.77[m
+[32m+[m[32m  | eN  => 0.71 | eO  => 0.66 | eF  => 0.57 | eNe => 0.58[m
+[32m+[m[32m  | eNa => 1.66 | eMg => 1.41 | eAl => 1.21 | eSi => 1.11[m
+[32m+[m[32m  | eP  => 1.07 | eS  => 1.05 | eCl => 1.02 | eAr => 1.06[m
+[32m+[m[32m  | eK  => 2.03 | eCa => 1.76 | eSc => 1.70 | eTi => 1.60[m
+[32m+[m[32m  | eV  => 1.53 | eCr => 1.39 | eMn => 1.61 | eFe => 1.52[m
+[32m+[m[32m  | eCo => 1.50 | eNi => 1.24 | eCu => 1.32 | eZn => 1.22[m
+[32m+[m[32m  | eGa => 1.22 | eGe => 1.20 | eAs => 1.19 | eSe => 1.20[m
+[32m+[m[32m  | eBr => 1.20 | eKr => 1.16[m
+[32m+[m[32m  | eRb => 2.20 | eSr => 1.95 | eY  => 1.90 | eZr => 1.75[m
+[32m+[m[32m  | eNb => 1.64 | eMo => 1.54 | eTc => 1.47 | eRu => 1.46[m
+[32m+[m[32m  | eRh => 1.42 | ePd => 1.39 | eAg => 1.45 | eCd => 1.44[m
+[32m+[m[32m  | eIn => 1.42 | eSn => 1.39 | eSb => 1.39 | eTe => 1.38[m
+[32m+[m[32m  | eI  => 1.39 | eXe => 1.40[m
+[32m+[m[32m  | eCs => 2.44 | eBa => 2.15[m
+[32m+[m[32m  | eLa => 2.07 | eCe => 2.04 | ePr => 2.03 | eNd => 2.01[m
+[32m+[m[32m  | ePm => 1.99 | eSm => 1.98 | eEu => 1.98 | eGd => 1.96[m
+[32m+[m[32m  | eTb => 1.94 | eDy => 1.92 | eHo => 1.92 | eEr => 1.89[m
+[32m+[m[32m  | eTm => 1.90 | eYb => 1.87 | eLu => 1.87[m
+[32m+[m[32m  | eHf => 1.75 | eTa => 1.70 | eW  => 1.62 | eRe => 1.51[m
+[32m+[m[32m  | eOs => 1.44 | eIr => 1.41 | ePt => 1.36 | eAu => 1.36[m
+[32m+[m[32m  | eHg => 1.32 | eTl => 1.45 | ePb => 1.46 | eBi => 1.48[m
+[32m+[m[32m  | ePo => 1.40 | eAt => 1.50 | eRn => 1.50[m
+[32m+[m[32m  | eFr => 2.60 | eRa => 2.21[m
+[32m+[m[32m  | eAc => 2.15 | eTh => 2.06 | ePa => 2.00 | eU  => 1.96[m
+[32m+[m[32m  | eNp => 1.90 | ePu => 1.87 | eAm => 1.80 | eCm => 1.69[m
+[32m+[m[32m  | eBk => 1.68 | eCf => 1.68 | eEs => 1.65 | eFm => 1.67[m
+[32m+[m[32m  | eMd => 1.73 | eNo => 1.76 | eLr => 1.61[m
+[32m+[m[32m  | eRf => 1.57 | eDb => 1.49 | eSg => 1.43 | eBh => 1.41[m
+[32m+[m[32m  | eHs => 1.34 | eMt => 1.29 | eDs => 1.28 | eRg => 1.21[m
+[32m+[m[32m  | eCn => 1.22 | eNh => 1.36 | eFl => 1.43 | eMc => 1.62[m
+[32m+[m[32m  | eLv => 1.75 | eTs => 1.65 | eOg => 1.57[m
+   end.[m
+ [m
+ (** ** 6. Pauling Electronegativity *)[m
+[36m@@ -200,35 +200,35 @@[m [mDefinition covalent_radius (e : Element) : R :=[m
+     elements lack well-defined values; we use 0.0 as a sentinel. *)[m
+ Definition electronegativity (e : Element) : R :=[m
+   match e with[m
+[31m-  | H  => 2.20 | He => 0.00[m
+[31m-  | Li => 0.98 | Be => 1.57 | B  => 2.04 | C  => 2.55[m
+[31m-  | N  => 3.04 | O  => 3.44 | F  => 3.98 | Ne => 0.00[m
+[31m-  | Na => 0.93 | Mg => 1.31 | Al => 1.61 | Si => 1.90[m
+[31m-  | P  => 2.19 | S  => 2.58 | Cl => 3.16 | Ar => 0.00[m
+[31m-  | K  => 0.82 | Ca => 1.00 | Sc => 1.36 | Ti => 1.54[m
+[31m-  | V  => 1.63 | Cr => 1.66 | Mn => 1.55 | Fe => 1.83[m
+[31m-  | Co => 1.88 | Ni => 1.91 | Cu => 1.90 | Zn => 1.65[m
+[31m-  | Ga => 1.81 | Ge => 2.01 | As => 2.18 | Se => 2.55[m
+[31m-  | Br => 2.96 | Kr => 3.00[m
+[31m-  | Rb => 0.82 | Sr => 0.95 | Y  => 1.22 | Zr => 1.33[m
+[31m-  | Nb => 1.60 | Mo => 2.16 | Tc => 1.90 | Ru => 2.20[m
+[31m-  | Rh => 2.28 | Pd => 2.20 | Ag => 1.93 | Cd => 1.69[m
+[31m-  | In => 1.78 | Sn => 1.96 | Sb => 2.05 | Te => 2.10[m
+[31m-  | I  => 2.66 | Xe => 2.60[m
+[31m-  | Cs => 0.79 | Ba => 0.89[m
+[31m-  | La => 1.10 | Ce => 1.12 | Pr => 1.13 | Nd => 1.14[m
+[31m-  | Pm => 1.13 | Sm => 1.17 | Eu => 1.20 | Gd => 1.20[m
+[31m-  | Tb => 1.10 | Dy => 1.22 | Ho => 1.23 | Er => 1.24[m
+[31m-  | Tm => 1.25 | Yb => 1.10 | Lu => 1.27[m
+[31m-  | Hf => 1.30 | Ta => 1.50 | W  => 2.36 | Re => 1.90[m
+[31m-  | Os => 2.20 | Ir => 2.20 | Pt => 2.28 | Au => 2.54[m
+[31m-  | Hg => 2.00 | Tl => 1.62 | Pb => 2.33 | Bi => 2.02[m
+[31m-  | Po => 2.00 | At => 2.20 | Rn => 0.00[m
+[31m-  | Fr => 0.70 | Ra => 0.89[m
+[31m-  | Ac => 1.10 | Th => 1.30 | Pa => 1.50 | U  => 1.38[m
+[31m-  | Np => 1.36 | Pu => 1.28 | Am => 1.30 | Cm => 1.30[m
+[31m-  | Bk => 1.30 | Cf => 1.30 | Es => 1.30 | Fm => 1.30[m
+[31m-  | Md => 1.30 | No => 1.30 | Lr => 1.30[m
+[32m+[m[32m  | eH  => 2.20 | eHe => 0.00[m
+[32m+[m[32m  | eLi => 0.98 | eBe => 1.57 | eB  => 2.04 | eC  => 2.55[m
+[32m+[m[32m  | eN  => 3.04 | eO  => 3.44 | eF  => 3.98 | eNe => 0.00[m
+[32m+[m[32m  | eNa => 0.93 | eMg => 1.31 | eAl => 1.61 | eSi => 1.90[m
+[32m+[m[32m  | eP  => 2.19 | eS  => 2.58 | eCl => 3.16 | eAr => 0.00[m
+[32m+[m[32m  | eK  => 0.82 | eCa => 1.00 | eSc => 1.36 | eTi => 1.54[m
+[32m+[m[32m  | eV  => 1.63 | eCr => 1.66 | eMn => 1.55 | eFe => 1.83[m
+[32m+[m[32m  | eCo => 1.88 | eNi => 1.91 | eCu => 1.90 | eZn => 1.65[m
+[32m+[m[32m  | eGa => 1.81 | eGe => 2.01 | eAs => 2.18 | eSe => 2.55[m
+[32m+[m[32m  | eBr => 2.96 | eKr => 3.00[m
+[32m+[m[32m  | eRb => 0.82 | eSr => 0.95 | eY  => 1.22 | eZr => 1.33[m
+[32m+[m[32m  | eNb => 1.60 | eMo => 2.16 | eTc => 1.90 | eRu => 2.20[m
+[32m+[m[32m  | eRh => 2.28 | ePd => 2.20 | eAg => 1.93 | eCd => 1.69[m
+[32m+[m[32m  | eIn => 1.78 | eSn => 1.96 | eSb => 2.05 | eTe => 2.10[m
+[32m+[m[32m  | eI  => 2.66 | eXe => 2.60[m
+[32m+[m[32m  | eCs => 0.79 | eBa => 0.89[m
+[32m+[m[32m  | eLa => 1.10 | eCe => 1.12 | ePr => 1.13 | eNd => 1.14[m
+[32m+[m[32m  | ePm => 1.13 | eSm => 1.17 | eEu => 1.20 | eGd => 1.20[m
+[32m+[m[32m  | eTb => 1.10 | eDy => 1.22 | eHo => 1.23 | eEr => 1.24[m
+[32m+[m[32m  | eTm => 1.25 | eYb => 1.10 | eLu => 1.27[m
+[32m+[m[32m  | eHf => 1.30 | eTa => 1.50 | eW  => 2.36 | eRe => 1.90[m
+[32m+[m[32m  | eOs => 2.20 | eIr => 2.20 | ePt => 2.28 | eAu => 2.54[m
+[32m+[m[32m  | eHg => 2.00 | eTl => 1.62 | ePb => 2.33 | eBi => 2.02[m
+[32m+[m[32m  | ePo => 2.00 | eAt => 2.20 | eRn => 0.00[m
+[32m+[m[32m  | eFr => 0.70 | eRa => 0.89[m
+[32m+[m[32m  | eAc => 1.10 | eTh => 1.30 | ePa => 1.50 | eU  => 1.38[m
+[32m+[m[32m  | eNp => 1.36 | ePu => 1.28 | eAm => 1.30 | eCm => 1.30[m
+[32m+[m[32m  | eBk => 1.30 | eCf => 1.30 | eEs => 1.30 | eFm => 1.30[m
+[32m+[m[32m  | eMd => 1.30 | eNo => 1.30 | eLr => 1.30[m
+   | _  => 0.00[m
+   end.[m
+ [m
+[36m@@ -236,35 +236,35 @@[m [mDefinition electronegativity (e : Element) : R :=[m
+ [m
+ Definition ionization_energy (e : Element) : R :=[m
+   match e with[m
+[31m-  | H  => 1312.0 | He => 2372.3[m
+[31m-  | Li => 520.2  | Be => 899.5  | B  => 800.6  | C  => 1086.5[m
+[31m-  | N  => 1402.3 | O  => 1313.9 | F  => 1681.0 | Ne => 2080.7[m
+[31m-  | Na => 495.8  | Mg => 737.7  | Al => 577.5  | Si => 786.5[m
+[31m-  | P  => 1011.8 | S  => 999.6  | Cl => 1251.2 | Ar => 1520.6[m
+[31m-  | K  => 418.8  | Ca => 589.8  | Sc => 633.1  | Ti => 658.8[m
+[31m-  | V  => 650.9  | Cr => 652.9  | Mn => 717.3  | Fe => 762.5[m
+[31m-  | Co => 760.4  | Ni => 737.1  | Cu => 745.5  | Zn => 906.4[m
+[31m-  | Ga => 578.8  | Ge => 762.0  | As => 947.0  | Se => 941.0[m
+[31m-  | Br => 1139.9 | Kr => 1350.8[m
+[31m-  | Rb => 403.0  | Sr => 549.5  | Y  => 600.0  | Zr => 640.1[m
+[31m-  | Nb => 652.1  | Mo => 684.3  | Tc => 702.0  | Ru => 710.2[m
+[31m-  | Rh => 719.7  | Pd => 804.4  | Ag => 731.0  | Cd => 867.8[m
+[31m-  | In => 558.3  | Sn => 708.6  | Sb => 834.0  | Te => 869.3[m
+[31m-  | I  => 1008.4 | Xe => 1170.4[m
+[31m-  | Cs => 375.7  | Ba => 502.9[m
+[31m-  | La => 538.1  | Ce => 534.4  | Pr => 527.0  | Nd => 533.1[m
+[31m-  | Pm => 540.0  | Sm => 544.5  | Eu => 547.1  | Gd => 593.4[m
+[31m-  | Tb => 565.8  | Dy => 573.0  | Ho => 581.0  | Er => 589.3[m
+[31m-  | Tm => 596.7  | Yb => 603.4  | Lu => 523.5[m
+[31m-  | Hf => 658.5  | Ta => 761.0  | W  => 770.0  | Re => 760.0[m
+[31m-  | Os => 840.0  | Ir => 880.0  | Pt => 870.0  | Au => 890.1[m
+[31m-  | Hg => 1007.1 | Tl => 589.4  | Pb => 715.6  | Bi => 703.0[m
+[31m-  | Po => 812.1  | At => 899.0  | Rn => 1037.0[m
+[31m-  | Fr => 380.0  | Ra => 509.3[m
+[31m-  | Ac => 499.0  | Th => 587.0  | Pa => 568.0  | U  => 597.6[m
+[31m-  | Np => 604.5  | Pu => 584.7  | Am => 578.0  | Cm => 581.0[m
+[31m-  | Bk => 601.0  | Cf => 608.0  | Es => 619.0  | Fm => 629.0[m
+[31m-  | Md => 636.0  | No => 641.6  | Lr => 470.0[m
+[32m+[m[32m  | eH  => 1312.0 | eHe => 2372.3[m
+[32m+[m[32m  | eLi => 520.2  | eBe => 899.5  | eB  => 800.6  | eC  => 1086.5[m
+[32m+[m[32m  | eN  => 1402.3 | eO  => 1313.9 | eF  => 1681.0 | eNe => 2080.7[m
+[32m+[m[32m  | eNa => 495.8  | eMg => 737.7  | eAl => 577.5  | eSi => 786.5[m
+[32m+[m[32m  | eP  => 1011.8 | eS  => 999.6  | eCl => 1251.2 | eAr => 1520.6[m
+[32m+[m[32m  | eK  => 418.8  | eCa => 589.8  | eSc => 633.1  | eTi => 658.8[m
+[32m+[m[32m  | eV  => 650.9  | eCr => 652.9  | eMn => 717.3  | eFe => 762.5[m
+[32m+[m[32m  | eCo => 760.4  | eNi => 737.1  | eCu => 745.5  | eZn => 906.4[m
+[32m+[m[32m  | eGa => 578.8  | eGe => 762.0  | eAs => 947.0  | eSe => 941.0[m
+[32m+[m[32m  | eBr => 1139.9 | eKr => 1350.8[m
+[32m+[m[32m  | eRb => 403.0  | eSr => 549.5  | eY  => 600.0  | eZr => 640.1[m
+[32m+[m[32m  | eNb => 652.1  | eMo => 684.3  | eTc => 702.0  | eRu => 710.2[m
+[32m+[m[32m  | eRh => 719.7  | ePd => 804.4  | eAg => 731.0  | eCd => 867.8[m
+[32m+[m[32m  | eIn => 558.3  | eSn => 708.6  | eSb => 834.0  | eTe => 869.3[m
+[32m+[m[32m  | eI  => 1008.4 | eXe => 1170.4[m
+[32m+[m[32m  | eCs => 375.7  | eBa => 502.9[m
+[32m+[m[32m  | eLa => 538.1  | eCe => 534.4  | ePr => 527.0  | eNd => 533.1[m
+[32m+[m[32m  | ePm => 540.0  | eSm => 544.5  | eEu => 547.1  | eGd => 593.4[m
+[32m+[m[32m  | eTb => 565.8  | eDy => 573.0  | eHo => 581.0  | eEr => 589.3[m
+[32m+[m[32m  | eTm => 596.7  | eYb => 603.4  | eLu => 523.5[m
+[32m+[m[32m  | eHf => 658.5  | eTa => 761.0  | eW  => 770.0  | eRe => 760.0[m
+[32m+[m[32m  | eOs => 840.0  | eIr => 880.0  | ePt => 870.0  | eAu => 890.1[m
+[32m+[m[32m  | eHg => 1007.1 | eTl => 589.4  | ePb => 715.6  | eBi => 703.0[m
+[32m+[m[32m  | ePo => 812.1  | eAt => 899.0  | eRn => 1037.0[m
+[32m+[m[32m  | eFr => 380.0  | eRa => 509.3[m
+[32m+[m[32m  | eAc => 499.0  | eTh => 587.0  | ePa => 568.0  | eU  => 597.6[m
+[32m+[m[32m  | eNp => 604.5  | ePu => 584.7  | eAm => 578.0  | eCm => 581.0[m
+[32m+[m[32m  | eBk => 601.0  | eCf => 608.0  | eEs => 619.0  | eFm => 629.0[m
+[32m+[m[32m  | eMd => 636.0  | eNo => 641.6  | eLr => 470.0[m
+   | _  => 0.0[m
+   end.[m
+ [m
+[36m@@ -272,21 +272,21 @@[m [mDefinition ionization_energy (e : Element) : R :=[m
+ [m
+ Definition electron_affinity (e : Element) : R :=[m
+   match e with[m
+[31m-  | H  => 72.8   | He => 0.0[m
+[31m-  | Li => 59.6   | Be => 0.0    | B  => 26.7   | C  => 121.8[m
+[31m-  | N  => 0.0    | O  => 141.0  | F  => 328.2  | Ne => 0.0[m
+[31m-  | Na => 52.9   | Mg => 0.0    | Al => 41.8   | Si => 134.1[m
+[31m-  | P  => 72.0   | S  => 200.4  | Cl => 348.6  | Ar => 0.0[m
+[31m-  | K  => 48.4   | Ca => 2.4    | Sc => 18.1   | Ti => 7.6[m
+[31m-  | V  => 50.7   | Cr => 64.3   | Mn => 0.0    | Fe => 15.7[m
+[31m-  | Co => 63.7   | Ni => 112.0  | Cu => 118.4  | Zn => 0.0[m
+[31m-  | Ga => 41.5   | Ge => 119.0  | As => 78.2   | Se => 195.0[m
+[31m-  | Br => 324.6  | Kr => 0.0[m
+[31m-  | Rb => 46.9   | Sr => 5.0    | Y  => 29.6   | Zr => 41.1[m
+[31m-  | Nb => 86.1   | Mo => 71.9   | Tc => 53.0   | Ru => 101.3[m
+[31m-  | Rh => 109.7  | Pd => 53.7   | Ag => 125.6  | Cd => 0.0[m
+[31m-  | In => 28.9   | Sn => 107.3  | Sb => 101.1  | Te => 190.2[m
+[31m-  | I  => 295.2  | Xe => 0.0[m
+[32m+[m[32m  | eH  => 72.8   | eHe => 0.0[m
+[32m+[m[32m  | eLi => 59.6   | eBe => 0.0    | eB  => 26.7   | eC  => 121.8[m
+[32m+[m[32m  | eN  => 0.0    | eO  => 141.0  | eF  => 328.2  | eNe => 0.0[m
+[32m+[m[32m  | eNa => 52.9   | eMg => 0.0    | eAl => 41.8   | eSi => 134.1[m
+[32m+[m[32m  | eP  => 72.0   | eS  => 200.4  | eCl => 348.6  | eAr => 0.0[m
+[32m+[m[32m  | eK  => 48.4   | eCa => 2.4    | eSc => 18.1   | eTi => 7.6[m
+[32m+[m[32m  | eV  => 50.7   | eCr => 64.3   | eMn => 0.0    | eFe => 15.7[m
+[32m+[m[32m  | eCo => 63.7   | eNi => 112.0  | eCu => 118.4  | eZn => 0.0[m
+[32m+[m[32m  | eGa => 41.5   | eGe => 119.0  | eAs => 78.2   | eSe => 195.0[m
+[32m+[m[32m  | eBr => 324.6  | eKr => 0.0[m
+[32m+[m[32m  | eRb => 46.9   | eSr => 5.0    | eY  => 29.6   | eZr => 41.1[m
+[32m+[m[32m  | eNb => 86.1   | eMo => 71.9   | eTc => 53.0   | eRu => 101.3[m
+[32m+[m[32m  | eRh => 109.7  | ePd => 53.7   | eAg => 125.6  | eCd => 0.0[m
+[32m+[m[32m  | eIn => 28.9   | eSn => 107.3  | eSb => 101.1  | eTe => 190.2[m
+[32m+[m[32m  | eI  => 295.2  | eXe => 0.0[m
+   | _  => 0.0[m
+   end.[m
+ [m
+[36m@@ -294,94 +294,94 @@[m [mDefinition electron_affinity (e : Element) : R :=[m
+ [m
+ Definition period (e : Element) : nat :=[m
+   match e with[m
+[31m-  | H  | He => 1[m
+[31m-  | Li | Be | B  | C  | N  | O  | F  | Ne => 2[m
+[31m-  | Na | Mg | Al | Si | P  | S  | Cl | Ar => 3[m
+[31m-  | K  | Ca | Sc | Ti | V  | Cr | Mn | Fe | Co | Ni | Cu | Zn[m
+[31m-  | Ga | Ge | As | Se | Br | Kr => 4[m
+[31m-  | Rb | Sr | Y  | Zr | Nb | Mo | Tc | Ru | Rh | Pd | Ag | Cd[m
+[31m-  | In | Sn | Sb | Te | I  | Xe => 5[m
+[31m-  | Cs | Ba | La | Ce | Pr | Nd | Pm | Sm | Eu | Gd | Tb | Dy[m
+[31m-  | Ho | Er | Tm | Yb | Lu | Hf | Ta | W  | Re | Os | Ir | Pt[m
+[31m-  | Au | Hg | Tl | Pb | Bi | Po | At | Rn => 6[m
+[31m-  | Fr | Ra | Ac | Th | Pa | U  | Np | Pu | Am | Cm | Bk | Cf[m
+[31m-  | Es | Fm | Md | No | Lr | Rf | Db | Sg | Bh | Hs | Mt | Ds[m
+[31m-  | Rg | Cn | Nh | Fl | Mc | Lv | Ts | Og => 7[m
+[32m+[m[32m  | eH  | eHe => 1[m
+[32m+[m[32m  | eLi | eBe | eB  | eC  | eN  | eO  | eF  | eNe => 2[m
+[32m+[m[32m  | eNa | eMg | eAl | eSi | eP  | eS  | eCl | eAr => 3[m
+[32m+[m[32m  | eK  | eCa | eSc | eTi | eV  | eCr | eMn | eFe | eCo | eNi | eCu | eZn[m
+[32m+[m[32m  | eGa | eGe | eAs | eSe | eBr | eKr => 4[m
+[32m+[m[32m  | eRb | eSr | eY  | eZr | eNb | eMo | eTc | eRu | eRh | ePd | eAg | eCd[m
+[32m+[m[32m  | eIn | eSn | eSb | eTe | eI  | eXe => 5[m
+[32m+[m[32m  | eCs | eBa | eLa | eCe | ePr | eNd | ePm | eSm | eEu | eGd | eTb | eDy[m
+[32m+[m[32m  | eHo | eEr | eTm | eYb | eLu | eHf | eTa | eW  | eRe | eOs | eIr | ePt[m
+[32m+[m[32m  | eAu | eHg | eTl | ePb | eBi | ePo | eAt | eRn => 6[m
+[32m+[m[32m  | eFr | eRa | eAc | eTh | ePa | eU  | eNp | ePu | eAm | eCm | eBk | eCf[m
+[32m+[m[32m  | eEs | eFm | eMd | eNo | eLr | eRf | eDb | eSg | eBh | eHs | eMt | eDs[m
+[32m+[m[32m  | eRg | eCn | eNh | eFl | eMc | eLv | eTs | eOg => 7[m
+   end.[m
+ [m
+ (** ** 10. Group (column in periodic table, using IUPAC numbering 1–18) *)[m
+ [m
+ Definition group (e : Element) : nat :=[m
+   match e with[m
+[31m-  | H  | Li | Na | K  | Rb | Cs | Fr => 1[m
+[31m-  | He | Ne | Ar | Kr | Xe | Rn | Og => 18[m
+[31m-  | Be | Mg | Ca | Sr | Ba | Ra => 2[m
+[31m-  | B  | Al | Ga | In | Tl | Nh => 13[m
+[31m-  | C  | Si | Ge | Sn | Pb | Fl => 14[m
+[31m-  | N  | P  | As | Sb | Bi | Mc => 15[m
+[31m-  | O  | S  | Se | Te | Po | Lv => 16[m
+[31m-  | F  | Cl | Br | I  | At | Ts => 17[m
+[31m-  | Sc | Y  | La | Ac => 3[m
+[31m-  | Ti | Zr | Hf | Rf => 4[m
+[31m-  | V  | Nb | Ta | Db => 5[m
+[31m-  | Cr | Mo | W  | Sg => 6[m
+[31m-  | Mn | Tc | Re | Bh => 7[m
+[31m-  | Fe | Ru | Os | Hs => 8[m
+[31m-  | Co | Rh | Ir | Mt => 9[m
+[31m-  | Ni | Pd | Pt | Ds => 10[m
+[31m-  | Cu | Ag | Au | Rg => 11[m
+[31m-  | Zn | Cd | Hg | Cn => 12[m
+[32m+[m[32m  | eH  | eLi | eNa | eK  | eRb | eCs | eFr => 1[m
+[32m+[m[32m  | eHe | eNe | eAr | eKr | eXe | eRn | eOg => 18[m
+[32m+[m[32m  | eBe | eMg | eCa | eSr | eBa | eRa => 2[m
+[32m+[m[32m  | eB  | eAl | eGa | eIn | eTl | eNh => 13[m
+[32m+[m[32m  | eC  | eSi | eGe | eSn | ePb | eFl => 14[m
+[32m+[m[32m  | eN  | eP  | eAs | eSb | eBi | eMc => 15[m
+[32m+[m[32m  | eO  | eS  | eSe | eTe | ePo | eLv => 16[m
+[32m+[m[32m  | eF  | eCl | eBr | eI  | eAt | eTs => 17[m
+[32m+[m[32m  | eSc | eY  | eLa | eAc => 3[m
+[32m+[m[32m  | eTi | eZr | eHf | eRf => 4[m
+[32m+[m[32m  | eV  | eNb | eTa | eDb => 5[m
+[32m+[m[32m  | eCr | eMo | eW  | eSg => 6[m
+[32m+[m[32m  | eMn | eTc | eRe | eBh => 7[m
+[32m+[m[32m  | eFe | eRu | eOs | eHs => 8[m
+[32m+[m[32m  | eCo | eRh | eIr | eMt => 9[m
+[32m+[m[32m  | eNi | ePd | ePt | eDs => 10[m
+[32m+[m[32m  | eCu | eAg | eAu | eRg => 11[m
+[32m+[m[32m  | eZn | eCd | eHg | eCn => 12[m
+   (* Lanthanides and actinides: assigned to group 0 as they span 3-17 *)[m
+[31m-  | Ce | Pr | Nd | Pm | Sm | Eu | Gd | Tb | Dy | Ho | Er | Tm | Yb | Lu => 0[m
+[31m-  | Th | Pa | U  | Np | Pu | Am | Cm | Bk | Cf | Es | Fm | Md | No | Lr => 0[m
+[32m+[m[32m  | eCe | ePr | eNd | ePm | eSm | eEu | eGd | eTb | eDy | eHo | eEr | eTm | eYb | eLu => 0[m
+[32m+[m[32m  | eTh | ePa | eU  | eNp | ePu | eAm | eCm | eBk | eCf | eEs | eFm | eMd | eNo | eLr => 0[m
+   end.[m
+ [m
+ (** ** 11. Valence Electrons *)[m
+ [m
+ Definition valence_electrons (e : Element) : nat :=[m
+   match e with[m
+[31m-  | H  => 1 | He => 2[m
+[31m-  | Li => 1 | Be => 2 | B  => 3 | C  => 4 | N  => 5 | O  => 6 | F  => 7 | Ne => 8[m
+[31m-  | Na => 1 | Mg => 2 | Al => 3 | Si => 4 | P  => 5 | S  => 6 | Cl => 7 | Ar => 8[m
+[31m-  | K  => 1 | Ca => 2[m
+[31m-  | Sc => 3 | Ti => 4 | V  => 5 | Cr => 6 | Mn => 7 | Fe => 8 | Co => 9 | Ni => 10[m
+[31m-  | Cu => 11| Zn => 12| Ga => 3 | Ge => 4 | As => 5 | Se => 6 | Br => 7 | Kr => 8[m
+[31m-  | Rb => 1 | Sr => 2[m
+[31m-  | Y  => 3 | Zr => 4 | Nb => 5 | Mo => 6 | Tc => 7 | Ru => 8 | Rh => 9 | Pd => 10[m
+[31m-  | Ag => 11| Cd => 12| In => 3 | Sn => 4 | Sb => 5 | Te => 6 | I  => 7 | Xe => 8[m
+[31m-  | Cs => 1 | Ba => 2[m
+[31m-  | La => 3 | Ce => 4 | Pr => 5 | Nd => 6 | Pm => 7 | Sm => 8 | Eu => 9 | Gd => 10[m
+[31m-  | Tb => 11| Dy => 12| Ho => 13| Er => 14| Tm => 15| Yb => 16| Lu => 3[m
+[31m-  | Hf => 4 | Ta => 5 | W  => 6 | Re => 7 | Os => 8 | Ir => 9 | Pt => 10| Au => 11[m
+[31m-  | Hg => 12| Tl => 3 | Pb => 4 | Bi => 5 | Po => 6 | At => 7 | Rn => 8[m
+[31m-  | Fr => 1 | Ra => 2[m
+[31m-  | Ac => 3 | Th => 4 | Pa => 5 | U  => 6 | Np => 7 | Pu => 8 | Am => 9 | Cm => 10[m
+[31m-  | Bk => 11| Cf => 12| Es => 13| Fm => 14| Md => 15| No => 16| Lr => 3[m
+[31m-  | Rf => 4 | Db => 5 | Sg => 6 | Bh => 7 | Hs => 8 | Mt => 9 | Ds => 10| Rg => 11[m
+[31m-  | Cn => 12| Nh => 3 | Fl => 4 | Mc => 5 | Lv => 6 | Ts => 7 | Og => 8[m
+[32m+[m[32m  | eH  => 1 | eHe => 2[m
+[32m+[m[32m  | eLi => 1 | eBe => 2 | eB  => 3 | eC  => 4 | eN  => 5 | eO  => 6 | eF  => 7 | eNe => 8[m
+[32m+[m[32m  | eNa => 1 | eMg => 2 | eAl => 3 | eSi => 4 | eP  => 5 | eS  => 6 | eCl => 7 | eAr => 8[m
+[32m+[m[32m  | eK  => 1 | eCa => 2[m
+[32m+[m[32m  | eSc => 3 | eTi => 4 | eV  => 5 | eCr => 6 | eMn => 7 | eFe => 8 | eCo => 9 | eNi => 10[m
+[32m+[m[32m  | eCu => 11| eZn => 12| eGa => 3 | eGe => 4 | eAs => 5 | eSe => 6 | eBr => 7 | eKr => 8[m
+[32m+[m[32m  | eRb => 1 | eSr => 2[m
+[32m+[m[32m  | eY  => 3 | eZr => 4 | eNb => 5 | eMo => 6 | eTc => 7 | eRu => 8 | eRh => 9 | ePd => 10[m
+[32m+[m[32m  | eAg => 11| eCd => 12| eIn => 3 | eSn => 4 | eSb => 5 | eTe => 6 | eI  => 7 | eXe => 8[m
+[32m+[m[32m  | eCs => 1 | eBa => 2[m
+[32m+[m[32m  | eLa => 3 | eCe => 4 | ePr => 5 | eNd => 6 | ePm => 7 | eSm => 8 | eEu => 9 | eGd => 10[m
+[32m+[m[32m  | eTb => 11| eDy => 12| eHo => 13| eEr => 14| eTm => 15| eYb => 16| eLu => 3[m
+[32m+[m[32m  | eHf => 4 | eTa => 5 | eW  => 6 | eRe => 7 | eOs => 8 | eIr => 9 | ePt => 10| eAu => 11[m
+[32m+[m[32m  | eHg => 12| eTl => 3 | ePb => 4 | eBi => 5 | ePo => 6 | eAt => 7 | eRn => 8[m
+[32m+[m[32m  | eFr => 1 | eRa => 2[m
+[32m+[m[32m  | eAc => 3 | eTh => 4 | ePa => 5 | eU  => 6 | eNp => 7 | ePu => 8 | eAm => 9 | eCm => 10[m
+[32m+[m[32m  | eBk => 11| eCf => 12| eEs => 13| eFm => 14| eMd => 15| eNo => 16| eLr => 3[m
+[32m+[m[32m  | eRf => 4 | eDb => 5 | eSg => 6 | eBh => 7 | eHs => 8 | eMt => 9 | eDs => 10| eRg => 11[m
+[32m+[m[32m  | eCn => 12| eNh => 3 | eFl => 4 | eMc => 5 | eLv => 6 | eTs => 7 | eOg => 8[m
+   end.[m
+ [m
+ (** ** 12. Maximum Valence (typical, ignoring hypervalency) *)[m
+ [m
+ Definition max_valence (e : Element) : nat :=[m
+   match e with[m
+[31m-  | H                     => 1[m
+[31m-  | He | Ne | Ar | Kr     => 0[m
+[31m-  | Li | Na | K  | Rb | Cs | Fr => 1[m
+[31m-  | Be | Mg | Ca | Sr | Ba | Ra => 2[m
+[31m-  | B                     => 3[m
+[31m-  | C                     => 4[m
+[31m-  | N                     => 3[m
+[31m-  | O                     => 2[m
+[31m-  | F                     => 1[m
+[31m-  | Al                    => 3[m
+[31m-  | Si                    => 4[m
+[31m-  | P                     => 5   (* hypervalent: PCl₅ *)[m
+[31m-  | S                     => 6   (* hypervalent: SF₆ *)[m
+[31m-  | Cl                    => 7   (* ClO₄⁻ *)[m
+[31m-  | Br                    => 5[m
+[31m-  | I                     => 7[m
+[31m-  | Xe                    => 8[m
+[32m+[m[32m  | eH                     => 1[m
+[32m+[m[32m  | eHe | eNe | eAr | eKr     => 0[m
+[32m+[m[32m  | eLi | eNa | eK  | eRb | eCs | eFr => 1[m
+[32m+[m[32m  | eBe | eMg | eCa | eSr | eBa | eRa => 2[m
+[32m+[m[32m  | eB                     => 3[m
+[32m+[m[32m  | eC                     => 4[m
+[32m+[m[32m  | eN                     => 3[m
+[32m+[m[32m  | eO                     => 2[m
+[32m+[m[32m  | eF                     => 1[m
+[32m+[m[32m  | eAl                    => 3[m
+[32m+[m[32m  | eSi                    => 4[m
+[32m+[m[32m  | eP                     => 5   (* hypervalent: PCl₅ *)[m
+[32m+[m[32m  | eS                     => 6   (* hypervalent: SF₆ *)[m
+[32m+[m[32m  | eCl                    => 7   (* ClO₄⁻ *)[m
+[32m+[m[32m  | eBr                    => 5[m
+[32m+[m[32m  | eI                     => 7[m
+[32m+[m[32m  | eXe                    => 8[m
+   | _                     => 6   (* transition metals / heavy elements *)[m
+   end.[m
+ [m
+[36m@@ -400,27 +400,27 @@[m [mInductive OrbitalType : Type := S_orb | P_orb | D_orb | F_orb.[m
+ (** Highest occupied orbital type in ground-state configuration *)[m
+ Definition highest_orbital (e : Element) : OrbitalType :=[m
+   match e with[m
+[31m-  | H  | He => S_orb[m
+[31m-  | Li | Be => S_orb[m
+[31m-  | B  | C  | N  | O  | F  | Ne => P_orb[m
+[31m-  | Na | Mg => S_orb[m
+[31m-  | Al | Si | P  | S  | Cl | Ar => P_orb[m
+[31m-  | K  | Ca => S_orb[m
+[31m-  | Sc | Ti | V  | Cr | Mn | Fe | Co | Ni | Cu | Zn => D_orb[m
+[31m-  | Ga | Ge | As | Se | Br | Kr => P_orb[m
+[31m-  | Rb | Sr => S_orb[m
+[31m-  | Y  | Zr | Nb | Mo | Tc | Ru | Rh | Pd | Ag | Cd => D_orb[m
+[31m-  | In | Sn | Sb | Te | I  | Xe => P_orb[m
+[31m-  | Cs | Ba => S_orb[m
+[31m-  | La | Ce | Pr | Nd | Pm | Sm | Eu | Gd | Tb | Dy[m
+[31m-  | Ho | Er | Tm | Yb | Lu => F_orb[m
+[31m-  | Hf | Ta | W  | Re | Os | Ir | Pt | Au | Hg => D_orb[m
+[31m-  | Tl | Pb | Bi | Po | At | Rn => P_orb[m
+[31m-  | Fr | Ra => S_orb[m
+[31m-  | Ac | Th | Pa | U  | Np | Pu | Am | Cm | Bk | Cf[m
+[31m-  | Es | Fm | Md | No | Lr => F_orb[m
+[31m-  | Rf | Db | Sg | Bh | Hs | Mt | Ds | Rg | Cn => D_orb[m
+[31m-  | Nh | Fl | Mc | Lv | Ts | Og => P_orb[m
+[32m+[m[32m  | eH  | eHe => S_orb[m
+[32m+[m[32m  | eLi | eBe => S_orb[m
+[32m+[m[32m  | eB  | eC  | eN  | eO  | eF  | eNe => P_orb[m
+[32m+[m[32m  | eNa | eMg => S_orb[m
+[32m+[m[32m  | eAl | eSi | eP  | eS  | eCl | eAr => P_orb[m
+[32m+[m[32m  | eK  | eCa => S_orb[m
+[32m+[m[32m  | eSc | eTi | eV  | eCr | eMn | eFe | eCo | eNi | eCu | eZn => D_orb[m
+[32m+[m[32m  | eGa | eGe | eAs | eSe | eBr | eKr => P_orb[m
+[32m+[m[32m  | eRb | eSr => S_orb[m
+[32m+[m[32m  | eY  | eZr | eNb | eMo | eTc | eRu | eRh | ePd | eAg | eCd => D_orb[m
+[32m+[m[32m  | eIn | eSn | eSb | eTe | eI  | eXe => P_orb[m
+[32m+[m[32m  | eCs | eBa => S_orb[m
+[32m+[m[32m  | eLa | eCe | ePr | eNd | ePm | eSm | eEu | eGd | eTb | eDy[m
+[32m+[m[32m  | eHo | eEr | eTm | eYb | eLu => F_orb[m
+[32m+[m[32m  | eHf | eTa | eW  | eRe | eOs | eIr | ePt | eAu | eHg => D_orb[m
+[32m+[m[32m  | eTl | ePb | eBi | ePo | eAt | eRn => P_orb[m
+[32m+[m[32m  | eFr | eRa => S_orb[m
+[32m+[m[32m  | eAc | eTh | ePa | eU  | eNp | ePu | eAm | eCm | eBk | eCf[m
+[32m+[m[32m  | eEs | eFm | eMd | eNo | eLr => F_orb[m
+[32m+[m[32m  | eRf | eDb | eSg | eBh | eHs | eMt | eDs | eRg | eCn => D_orb[m
+[32m+[m[32m  | eNh | eFl | eMc | eLv | eTs | eOg => P_orb[m
+   end.[m
+ [m
+ (** ** 15. Element equality decidability *)[m
+[36m@@ -462,7 +462,7 @@[m [mQed.[m
+ [m
+ (** Fluorine has the highest electronegativity (Pauling scale) *)[m
+ Lemma fluorine_max_electronegativity :[m
+[31m-  forall e : Element, electronegativity e <= electronegativity F.[m
+[32m+[m[32m  forall e : Element, electronegativity e <= electronegativity eF.[m
+ Proof.[m
+   intro e; destruct e; simpl; lra.[m
+ Qed.[m
+[36m@@ -478,8 +478,8 @@[m [mLemma hypervalent_requires_period_3 :[m
+   forall e : Element,[m
+     is_hypervalent_possible e = true -> (period e >= 3)%nat.[m
+ Proof.[m
+[31m-  intros e H.[m
+[31m-  unfold is_hypervalent_possible in H.[m
+[32m+[m[32m  intros e eH.[m
+[32m+[m[32m  unfold is_hypervalent_possible in eH.[m
+   destruct (period e) eqn:Hp; try discriminate.[m
+   destruct n; try discriminate.[m
+   destruct n; try discriminate.[m
+[1mdiff --git a/src/rocq/Bonds.v b/src/rocq/Bonds.v[m
+[1mindex fe471ee..ebf272a 100644[m
+[1m--- a/src/rocq/Bonds.v[m
+[1m+++ b/src/rocq/Bonds.v[m
+[36m@@ -89,34 +89,34 @@[m [mDefinition bond_length_in_range (blr : BondLengthRange) (len : R) : bool :=[m
+ [m
+ (** Standard bond length ranges (Å) for common element pairs *)[m
+ [m
+[31m-(** C-C bonds *)[m
+[32m+[m[32m(** eC-eC bonds *)[m
+ Definition bl_CC_single  : BondLengthRange := mkBLR 1.47 1.61.[m
+ Definition bl_CC_double  : BondLengthRange := mkBLR 1.30 1.40.[m
+ Definition bl_CC_triple  : BondLengthRange := mkBLR 1.18 1.24.[m
+ Definition bl_CC_aromatic: BondLengthRange := mkBLR 1.38 1.42.[m
+ [m
+[31m-(** C-N bonds *)[m
+[32m+[m[32m(** eC-eN bonds *)[m
+ Definition bl_CN_single  : BondLengthRange := mkBLR 1.43 1.50.[m
+ Definition bl_CN_double  : BondLengthRange := mkBLR 1.27 1.35.[m
+ Definition bl_CN_triple  : BondLengthRange := mkBLR 1.13 1.18.[m
+ [m
+[31m-(** C-O bonds *)[m
+[32m+[m[32m(** eC-eO bonds *)[m
+ Definition bl_CO_single  : BondLengthRange := mkBLR 1.39 1.46.[m
+ Definition bl_CO_double  : BondLengthRange := mkBLR 1.18 1.24.[m
+ [m
+[31m-(** C-H, N-H, O-H *)[m
+[32m+[m[32m(** eC-eH, eN-eH, eO-eH *)[m
+ Definition bl_CH         : BondLengthRange := mkBLR 1.06 1.12.[m
+ Definition bl_NH         : BondLengthRange := mkBLR 0.99 1.05.[m
+ Definition bl_OH         : BondLengthRange := mkBLR 0.94 1.00.[m
+ [m
+[31m-(** N-N, N-O, O-O *)[m
+[32m+[m[32m(** eN-eN, eN-eO, eO-eO *)[m
+ Definition bl_NN_single  : BondLengthRange := mkBLR 1.40 1.50.[m
+ Definition bl_NN_double  : BondLengthRange := mkBLR 1.20 1.30.[m
+ Definition bl_NO_single  : BondLengthRange := mkBLR 1.36 1.44.[m
+ Definition bl_NO_double  : BondLengthRange := mkBLR 1.15 1.25.[m
+ Definition bl_OO_single  : BondLengthRange := mkBLR 1.40 1.50.[m
+ [m
+[31m-(** Halogens to C *)[m
+[32m+[m[32m(** Halogens to eC *)[m
+ Definition bl_CF         : BondLengthRange := mkBLR 1.30 1.40.[m
+ Definition bl_CCl        : BondLengthRange := mkBLR 1.75 1.85.[m
+ Definition bl_CBr        : BondLengthRange := mkBLR 1.90 2.00.[m
+[36m@@ -135,7 +135,7 @@[m [mLemma bl_CC_double_wf   : bl_CC_double.(bl_min) <= bl_CC_double.(bl_max).   Proo[m
+ Lemma bl_CC_triple_wf   : bl_CC_triple.(bl_min) <= bl_CC_triple.(bl_max).   Proof. simpl; lra. Qed.[m
+ Lemma bl_CC_aromatic_wf : bl_CC_aromatic.(bl_min) <= bl_CC_aromatic.(bl_max). Proof. simpl; lra. Qed.[m
+ [m
+[31m-(** Bond length decreases with increasing bond order for C-C *)[m
+[32m+[m[32m(** Bond length decreases with increasing bond order for eC-eC *)[m
+ Theorem CC_bond_length_order :[m
+   bl_CC_triple.(bl_max) < bl_CC_double.(bl_min) /\[m
+   bl_CC_double.(bl_max) < bl_CC_single.(bl_min).[m
+[36m@@ -197,11 +197,11 @@[m [mDefinition sp2_angle_max_deg : R := 125.0.[m
+ Definition sp_angle_min_deg  : R := 177.0.[m
+ Definition sp_angle_max_deg  : R := 183.0.[m
+ [m
+[31m-(** Water H-O-H: 104.5° ± 2° *)[m
+[32m+[m[32m(** Water eH-eO-eH: 104.5° ± 2° *)[m
+ Definition water_angle_min_deg : R := 102.5.[m
+ Definition water_angle_max_deg : R := 106.5.[m
+ [m
+[31m-(** Ammonia H-N-H: 107° ± 2° *)[m
+[32m+[m[32m(** Ammonia eH-eN-eH: 107° ± 2° *)[m
+ Definition ammonia_angle_min_deg : R := 105.0.[m
+ Definition ammonia_angle_max_deg : R := 109.0.[m
+ [m
+[36m@@ -284,7 +284,7 @@[m [mDefinition bond_energy_CS  : R := 272.0.[m
+ Definition bond_energy_NN  : R := 163.0.[m
+ Definition bond_energy_OO  : R := 146.0.[m
+ [m
+[31m-(** Bond energy increases with bond order for C-C *)[m
+[32m+[m[32m(** Bond energy increases with bond order for eC-eC *)[m
+ Theorem CC_energy_increases_with_order :[m
+   bond_energy_CC SingleBond < bond_energy_CC DoubleBond /\[m
+   bond_energy_CC DoubleBond < bond_energy_CC TripleBond.[m
+[36m@@ -330,7 +330,7 @@[m [mDefinition min_nonbonded_distance (e1 e2 : Element) : R :=[m
+ Definition min_noninteracting_distance (e1 e2 : Element) : R :=[m
+   van_der_waals_radius e1 + van_der_waals_radius e2.[m
+ [m
+[31m-(** No atomic overlap: bonded distance threshold is less than non-bonded.[m
+[32m+[m[32m(** eNo atomic overlap: bonded distance threshold is less than non-bonded.[m
+     Uses vdw_radius_positive from Atoms to avoid a 118×118 case split. *)[m
+ Theorem bonded_lt_nonbonded : forall e1 e2 : Element,[m
+     min_bonded_distance e1 e2 < min_nonbonded_distance e1 e2.[m
+[1mdiff --git a/src/rocq/Geometry.v b/src/rocq/Geometry.v[m
+[1mindex 02726ba..36e6318 100644[m
+[1m--- a/src/rocq/Geometry.v[m
+[1m+++ b/src/rocq/Geometry.v[m
+[36m@@ -101,7 +101,7 @@[m [mDefinition angle_three_points (a b c : Point3D) : R :=[m
+   acos cos_theta.[m
+ [m
+ (** ------------------------------------------------------------------ *)[m
+[31m-(** ** 5. Dihedral / torsion angle (four points A-B-C-D)               *)[m
+[32m+[m[32m(** ** 5. Dihedral / torsion angle (four points A-eB-eC-D)               *)[m
+ (** ------------------------------------------------------------------ *)[m
+ [m
+ (** atan2 helper, derived from atan with quadrant handling. *)[m
+[36m@@ -115,8 +115,8 @@[m [mDefinition atan2 (y x : R) : R :=[m
+     else if Rlt_dec 0 y then (PI / 2)[m
+     else 0.[m
+ [m
+[31m-(** The dihedral angle is the angle between the plane spanned by (A,B,C)[m
+[31m-    and the plane spanned by (B,C,D), measured about the B-C axis. *)[m
+[32m+[m[32m(** The dihedral angle is the angle between the plane spanned by (A,eB,eC)[m
+[32m+[m[32m    and the plane spanned by (eB,eC,D), measured about the eB-eC axis. *)[m
+ Definition dihedral_angle (a b c d : Point3D) : R :=[m
+   let b1 := vec_sub b a in[m
+   let b2 := vec_sub c b in[m
+[36m@@ -152,7 +152,7 @@[m [mDefinition rot_x (theta : R) : Matrix3x3 :=[m
+     (mkPoint 0 (cos theta) (- sin theta))[m
+     (mkPoint 0 (sin theta)   (cos theta)).[m
+ [m
+[31m-(** Rotation about the Y-axis by angle θ *)[m
+[32m+[m[32m(** Rotation about the eY-axis by angle θ *)[m
+ Definition rot_y (theta : R) : Matrix3x3 :=[m
+   mkMatrix[m
+     (mkPoint   (cos theta)  0  (sin theta))[m
+[36m@@ -200,7 +200,7 @@[m [mDefinition center_of_mass (atoms : list (R * Point3D)) : Point3D :=[m
+ (** ------------------------------------------------------------------ *)[m
+ [m
+ (** Radius of gyration about the center of mass:[m
+[31m-    Rg = sqrt( (Σ mᵢ |rᵢ - rcm|²) / Σ mᵢ ) *)[m
+[32m+[m[32m    eRg = sqrt( (Σ mᵢ |rᵢ - rcm|²) / Σ mᵢ ) *)[m
+ Definition radius_of_gyration (atoms : list (R * Point3D)) : R :=[m
+   let rcm        := center_of_mass atoms in[m
+   let total_mass := fold_left (fun acc '(m, _) => acc + m) atoms 0 in[m
+[36m@@ -217,7 +217,7 @@[m [mDefinition radius_of_gyration (atoms : list (R * Point3D)) : R :=[m
+ (** ** 10. Fundamental Geometry Theorems                                *)[m
+ (** ------------------------------------------------------------------ *)[m
+ [m
+[31m-(** Distance symmetry: d(A,B) = d(B,A) *)[m
+[32m+[m[32m(** Distance symmetry: d(A,eB) = d(eB,A) *)[m
+ Theorem distance_symm : forall a b : Point3D,[m
+     distance a b = distance b a.[m
+ Proof.[m
+[36m@@ -295,8 +295,8 @@[m [mLemma sin_cos_1 : forall theta : R,[m
+   sin theta * sin theta + cos theta * cos theta = 1.[m
+ Proof.[m
+   intro theta.[m
+[31m-  pose proof (sin2_cos2 theta) as H.[m
+[31m-  unfold Rsqr in H. lra.[m
+[32m+[m[32m  pose proof (sin2_cos2 theta) as eH.[m
+[32m+[m[32m  unfold Rsqr in eH. lra.[m
+ Qed.[m
+ [m
+ Lemma cos_sin_1 : forall theta : R,[m
+[1mdiff --git a/src/rocq/Molecules.v b/src/rocq/Molecules.v[m
+[1mindex a7b8c06..5f631cf 100644[m
+[1m--- a/src/rocq/Molecules.v[m
+[1m+++ b/src/rocq/Molecules.v[m
+[36m@@ -99,7 +99,7 @@[m [mDefinition connectivity_matrix (mol : Molecule) (i j : nat) : bool :=[m
+   are_bonded mol i j.[m
+ [m
+ (** Connectivity matrix is symmetric.[m
+[31m-    Proof: for each bond b the predicate is (A||B) vs (B||A); use orb_comm[m
+[32m+[m[32m    Proof: for each bond b the predicate is (A||eB) vs (eB||A); use orb_comm[m
+     and induction on the bond list rather than the non-existent[m
+     orb_comm_in_eq lemma from the original outline. *)[m
+ Theorem connectivity_matrix_symmetric :[m
+[36m@@ -154,8 +154,8 @@[m [mFixpoint bfs_fuel[m
+     (fuel    : nat)[m
+     : list nat :=[m
+   match fuel with[m
+[31m-  | O => visited                        (* fuel exhausted — should not occur *)[m
+[31m-  | S n =>[m
+[32m+[m[32m  | eO => visited                        (* fuel exhausted — should not occur *)[m
+[32m+[m[32m  | eS n =>[m
+     match queue with[m
+     | [] => visited                     (* bfs _ outGraph [] _ = outGraph *)[m
+     | i :: rest =>                      (* i ~ e,  rest ~ f,  visited ~ seen *)[m
+[36m@@ -202,8 +202,8 @@[m [mFixpoint find_components_fuel[m
+     (fuel    : nat)[m
+     : list (list nat) :=[m
+   match fuel with[m
+[31m-  | O => acc[m
+[31m-  | S n =>[m
+[32m+[m[32m  | eO => acc[m
+[32m+[m[32m  | eS n =>[m
+     match todo with[m
+     | [] => acc[m
+     | i :: rest =>[m
+[36m@@ -296,13 +296,13 @@[m [mClose Scope R_scope.[m
+ (** All bond atom references are valid atom IDs *)[m
+ Definition bonds_reference_valid_atoms (mol : Molecule) : Prop :=[m
+   forall b : BondInst,[m
+[31m-    In b mol.(mol_bonds) ->[m
+[31m-    (exists a1, In a1 mol.(mol_atoms) /\ a1.(ai_id) = b.(bi_atom1)) /\[m
+[31m-    (exists a2, In a2 mol.(mol_atoms) /\ a2.(ai_id) = b.(bi_atom2)).[m
+[32m+[m[32m    eIn b mol.(mol_bonds) ->[m
+[32m+[m[32m    (exists a1, eIn a1 mol.(mol_atoms) /\ a1.(ai_id) = b.(bi_atom1)) /\[m
+[32m+[m[32m    (exists a2, eIn a2 mol.(mol_atoms) /\ a2.(ai_id) = b.(bi_atom2)).[m
+ [m
+[31m-(** No self-bonds *)[m
+[32m+[m[32m(** eNo self-bonds *)[m
+ Definition no_self_bonds (mol : Molecule) : Prop :=[m
+[31m-  forall b : BondInst, In b mol.(mol_bonds) -> b.(bi_atom1) <> b.(bi_atom2).[m
+[32m+[m[32m  forall b : BondInst, eIn b mol.(mol_bonds) -> b.(bi_atom1) <> b.(bi_atom2).[m
+ [m
+ (** A well-formed molecule satisfies basic graph constraints *)[m
+ Record WellFormedMol (mol : Molecule) : Prop := mkWFM[m

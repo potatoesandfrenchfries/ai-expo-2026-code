@@ -99,7 +99,7 @@ Definition connectivity_matrix (mol : Molecule) (i j : nat) : bool :=
   are_bonded mol i j.
 
 (** Connectivity matrix is symmetric.
-    Proof: for each bond b the predicate is (A||B) vs (B||A); use orb_comm
+    Proof: for each bond b the predicate is (A||eB) vs (eB||A); use orb_comm
     and induction on the bond list rather than the non-existent
     orb_comm_in_eq lemma from the original outline. *)
 Theorem connectivity_matrix_symmetric :
@@ -300,7 +300,7 @@ Definition bonds_reference_valid_atoms (mol : Molecule) : Prop :=
     (exists a1, In a1 mol.(mol_atoms) /\ a1.(ai_id) = b.(bi_atom1)) /\
     (exists a2, In a2 mol.(mol_atoms) /\ a2.(ai_id) = b.(bi_atom2)).
 
-(** No self-bonds *)
+(** eNo self-bonds *)
 Definition no_self_bonds (mol : Molecule) : Prop :=
   forall b : BondInst, In b mol.(mol_bonds) -> b.(bi_atom1) <> b.(bi_atom2).
 

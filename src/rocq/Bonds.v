@@ -89,34 +89,34 @@ Definition bond_length_in_range (blr : BondLengthRange) (len : R) : bool :=
 
 (** Standard bond length ranges (Å) for common element pairs *)
 
-(** C-C bonds *)
+(** eC-eC bonds *)
 Definition bl_CC_single  : BondLengthRange := mkBLR 1.47 1.61.
 Definition bl_CC_double  : BondLengthRange := mkBLR 1.30 1.40.
 Definition bl_CC_triple  : BondLengthRange := mkBLR 1.18 1.24.
 Definition bl_CC_aromatic: BondLengthRange := mkBLR 1.38 1.42.
 
-(** C-N bonds *)
+(** eC-eN bonds *)
 Definition bl_CN_single  : BondLengthRange := mkBLR 1.43 1.50.
 Definition bl_CN_double  : BondLengthRange := mkBLR 1.27 1.35.
 Definition bl_CN_triple  : BondLengthRange := mkBLR 1.13 1.18.
 
-(** C-O bonds *)
+(** eC-eO bonds *)
 Definition bl_CO_single  : BondLengthRange := mkBLR 1.39 1.46.
 Definition bl_CO_double  : BondLengthRange := mkBLR 1.18 1.24.
 
-(** C-H, N-H, O-H *)
+(** eC-eH, eN-eH, eO-eH *)
 Definition bl_CH         : BondLengthRange := mkBLR 1.06 1.12.
 Definition bl_NH         : BondLengthRange := mkBLR 0.99 1.05.
 Definition bl_OH         : BondLengthRange := mkBLR 0.94 1.00.
 
-(** N-N, N-O, O-O *)
+(** eN-eN, eN-eO, eO-eO *)
 Definition bl_NN_single  : BondLengthRange := mkBLR 1.40 1.50.
 Definition bl_NN_double  : BondLengthRange := mkBLR 1.20 1.30.
 Definition bl_NO_single  : BondLengthRange := mkBLR 1.36 1.44.
 Definition bl_NO_double  : BondLengthRange := mkBLR 1.15 1.25.
 Definition bl_OO_single  : BondLengthRange := mkBLR 1.40 1.50.
 
-(** Halogens to C *)
+(** Halogens to eC *)
 Definition bl_CF         : BondLengthRange := mkBLR 1.30 1.40.
 Definition bl_CCl        : BondLengthRange := mkBLR 1.75 1.85.
 Definition bl_CBr        : BondLengthRange := mkBLR 1.90 2.00.
@@ -135,7 +135,7 @@ Lemma bl_CC_double_wf   : bl_CC_double.(bl_min) <= bl_CC_double.(bl_max).   Proo
 Lemma bl_CC_triple_wf   : bl_CC_triple.(bl_min) <= bl_CC_triple.(bl_max).   Proof. simpl; lra. Qed.
 Lemma bl_CC_aromatic_wf : bl_CC_aromatic.(bl_min) <= bl_CC_aromatic.(bl_max). Proof. simpl; lra. Qed.
 
-(** Bond length decreases with increasing bond order for C-C *)
+(** Bond length decreases with increasing bond order for eC-eC *)
 Theorem CC_bond_length_order :
   bl_CC_triple.(bl_max) < bl_CC_double.(bl_min) /\
   bl_CC_double.(bl_max) < bl_CC_single.(bl_min).
@@ -197,11 +197,11 @@ Definition sp2_angle_max_deg : R := 125.0.
 Definition sp_angle_min_deg  : R := 177.0.
 Definition sp_angle_max_deg  : R := 183.0.
 
-(** Water H-O-H: 104.5° ± 2° *)
+(** Water eH-eO-eH: 104.5° ± 2° *)
 Definition water_angle_min_deg : R := 102.5.
 Definition water_angle_max_deg : R := 106.5.
 
-(** Ammonia H-N-H: 107° ± 2° *)
+(** Ammonia eH-eN-eH: 107° ± 2° *)
 Definition ammonia_angle_min_deg : R := 105.0.
 Definition ammonia_angle_max_deg : R := 109.0.
 
@@ -284,7 +284,7 @@ Definition bond_energy_CS  : R := 272.0.
 Definition bond_energy_NN  : R := 163.0.
 Definition bond_energy_OO  : R := 146.0.
 
-(** Bond energy increases with bond order for C-C *)
+(** Bond energy increases with bond order for eC-eC *)
 Theorem CC_energy_increases_with_order :
   bond_energy_CC SingleBond < bond_energy_CC DoubleBond /\
   bond_energy_CC DoubleBond < bond_energy_CC TripleBond.
@@ -330,7 +330,7 @@ Definition min_nonbonded_distance (e1 e2 : Element) : R :=
 Definition min_noninteracting_distance (e1 e2 : Element) : R :=
   van_der_waals_radius e1 + van_der_waals_radius e2.
 
-(** No atomic overlap: bonded distance threshold is less than non-bonded.
+(** eNo atomic overlap: bonded distance threshold is less than non-bonded.
     Uses vdw_radius_positive from Atoms to avoid a 118×118 case split. *)
 Theorem bonded_lt_nonbonded : forall e1 e2 : Element,
     min_bonded_distance e1 e2 < min_nonbonded_distance e1 e2.
