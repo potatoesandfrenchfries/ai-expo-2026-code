@@ -1,4 +1,5 @@
 -R . Chemistry
 
-Chemistry Formalisms/Atoms.v
-
+Atoms.v
+Geometry.v
+Bonds.v
