@@ -1,6 +1,28 @@
+# Coq/Rocq build artifacts
 *.vo
 *.vos
 *.vok
 *.glob
 *.aux
 *.cache
+.*.aux
+.Makefile.d
+Makefile
+Makefile.conf
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated data (large files)
+data/*.pt
+data/*.json
+data/*.csv
+
+# Model checkpoints
+models/*.pt
+
+# OS
+.DS_Store
+Thumbs.db

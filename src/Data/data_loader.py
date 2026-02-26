@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import torch
@@ -7,8 +8,10 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors, rdMolDescriptors, FilterCatalog, rdFingerprintGenerator
 from rdkit.Chem.FilterCatalog import FilterCatalogParams
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT  = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..'))
 
-df= pd.read_csv('src/Chemistry Formalisms/Data/250k_rndm_zinc_drugs_clean_3.csv')
+df = pd.read_csv(os.path.join(SCRIPT_DIR, '250k_rndm_zinc_drugs_clean_3.csv'))
 
 print(f"Loaded {len(df)} molecules from the dataset.")
 
@@ -105,7 +108,7 @@ for smi in df['smiles']:
         'smiles':    smi,
         'atoms':     atoms,
         'mw':        round(mw, 4),
-        'toxic_flag': toxic_flags[len(atom_data)]
+        'toxic_flag': int(toxic_flags[len(atom_data)])
     })
 
 print(f"Atom data collected for {len(atom_data)} molecules")
@@ -115,14 +118,17 @@ print(f"  Atoms: {len(atom_data[0]['atoms'])}")
 print(f"  Toxic: {atom_data[0]['toxic_flag']}")
 
 # Files
-torch.save(X,     'data/X.pt')
-torch.save(y,     'data/y.pt')
-torch.save(toxic_flags, 'data/toxic.pt')
+DATA_DIR  = os.path.join(REPO_ROOT, 'data')
+os.makedirs(DATA_DIR, exist_ok=True)
 
-with open('data/atom_data.json', 'w') as f:
+torch.save(X,     os.path.join(DATA_DIR, 'X.pt'))
+torch.save(y,     os.path.join(DATA_DIR, 'y.pt'))
+torch.save(toxic_flags, os.path.join(DATA_DIR, 'toxic.pt'))
+
+with open(os.path.join(DATA_DIR, 'atom_data.json'), 'w') as f:
     json.dump(atom_data, f, indent=2)
 
-df[['smiles', 'qed']].to_csv('data/molecules_clean.csv', index=False)
+df[['smiles', 'qed']].to_csv(os.path.join(DATA_DIR, 'molecules_clean.csv'), index=False)
 
 print("\n✓ Done. Files saved:")
 print(f"  X.pt             {tuple(X.shape)}  — BNN input features")
