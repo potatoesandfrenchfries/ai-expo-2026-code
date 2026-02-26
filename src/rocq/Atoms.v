@@ -17,75 +17,75 @@ Open Scope R_scope.
 
 Inductive Element : Type :=
   (* Period 1 *)
-  | H  | He
+  | eH  | eHe
   (* Period 2 *)
-  | Li | Be | B  | C  | N  | O  | F  | Ne
+  | eLi | eBe | eB  | eC  | eN  | eO  | eF  | Ne
   (* Period 3 *)
-  | Na | Mg | Al | Si | P  | S  | Cl | Ar
+  | eNa | eMg | eAl | eSi | eP  | eS  | eCl | Ar
   (* Period 4 *)
-  | K  | Ca | Sc | Ti | V  | Cr | Mn | Fe | Co | Ni | Cu | Zn
-  | Ga | Ge | As | Se | Br | Kr
+  | eK  | eCa | eSc | eTi | eV  | eCr | eMn | eFe | eCo | eNi | eCu | eZn
+  | eGa | eGe | eAs | eSe | eBr | eKr
   (* Period 5 *)
-  | Rb | Sr | Y  | Zr | Nb | Mo | Tc | Ru | Rh | Pd | Ag | Cd
-  | In | Sn | Sb | Te | I  | Xe
+  | eRb | eSr | eY  | eZr | eNb | eMo | eTc | eRu | eRh | ePd | eAg | eCd
+  | eIn | eSn | eSb | eTe | eI  | eXe
   (* Period 6 *)
-  | Cs | Ba
+  | eCs | eBa
   (* Lanthanides *)
-  | La | Ce | Pr | Nd | Pm | Sm | Eu | Gd | Tb | Dy | Ho | Er | Tm | Yb | Lu
+  | eLa | eCe | ePr | eNd | ePm | eSm | eEu | eGd | eTb | eDy | eHo | eEr | eTm | eYb | eLu
   (* Period 6 d-block *)
-  | Hf | Ta | W  | Re | Os | Ir | Pt | Au | Hg
-  | Tl | Pb | Bi | Po | At | Rn
+  | eHf | eTa | eW  | eRe | eOs | eIr | ePt | eAu | eHg
+  | eTl | ePb | eBi | ePo | eAt | eRn
   (* Period 7 *)
-  | Fr | Ra
+  | eFr | eRa
   (* Actinides *)
-  | Ac | Th | Pa | U  | Np | Pu | Am | Cm | Bk | Cf | Es | Fm | Md | No | Lr
+  | eAc | eTh | ePa | eU  | eNp | ePu | eAm | eCm | eBk | eCf | eEs | eFm | eMd | eNo | eLr
   (* Period 7 d-block *)
-  | Rf | Db | Sg | Bh | Hs | Mt | Ds | Rg | Cn
-  | Nh | Fl | Mc | Lv | Ts | Og.
+  | eRf | eDb | eSg | eBh | eHs | eMt | eDs | eRg | eCn
+  | eNh | eFl | eMc | eLv | eTs | eOg.
 
 (** ** 2. Atomic Number *)
 
 Definition atomic_number (e : Element) : nat :=
   match e with
-  | H  => 1  | He => 2
-  | Li => 3  | Be => 4  | B  => 5  | C  => 6  | N  => 7
-  | O  => 8  | F  => 9  | Ne => 10
-  | Na => 11 | Mg => 12 | Al => 13 | Si => 14 | P  => 15
-  | S  => 16 | Cl => 17 | Ar => 18
-  | K  => 19 | Ca => 20 | Sc => 21 | Ti => 22 | V  => 23
-  | Cr => 24 | Mn => 25 | Fe => 26 | Co => 27 | Ni => 28
-  | Cu => 29 | Zn => 30 | Ga => 31 | Ge => 32 | As => 33
-  | Se => 34 | Br => 35 | Kr => 36
-  | Rb => 37 | Sr => 38 | Y  => 39 | Zr => 40 | Nb => 41
-  | Mo => 42 | Tc => 43 | Ru => 44 | Rh => 45 | Pd => 46
-  | Ag => 47 | Cd => 48 | In => 49 | Sn => 50 | Sb => 51
-  | Te => 52 | I  => 53 | Xe => 54
-  | Cs => 55 | Ba => 56
-  | La => 57 | Ce => 58 | Pr => 59 | Nd => 60 | Pm => 61
-  | Sm => 62 | Eu => 63 | Gd => 64 | Tb => 65 | Dy => 66
-  | Ho => 67 | Er => 68 | Tm => 69 | Yb => 70 | Lu => 71
-  | Hf => 72 | Ta => 73 | W  => 74 | Re => 75 | Os => 76
-  | Ir => 77 | Pt => 78 | Au => 79 | Hg => 80
-  | Tl => 81 | Pb => 82 | Bi => 83 | Po => 84 | At => 85 | Rn => 86
-  | Fr => 87 | Ra => 88
-  | Ac => 89 | Th => 90 | Pa => 91 | U  => 92 | Np => 93
-  | Pu => 94 | Am => 95 | Cm => 96 | Bk => 97 | Cf => 98
-  | Es => 99 | Fm => 100| Md => 101| No => 102| Lr => 103
-  | Rf => 104| Db => 105| Sg => 106| Bh => 107| Hs => 108
-  | Mt => 109| Ds => 110| Rg => 111| Cn => 112
-  | Nh => 113| Fl => 114| Mc => 115| Lv => 116| Ts => 117| Og => 118
+  | eH  => 1  | eHe => 2
+  | eLi => 3  | eBe => 4  | eB  => 5  | eC  => 6  | eN  => 7
+  | eO  => 8  | eF  => 9  | eNe => 10
+  | eNa => 11 | eMg => 12 | eAl => 13 | eSi => 14 | eP  => 15
+  | eS  => 16 | eCl => 17 | eAr => 18
+  | eK  => 19 | eCa => 20 | eSc => 21 | eTi => 22 | eV  => 23
+  | eCr => 24 | eMn => 25 | eFe => 26 | eCo => 27 | eNi => 28
+  | eCu => 29 | eZn => 30 | eGa => 31 | eGe => 32 | eAs => 33
+  | eSe => 34 | eBr => 35 | eKr => 36
+  | eRb => 37 | eSr => 38 | eY  => 39 | eZr => 40 | eNb => 41
+  | eMo => 42 | eTc => 43 | eRu => 44 | eRh => 45 | ePd => 46
+  | eAg => 47 | eCd => 48 | eIn => 49 | eSn => 50 | eSb => 51
+  | eTe => 52 | eI  => 53 | eXe => 54
+  | eCs => 55 | eBa => 56
+  | eLa => 57 | eCe => 58 | ePr => 59 | eNd => 60 | ePm => 61
+  | eSm => 62 | eEu => 63 | eGd => 64 | eTb => 65 | eDy => 66
+  | eHo => 67 | eEr => 68 | eTm => 69 | eYb => 70 | eLu => 71
+  | eHf => 72 | eTa => 73 | eW  => 74 | eRe => 75 | eOs => 76
+  | eIr => 77 | ePt => 78 | eAu => 79 | eHg => 80
+  | eTl => 81 | ePb => 82 | eBi => 83 | ePo => 84 | eAt => 85 | eRn => 86
+  | eFr => 87 | eRa => 88
+  | eAc => 89 | eTh => 90 | ePa => 91 | eU  => 92 | eNp => 93
+  | ePu => 94 | eAm => 95 | eCm => 96 | eBk => 97 | eCf => 98
+  | eEs => 99 | eFm => 100| eMd => 101| eNo => 102| eLr => 103
+  | eRf => 104| eDb => 105| eSg => 106| eBh => 107| eHs => 108
+  | eMt => 109| eDs => 110| eRg => 111| eCn => 112
+  | eNh => 113| eFl => 114| eMc => 115| eLv => 116| eTs => 117| eOg => 118
   end.
 
 (** ** 3. Atomic Mass (in Daltons, u) *)
 
 Definition atomic_mass (e : Element) : R :=
   match e with
-  | H  => 1.008   | He => 4.0026
-  | Li => 6.941   | Be => 9.0122  | B  => 10.811  | C  => 12.011
-  | N  => 14.007  | O  => 15.999  | F  => 18.998  | Ne => 20.180
-  | Na => 22.990  | Mg => 24.305  | Al => 26.982  | Si => 28.086
-  | P  => 30.974  | S  => 32.065  | Cl => 35.453  | Ar => 39.948
-  | K  => 39.098  | Ca => 40.078  | Sc => 44.956  | Ti => 47.867
+  | eH  => 1.008   | eHe => 4.0026
+  | eLi => 6.941   | eBe => 9.0122  | eB  => 10.811  | eC  => 12.011
+  | eN  => 14.007  | eO  => 15.999  | eF  => 18.998  | eNe => 20.180
+  | eNa => 22.990  | eMg => 24.305  | eAl => 26.982  | eSi => 28.086
+  | eP  => 30.974   | eS   => 32.065   | eCl => 35.453   | eAr => 39.948
+
   | V  => 50.942  | Cr => 51.996  | Mn => 54.938  | Fe => 55.845
   | Co => 58.933  | Ni => 58.693  | Cu => 63.546  | Zn => 65.38
   | Ga => 69.723  | Ge => 72.630  | As => 74.922  | Se => 78.971
