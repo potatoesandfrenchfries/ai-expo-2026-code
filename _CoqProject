@@ -10,6 +10,7 @@ src/rocq/Valency.v
 src/rocq/Aromaticity.v
 src/rocq/Conformational.v
 src/rocq/DrugLikeness.v
+src/rocq/Geometry.v
 
 src/rocq/Molecule.v
 src/rocq/Demo.v

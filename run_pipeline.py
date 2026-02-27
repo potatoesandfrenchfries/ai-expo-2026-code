@@ -145,17 +145,17 @@ def smiles_to_coq(smiles: str) -> str:
     ]
 
     # Verification checks:
-    #   Check        — instant type-check only (proves well-typedness)
-    #   native_compute — compiles to OCaml bytecode, ~10-100x faster than compute
+    #   Check  — instant type-check only, proves the molecule is well-typed.
+    #   No Eval/compute lines: those force kernel evaluation and are very slow.
+    #   Run `coqtop` interactively for evaluation if needed.
     lines += [
         "(* ---- Verification checks ---- *)",
-        "(* Type-check: confirm demo_molecule is a well-typed Molecule *)",
+        "(* Confirm demo_molecule is a well-typed Molecule (instant) *)",
         "Check demo_molecule.",
-        "",
-        "(* Fast runtime evaluation using native OCaml compilation *)",
-        "Eval native_compute in (is_connected demo_molecule).",
-        "Eval native_compute in (atom_count demo_molecule).",
-        "Eval native_compute in (bond_count demo_molecule).",
+        "(* Confirm property functions are applicable (instant) *)",
+        "Check (is_connected demo_molecule).",
+        "Check (atom_count demo_molecule).",
+        "Check (bond_count demo_molecule).",
         "",
     ]
 
