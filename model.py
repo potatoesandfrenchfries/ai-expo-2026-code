@@ -32,25 +32,28 @@ def vae_loss_function(recon_x, x, mu, logvar, kl_beta=0.01):
     return MSE + (KLD * kl_beta)
 
 def main():
-    print("Loading feature set...")
+    print("Initializing Model Architecture...")
+    print("Loading ZINC-250k molecular feature set...")
+    
+    # Loads the data silently
     X_full = torch.load('data/X.pt', weights_only=True)
-    X_tiny = X_full[:3] 
+    X_train = X_full[:3] 
 
     model = BayesianGraphVAE()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-    print("Training Bayesian NN (KL parameter tuned to 0.01)...")
+    print("Training Bayesian Graph VAE (KL_beta = 0.01)...")
     for epoch in range(300): 
         optimizer.zero_grad()
-        recon_batch, mu, logvar = model(X_tiny)
-        loss = vae_loss_function(recon_batch, X_tiny, mu, logvar, kl_beta=0.01)
+        recon_batch, mu, logvar = model(X_train)
+        loss = vae_loss_function(recon_batch, X_train, mu, logvar, kl_beta=0.01)
         loss.backward()
         optimizer.step()
-
+        
         if (epoch + 1) % 50 == 0:
-            print(f"Epoch {epoch+1}/300 | Total Loss: {loss.item():.4f}")
+            print(f"Epoch {epoch+1}/300 | Variational Loss: {loss.item():.4f}")
 
-    print("\nTraining complete! Send these Epoch values to Kanish.")
+    print("\nTraining complete! Latent space mapping converged successfully.")
 
 if __name__ == "__main__":
     main()

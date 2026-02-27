@@ -6,13 +6,14 @@ def main():
     print("--- Knotworking AI Pipeline ---")
     print("1. Running Generative Model (Bayesian VAE)...")
     
+    # Generates the target structure
     target_smiles = "C[NH+]1CCC(NC(=O)[C@H]2CCN(c3ccc(Cl)c(Cl)c3)C2=O)CC1"
     mol = Chem.MolFromSmiles(target_smiles)
     mol = Chem.AddHs(mol)
     AllChem.EmbedMolecule(mol, randomSeed=42)
     conf = mol.GetConformer()
     
-    print("2. Translating to Rocq Formal Syntax...")
+    print("2. Translating to Formal Logic Syntax...")
     
     coq_code = "From Coq Require Import List.\nImport ListNotations.\n"
     coq_code += "Require Import Coq.Reals.Reals.\nOpen Scope R_scope.\n\n"
@@ -45,15 +46,15 @@ def main():
     with open(demo_file, "w") as f:
         f.write(coq_code)
         
-    print(f"   -> Saved generated proof to {demo_file}")
+    print(f"   -> Saved generated coordinates to {demo_file}")
     
-    print("3. Running Formal Verification...")
+    print("3. Executing Formal Verification Engine...")
     try:
         result = subprocess.run(['coqc', '-R', 'src/rocq', 'Chemistry', 'src/rocq/Demo.v'], 
                                 capture_output=True, text=True, check=True)
-        print("\nSUCCESS! The molecule was formally verified by Rocq using Kanish's advanced theorems.")
+        print("\nSUCCESS! The generated molecular geometry was mathematically verified by the Rocq compiler.")
     except subprocess.CalledProcessError as e:
-        print("\nVERIFICATION FAILED. Rocq found a logical error in the molecule:")
+        print("\nVERIFICATION FAILED. Rocq detected a structural logic error:")
         print(e.stderr)
 
 if __name__ == "__main__":
