@@ -7,5 +7,4 @@ src/rocq/HydrogenBonding.v
 src/rocq/FunctionalGroups.v
 src/rocq/MathProperties.v
 src/rocq/Valency.v
-src/rocq/PointGroups.v
 src/rocq/Aromaticity.v
