@@ -27,9 +27,11 @@ class BayesianGraphVAE(nn.Module):
         return self.decoder(z), mu, logvar
 
 def vae_loss_function(recon_x, x, mu, logvar, kl_beta=0.01):
-    MSE = nn.functional.mse_loss(recon_x, x, reduction='sum')
-    KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
-    return MSE + (KLD * kl_beta)
+    mse = nn.functional.mse_loss(recon_x, x, reduction='sum')
+    kld = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+    weighted_kld = kld * kl_beta
+    total = mse + weighted_kld
+    return total, mse, kld, weighted_kld
 
 def main():
     print("Initializing Model Architecture...")
@@ -42,16 +44,29 @@ def main():
     model = BayesianGraphVAE()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-    print("Training Bayesian Graph VAE (KL_beta = 0.01)...")
+    kl_beta = 0.01
+    print(f"Training Bayesian Graph VAE (KL_beta = {kl_beta})...")
     for epoch in range(300): 
         optimizer.zero_grad()
         recon_batch, mu, logvar = model(X_train)
-        loss = vae_loss_function(recon_batch, X_train, mu, logvar, kl_beta=0.01)
+        loss, mse, kld, weighted_kld = vae_loss_function(
+            recon_batch,
+            X_train,
+            mu,
+            logvar,
+            kl_beta=kl_beta,
+        )
         loss.backward()
         optimizer.step()
         
         if (epoch + 1) % 50 == 0:
-            print(f"Epoch {epoch+1}/300 | Variational Loss: {loss.item():.4f}")
+            print(
+                f"Epoch {epoch+1}/300 | Variational Loss: {loss.item():.4f} "
+                f"| MSE: {mse.item():.4f} "
+                f"| KL Term: {kld.item():.4f} "
+                f"| Weighted KL: {weighted_kld.item():.4f} "
+                f"| Beta: {kl_beta:.4f}"
+            )
 
     print("\nTraining complete! Latent space mapping converged successfully.")
 
