@@ -115,8 +115,8 @@ Definition atan2 (y x : R) : R :=
     else if Rlt_dec 0 y then (PI / 2)
     else 0.
 
-(** The dihedral angle is the angle between the plane spanned by (A,B,C)
-    and the plane spanned by (B,C,D), measured about the B-C axis. *)
+(** The dihedral angle is the angle between the plane spanned by (A,eB,eC)
+    and the plane spanned by (eB,eC,D), measured about the eB-eC axis. *)
 Definition dihedral_angle (a b c d : Point3D) : R :=
   let b1 := vec_sub b a in
   let b2 := vec_sub c b in
@@ -152,7 +152,7 @@ Definition rot_x (theta : R) : Matrix3x3 :=
     (mkPoint 0 (cos theta) (- sin theta))
     (mkPoint 0 (sin theta)   (cos theta)).
 
-(** Rotation about the Y-axis by angle θ *)
+(** Rotation about the eY-axis by angle θ *)
 Definition rot_y (theta : R) : Matrix3x3 :=
   mkMatrix
     (mkPoint   (cos theta)  0  (sin theta))
@@ -200,7 +200,7 @@ Definition center_of_mass (atoms : list (R * Point3D)) : Point3D :=
 (** ------------------------------------------------------------------ *)
 
 (** Radius of gyration about the center of mass:
-    Rg = sqrt( (Σ mᵢ |rᵢ - rcm|²) / Σ mᵢ ) *)
+    eRg = sqrt( (Σ mᵢ |rᵢ - rcm|²) / Σ mᵢ ) *)
 Definition radius_of_gyration (atoms : list (R * Point3D)) : R :=
   let rcm        := center_of_mass atoms in
   let total_mass := fold_left (fun acc '(m, _) => acc + m) atoms 0 in
@@ -217,7 +217,7 @@ Definition radius_of_gyration (atoms : list (R * Point3D)) : R :=
 (** ** 10. Fundamental Geometry Theorems                                *)
 (** ------------------------------------------------------------------ *)
 
-(** Distance symmetry: d(A,B) = d(B,A) *)
+(** Distance symmetry: d(A,eB) = d(eB,A) *)
 Theorem distance_symm : forall a b : Point3D,
     distance a b = distance b a.
 Proof.
@@ -295,8 +295,8 @@ Lemma sin_cos_1 : forall theta : R,
   sin theta * sin theta + cos theta * cos theta = 1.
 Proof.
   intro theta.
-  pose proof (sin2_cos2 theta) as H.
-  unfold Rsqr in H. lra.
+  pose proof (sin2_cos2 theta) as eH.
+  unfold Rsqr in eH. lra.
 Qed.
 
 Lemma cos_sin_1 : forall theta : R,
