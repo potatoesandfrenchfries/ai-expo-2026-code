@@ -14,9 +14,9 @@ def main():
     
     print("2. Translating to Rocq Formal Syntax...")
     
-    coq_code = "From Stdlib Require Import List.\nImport ListNotations.\n"
-    coq_code += "Require Import Stdlib.Reals.Reals.\nOpen Scope R_scope.\n\n"
-    coq_code += "Require Import Stdlib.ZArith.ZArith.\n"
+    coq_code = "From Coq Require Import List.\nImport ListNotations.\n"
+    coq_code += "Require Import Coq.Reals.Reals.\nOpen Scope R_scope.\n\n"
+    coq_code += "Require Import Coq.ZArith.ZArith.\n"
     coq_code += "Require Import Chemistry.Atoms.\n"
     coq_code += "Require Import Chemistry.Geometry.\n"
     coq_code += "Require Import Chemistry.Bonds.\n"
@@ -30,12 +30,10 @@ def main():
         pos = conf.GetAtomPosition(i)
         symbol = "e" + mol.GetAtomWithIdx(i).GetSymbol()
         
-        # Convert decimals into exact fractions for Rocq
         x_frac = f"({int(pos.x * 1000)} / 1000)"
         y_frac = f"({int(pos.y * 1000)} / 1000)"
         z_frac = f"({int(pos.z * 1000)} / 1000)"
         
-        # Matches Kanish's advanced AtomInst record
         atom_strings.append(
             f"mkAtom {i} {symbol} (mkPoint {x_frac} {y_frac} {z_frac}) 0%Z None None"
         )
