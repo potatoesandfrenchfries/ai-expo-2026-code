@@ -1,5 +1,4 @@
 import subprocess
-from pathlib import Path
 from rdkit import Chem
 from rdkit.Chem import AllChem
 
@@ -17,13 +16,21 @@ def main():
     
     coq_code = "From Stdlib Require Import List.\nImport ListNotations.\n"
     coq_code += "Require Import Stdlib.Reals.Reals.\nOpen Scope R_scope.\n\n"
+    coq_code += "Require Import Stdlib.ZArith.ZArith.\n"
     coq_code += "Require Import Chemistry.Atoms.\n"
     coq_code += "Require Import Chemistry.Geometry.\n"
     coq_code += "Require Import Chemistry.Bonds.\n"
-    coq_code += "Require Import Chemistry.Molecule.\n\n"
+    coq_code += "Require Import Chemistry.Molecules.\n\n"
+    coq_code += "Require Import Chemistry.MolecularProperties.\n"
+    coq_code += "Require Import Chemistry.HydrogenBonding.\n"
+    coq_code += "Require Import Chemistry.FunctionalGroups.\n"
+    coq_code += "Require Import Chemistry.MathProperties.\n"
+    coq_code += "Require Import Chemistry.Valency.\n"
+    coq_code += "Require Import Chemistry.Aromaticity.\n"
+    coq_code += "Require Import Chemistry.Conformational.\n\n"
     
     coq_code += "Definition demo_molecule : Molecule :=\n"
-    coq_code += "  mkMolecule\n    [ "
+    coq_code += "  mkMol\n    [ "
     
     atom_strings = []
     for i in range(3):
@@ -36,7 +43,9 @@ def main():
         y_frac = f"({int(pos.y * 1000)} / 1000)"
         z_frac = f"({int(pos.z * 1000)} / 1000)"
         
-        atom_strings.append(f"mkAtomInstance {symbol} (mkPoint {x_frac} {y_frac} {z_frac})")
+        atom_strings.append(
+            f"mkAtom {i} {symbol} (mkPoint {x_frac} {y_frac} {z_frac}) 0%Z None None"
+        )
     
     coq_code += " ;\n      ".join(atom_strings)
     coq_code += " ]\n    [].\n"
