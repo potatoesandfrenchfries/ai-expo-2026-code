@@ -86,7 +86,7 @@ def main():
 
     # Loads the data silently (unchanged)
     X_full = torch.load('data/X.pt', weights_only=True)
-    X_train = X_full[:3]
+    X_train = X_full 
 
     model = BayesianGraphVAE()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
