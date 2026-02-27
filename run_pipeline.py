@@ -1,7 +1,13 @@
+import os
+
 import subprocess
 import random
 from rdkit import Chem
 from rdkit.Chem import AllChem
+
+from src.llm.pipeline_layer9 import Layer9FormalValidator
+from src.llm.feedback_controller import FeedbackController
+
 
 def main():
     print("--- Knotworking AI Pipeline ---")
