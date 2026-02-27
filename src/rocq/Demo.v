@@ -10,7 +10,7 @@ Require Import Chemistry.Molecule.
 
 Definition demo_molecule : Molecule :=
   mkMolecule
-    [ mkAtomInstance C (mkPoint (-6405 / 1000) (914 / 1000) (512 / 1000)) ;
-      mkAtomInstance N (mkPoint (-5546 / 1000) (-164 / 1000) (42 / 1000)) ;
-      mkAtomInstance C (mkPoint (-4674 / 1000) (-500 / 1000) (1145 / 1000)) ]
+    [ mkAtomInstance eC (mkPoint (-6405 / 1000) (914 / 1000) (512 / 1000)) ;
+      mkAtomInstance eN (mkPoint (-5546 / 1000) (-164 / 1000) (42 / 1000)) ;
+      mkAtomInstance eC (mkPoint (-4674 / 1000) (-500 / 1000) (1145 / 1000)) ]
     [].

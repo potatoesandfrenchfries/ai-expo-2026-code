@@ -1,6 +1,6 @@
--Q src/rocq Chemistry
-
+-R src/rocq Chemistry
 src/rocq/Atoms.v
-src/rocq/Geometry.v
 src/rocq/Bonds.v
-src/rocq/Molecules.v
+src/rocq/Geometry.v
+src/rocq/Molecule.v
+src/rocq/Demo.v

@@ -27,7 +27,7 @@ def main():
     atom_strings = []
     for i in range(3):
         pos = conf.GetAtomPosition(i)
-        symbol = mol.GetAtomWithIdx(i).GetSymbol()
+        symbol = "e" + mol.GetAtomWithIdx(i).GetSymbol()
         
         # THE FIX: Convert decimals into exact fractions for Rocq
         # e.g., -6.406 becomes (-6406 / 1000)
