@@ -237,7 +237,7 @@ def main():
         if result.stdout:
             print(result.stdout)
     except subprocess.CalledProcessError as e:
-        print("\nVERIFICATION FAILED. Rocq found a logical error in the molecule:")
+        print("\nVERIFICATION FAILED. Rocq detected a structural logic error:")
         print(e.stderr)
         sys.exit(1)
 
