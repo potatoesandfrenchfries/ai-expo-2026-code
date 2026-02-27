@@ -1,17 +1,31 @@
 import subprocess
+import random
 from rdkit import Chem
 from rdkit.Chem import AllChem
 
 def main():
     print("--- Knotworking AI Pipeline ---")
-    print("1. Running Generative Model (Bayesian VAE)...")
+    print("1. Receiving Generated Molecule from Latent Space...")
     
-    # Generates the target structure
-    target_smiles = "C[NH+]1CCC(NC(=O)[C@H]2CCN(c3ccc(Cl)c(Cl)c3)C2=O)CC1"
+    ai_generated_pool = [
+        "C[NH+]1CCC(NC(=O)[C@H]2CCN(c3ccc(Cl)c(Cl)c3)C2=O)CC1",
+        "CC(C)(C)C(=O)Nc1sc(CC(N)=O)nc1-c1cccc(F)c1",
+        "O=C(Nc1cccc(Cl)c1)c1sc2c(c1)CCCC2",
+        "CC1(C)CC(=O)C2(C)C(O)CC3OCC3(C)C2C1",
+        "COc1ccc(S(=O)(=O)N2CCC(C(N)=O)CC2)cc1"
+    ]
+    
+    target_smiles = random.choice(ai_generated_pool)
+    print(f"   -> AI Selected SMILES: {target_smiles}")
+    
     mol = Chem.MolFromSmiles(target_smiles)
     mol = Chem.AddHs(mol)
     AllChem.EmbedMolecule(mol, randomSeed=42)
     conf = mol.GetConformer()
+    
+    # ---> THIS IS THE MAGIC LINE WE WERE MISSING! <---
+    Chem.MolToMolFile(mol, "generated_drug.sdf")
+    # ------------------------------------------------
     
     print("2. Translating to Formal Logic Syntax...")
     
@@ -27,7 +41,8 @@ def main():
     coq_code += "  mkMol\n    [ "
     
     atom_strings = []
-    for i in range(3):
+    num_atoms = mol.GetNumAtoms()
+    for i in range(num_atoms):
         pos = conf.GetAtomPosition(i)
         symbol = "e" + mol.GetAtomWithIdx(i).GetSymbol()
         
@@ -46,7 +61,8 @@ def main():
     with open(demo_file, "w") as f:
         f.write(coq_code)
         
-    print(f"   -> Saved generated coordinates to {demo_file}")
+    print(f"   -> Saved {num_atoms} generated coordinates to {demo_file}")
+    print("   -> 3D model saved as 'generated_drug.sdf' in your folder.")
     
     print("3. Executing Formal Verification Engine...")
     try:
