@@ -13,6 +13,7 @@ If SMILES is omitted the default drug-like molecule is used.
 import subprocess
 import shutil
 import sys
+import os
 
 from rdkit import Chem
 from rdkit.Chem import AllChem
@@ -175,13 +176,21 @@ def _frac(value: float, denom: int = 10000) -> str:
 def main():
     print("--- Knotworking AI Pipeline ---")
 
-    # Accept SMILES from CLI argument
-    if len(sys.argv) >= 2:
-        target_smiles = sys.argv[1]
-        print(f"Using CLI SMILES: {target_smiles}")
-    else:
+    # Accept SMILES from CLI argument (first non-flag argument)
+    # Optional flag: --demo-only (skip full Rocq suite for fastest feedback)
+    run_full_suite = True
+    target_smiles = None
+    for arg in sys.argv[1:]:
+        if arg == "--demo-only":
+            run_full_suite = False
+        elif not arg.startswith("--") and target_smiles is None:
+            target_smiles = arg
+
+    if target_smiles is None:
         target_smiles = DEFAULT_SMILES
         print(f"Using default SMILES: {target_smiles}")
+    else:
+        print(f"Using CLI SMILES: {target_smiles}")
 
     # Step 1
     print("\n1. Running Generative Model (Overfitted)...")
@@ -210,7 +219,7 @@ def main():
     print(f"   -> Atoms emitted: {n_total} | Bonds emitted: {n_bonds}")
 
     # Step 3
-    print("\n3. Running Formal Verification...")
+    print("\n3. Running Formal Verification (generated Demo.v)...")
 
     # Check coqc availability before attempting compilation
     if shutil.which("coqc") is None:
@@ -224,13 +233,46 @@ def main():
             ['coqc', '-R', 'src/rocq', 'Chemistry', demo_file],
             capture_output=True, text=True, check=True
         )
-        print("\nSUCCESS! The molecule was formally verified by Rocq.")
+        print("\nSUCCESS! Demo molecule was formally verified by Rocq.")
         if result.stdout:
             print(result.stdout)
     except subprocess.CalledProcessError as e:
         print("\nVERIFICATION FAILED. Rocq found a logical error in the molecule:")
         print(e.stderr)
         sys.exit(1)
+
+    # Step 4
+    if run_full_suite:
+        print("\n4. Running full Rocq verification suite (incremental + parallel)...")
+
+        if shutil.which("coq_makefile") is None or shutil.which("make") is None:
+            print("   WARNING: coq_makefile or make not found. Skipping full suite.")
+            print("   Install both tools to enable integrated fast full-suite checks.")
+            print("\nPipeline complete (Demo.v verified; full suite skipped).")
+            return
+
+        try:
+            subprocess.run(
+                ["coq_makefile", "-f", "_CoqProject", "-o", "Makefile"],
+                capture_output=True, text=True, check=True
+            )
+
+            jobs = max(1, (os.cpu_count() or 2) - 1)
+            suite_result = subprocess.run(
+                ["make", f"-j{jobs}"],
+                capture_output=True, text=True, check=True
+            )
+            print("SUCCESS! Full Rocq verification suite passed.")
+            if suite_result.stdout:
+                print(suite_result.stdout)
+        except subprocess.CalledProcessError as e:
+            print("\nFULL SUITE FAILED. Rocq reported an error in the project proofs:")
+            print(e.stderr if e.stderr else e.stdout)
+            sys.exit(1)
+    else:
+        print("\n4. Skipping full suite (--demo-only enabled).")
+
+    print("\nPipeline complete.")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,20 @@
 -R src/rocq Chemistry
-src/rocq/Atoms.v
+
+# Compilation flags for better performance
+-arg -w -arg -notation-overridden
+-arg -w -arg -redundant-canonical-projection
+
+# Core geometry and bonds (shared)
+src/rocq/Geometry.v
 src/rocq/Bonds.v
+
+# Optimized modules (fast compilation)
+src/rocq/CommonElements.v
+src/rocq/FastMolecule.v
+src/rocq/FastDemo.v
+
+# Original full modules (slower, kept for completeness)
+src/rocq/Atoms.v
 src/rocq/Molecules.v
 src/rocq/MolecularProperties.v
 src/rocq/HydrogenBonding.v
@@ -10,7 +24,4 @@ src/rocq/Valency.v
 src/rocq/Aromaticity.v
 src/rocq/Conformational.v
 src/rocq/DrugLikeness.v
-src/rocq/Geometry.v
-
-src/rocq/Molecule.v
 src/rocq/Demo.v
