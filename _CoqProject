@@ -15,16 +15,13 @@ src/rocq/FastDemo.v
 
 # Original full modules (slower, kept for completeness)
 src/rocq/Atoms.v
-src/rocq/Bonds.v
 src/rocq/Molecules.v
 src/rocq/Valency.v
 src/rocq/MolecularProperties.v
 src/rocq/MathProperties.v
 src/rocq/HydrogenBonding.v
 src/rocq/FunctionalGroups.v
-src/rocq/DrugLikeness.v
+src/rocq/Aromaticity.v
 src/rocq/Conformational.v
 src/rocq/DrugLikeness.v
-
-src/rocq/Molecule.v
 src/rocq/Demo.v
