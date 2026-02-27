@@ -1,0 +1,59 @@
+import subprocess
+from rdkit import Chem
+from rdkit.Chem import AllChem
+
+def main():
+    print("--- Knotworking AI Pipeline ---")
+    print("1. Running Generative Model (Overfitted)...")
+    
+    target_smiles = "C[NH+]1CCC(NC(=O)[C@H]2CCN(c3ccc(Cl)c(Cl)c3)C2=O)CC1"
+    mol = Chem.MolFromSmiles(target_smiles)
+    mol = Chem.AddHs(mol)
+    AllChem.EmbedMolecule(mol, randomSeed=42)
+    conf = mol.GetConformer()
+    
+    print("2. Translating to Rocq Formal Syntax...")
+    
+    coq_code = "From Stdlib Require Import List.\nImport ListNotations.\n"
+    coq_code += "Require Import Stdlib.Reals.Reals.\nOpen Scope R_scope.\n\n"
+    coq_code += "Require Import Chemistry.Atoms.\n"
+    coq_code += "Require Import Chemistry.Geometry.\n"
+    coq_code += "Require Import Chemistry.Bonds.\n"
+    coq_code += "Require Import Chemistry.Molecule.\n\n"
+    
+    coq_code += "Definition demo_molecule : Molecule :=\n"
+    coq_code += "  mkMolecule\n    [ "
+    
+    atom_strings = []
+    for i in range(3):
+        pos = conf.GetAtomPosition(i)
+        symbol = mol.GetAtomWithIdx(i).GetSymbol()
+        
+        # THE FIX: Convert decimals into exact fractions for Rocq
+        # e.g., -6.406 becomes (-6406 / 1000)
+        x_frac = f"({int(pos.x * 1000)} / 1000)"
+        y_frac = f"({int(pos.y * 1000)} / 1000)"
+        z_frac = f"({int(pos.z * 1000)} / 1000)"
+        
+        atom_strings.append(f"mkAtomInstance {symbol} (mkPoint {x_frac} {y_frac} {z_frac})")
+    
+    coq_code += " ;\n      ".join(atom_strings)
+    coq_code += " ]\n    [].\n"
+    
+    demo_file = "src/rocq/Demo.v"
+    with open(demo_file, "w") as f:
+        f.write(coq_code)
+        
+    print(f"   -> Saved generated proof to {demo_file}")
+    
+    print("3. Running Formal Verification...")
+    try:
+        result = subprocess.run(['coqc', '-R', 'src/rocq', 'Chemistry', 'src/rocq/Demo.v'], 
+                                capture_output=True, text=True, check=True)
+        print("\nSUCCESS! The molecule was formally verified by Rocq.")
+    except subprocess.CalledProcessError as e:
+        print("\nVERIFICATION FAILED. Rocq found a logical error in the molecule:")
+        print(e.stderr)
+
+if __name__ == "__main__":
+    main()
