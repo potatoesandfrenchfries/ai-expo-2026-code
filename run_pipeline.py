@@ -76,8 +76,8 @@ def generate_decision_rocq(mean_var, var_spread, mol):
     hbd = Descriptors.NumHDonors(mol)
     hba = Descriptors.NumHAcceptors(mol)
 
-    coq_code = "Require Import Coq.Reals.Reals.\n"
-    coq_code += "Require Import Coq.micromega.Lra.\n"
+    coq_code = "Require Import Stdlib.Reals.Reals.\n"
+    coq_code += "Require Import Stdlib.micromega.Lra.\n"
     coq_code += "Open Scope R_scope.\n\n"
 
     coq_code += "(* === BNN Uncertainty Values === *)\n"
