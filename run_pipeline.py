@@ -37,7 +37,7 @@ def molecule_to_fingerprint(mol, n_bits=2048):
 def generate_structure_rocq(mol, conf):
     """Generate Rocq code to verify molecular structure (valid atoms, geometry)."""
 
-    coq_code = "From Coq Require Import List.\nImport ListNotations.\n"
+    coq_code = "From Stdlib Require Import List.\nImport ListNotations.\n"
     coq_code += "Require Import Coq.Reals.Reals.\nOpen Scope R_scope.\n\n"
     coq_code += "Require Import Coq.ZArith.ZArith.\n"
     coq_code += "Require Import Chemistry.Atoms.\n"
@@ -164,7 +164,7 @@ def main():
 
 
     ### 3. Verify molecular structure with Rocq (Layer 9a)
-    print("\n[Layer 9a] Verifying molecular structure...")
+    print("\nVerifying molecular structure...")
 
     structure_code = generate_structure_rocq(mol_with_h, conf)
     structure_file = "src/rocq/Demo.v"
@@ -189,7 +189,7 @@ def main():
 
     # Load the trained model
     model = BayesianGraphVAE(input_dim=2048)
-    model.load_state_dict(torch.load("models/best_model.pt", weights_only=True))
+    model.load_state_dict(torch.load("models/model.pt", weights_only=True))
 
     # Monte Carlo uncertainty estimation — 50 forward passes through the VAE
     # Each pass samples different latent vectors due to reparameterization
@@ -206,7 +206,7 @@ def main():
 
 
     ### 5. Verify predictions and drug-likeness with Rocq (Layer 9b)
-    print("\n[Layer 9b] Verifying drug-likeness and prediction confidence...")
+    print("\n Verifying drug-likeness and prediction confidence...")
 
     decision_code = generate_decision_rocq(mean_var, var_spread, mol)
     decision_file = "src/rocq/Decision.v"
