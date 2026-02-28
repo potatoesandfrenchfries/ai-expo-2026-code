@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -132,6 +133,15 @@ def main():
 
     print(f"  Mean predictive variance      : {avg_variance:.5f}")
     print(f"  Error-uncertainty correlation : {corr:.4f}")
+
+    # Persist trained weights so Layer 7 can load them at pipeline runtime.
+    # Format: bare state_dict — matches layer7_molecular_generation._load_vae()
+    # which calls vae.load_state_dict(torch.load(path)) directly.
+    DATA_DIR  = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+    ckpt_path = os.path.join(DATA_DIR, "bayesian_vae.pt")
+    os.makedirs(DATA_DIR, exist_ok=True)
+    torch.save(model.state_dict(), ckpt_path)
+    print(f"\nModel weights saved → {ckpt_path}")
 
 
 if __name__ == "__main__":
