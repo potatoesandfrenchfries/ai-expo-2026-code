@@ -1,83 +1,69 @@
-import os
+"""Knotworking Drug Discovery Pipeline — Phase 1 entry point.
 
-import subprocess
-import random
-from rdkit import Chem
-from rdkit.Chem import AllChem
+Chains Layers 2–10 for an end-to-end run from patient record to ranked
+drug candidates.
 
-from src.llm.pipeline_layer9 import Layer9FormalValidator
-from src.llm.feedback_controller import FeedbackController
+Quick start (no internet or API keys required):
+    python run_pipeline.py --demo
+
+Full run (requires network access + ANTHROPIC_API_KEY for Rocq proof):
+    ANTHROPIC_API_KEY=sk-ant-... python run_pipeline.py
+
+Options:
+    --demo          Use stub data for L3–L5 (no network / API key required).
+    --candidates N  Number of molecules to generate (default: 50).
+    --output PATH   JSON output file path (default: pipeline_output.json).
+
+The pipeline prints a live progress banner as each layer completes and
+produces a unified summary report at the end.  All results are also
+serialised to a JSON file for downstream consumption or audit trails.
+"""
+
+import argparse
+
+from src.pipeline.pipeline_runner import DrugDiscoveryPipeline, demo_patient
 
 
-def main():
-    print("--- Knotworking AI Pipeline ---")
-    print("1. Receiving Generated Molecule from Latent Space...")
-    
-    ai_generated_pool = [
-        "C[NH+]1CCC(NC(=O)[C@H]2CCN(c3ccc(Cl)c(Cl)c3)C2=O)CC1",
-        "CC(C)(C)C(=O)Nc1sc(CC(N)=O)nc1-c1cccc(F)c1",
-        "O=C(Nc1cccc(Cl)c1)c1sc2c(c1)CCCC2",
-        "CC1(C)CC(=O)C2(C)C(O)CC3OCC3(C)C2C1",
-        "COc1ccc(S(=O)(=O)N2CCC(C(N)=O)CC2)cc1"
-    ]
-    
-    target_smiles = random.choice(ai_generated_pool)
-    print(f"   -> AI Selected SMILES: {target_smiles}")
-    
-    mol = Chem.MolFromSmiles(target_smiles)
-    mol = Chem.AddHs(mol)
-    AllChem.EmbedMolecule(mol, randomSeed=42)
-    conf = mol.GetConformer()
-    
-    # ---> THIS IS THE MAGIC LINE WE WERE MISSING! <---
-    Chem.MolToMolFile(mol, "generated_drug.sdf")
-    # ------------------------------------------------
-    
-    print("2. Translating to Formal Logic Syntax...")
-    
-    coq_code = "From Coq Require Import List.\nImport ListNotations.\n"
-    coq_code += "Require Import Coq.Reals.Reals.\nOpen Scope R_scope.\n\n"
-    coq_code += "Require Import Coq.ZArith.ZArith.\n"
-    coq_code += "Require Import Chemistry.Atoms.\n"
-    coq_code += "Require Import Chemistry.Geometry.\n"
-    coq_code += "Require Import Chemistry.Bonds.\n"
-    coq_code += "Require Import Chemistry.Molecules.\n\n"
-    
-    coq_code += "Definition demo_molecule : Molecule :=\n"
-    coq_code += "  mkMol\n    [ "
-    
-    atom_strings = []
-    num_atoms = mol.GetNumAtoms()
-    for i in range(num_atoms):
-        pos = conf.GetAtomPosition(i)
-        symbol = "e" + mol.GetAtomWithIdx(i).GetSymbol()
-        
-        x_frac = f"({int(pos.x * 1000)} / 1000)"
-        y_frac = f"({int(pos.y * 1000)} / 1000)"
-        z_frac = f"({int(pos.z * 1000)} / 1000)"
-        
-        atom_strings.append(
-            f"mkAtom {i} {symbol} (mkPoint {x_frac} {y_frac} {z_frac}) 0%Z None None"
-        )
-    
-    coq_code += " ;\n      ".join(atom_strings)
-    coq_code += " ]\n    [].\n"
-    
-    demo_file = "src/rocq/Demo.v"
-    with open(demo_file, "w") as f:
-        f.write(coq_code)
-        
-    print(f"   -> Saved {num_atoms} generated coordinates to {demo_file}")
-    print("   -> 3D model saved as 'generated_drug.sdf' in your folder.")
-    
-    print("3. Executing Formal Verification Engine...")
-    try:
-        result = subprocess.run(['coqc', '-R', 'src/rocq', 'Chemistry', 'src/rocq/Demo.v'], 
-                                capture_output=True, text=True, check=True)
-        print("\nSUCCESS! The generated molecular geometry was mathematically verified by the Rocq compiler.")
-    except subprocess.CalledProcessError as e:
-        print("\nVERIFICATION FAILED. Rocq detected a structural logic error:")
-        print(e.stderr)
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Knotworking AI Drug Discovery Pipeline — Phase 1",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__,
+    )
+    parser.add_argument(
+        "--demo",
+        action="store_true",
+        help="Run with stub L3–L5 data (no network or API key required).",
+    )
+    parser.add_argument(
+        "--candidates",
+        type=int,
+        default=50,
+        metavar="N",
+        help="Number of molecular candidates to generate (default: 50).",
+    )
+    parser.add_argument(
+        "--output",
+        default="pipeline_output.json",
+        metavar="PATH",
+        help="Path for the JSON results file (default: pipeline_output.json).",
+    )
+    args = parser.parse_args()
+
+    patient  = demo_patient()
+    pipeline = DrugDiscoveryPipeline(
+        n_candidates=args.candidates,
+        demo_mode=args.demo,
+    )
+
+    result = pipeline.run(patient)
+    pipeline.print_full_report(result)
+
+    output_path = args.output
+    if output_path == "pipeline_output.json":
+        output_path = f"pipeline_output_{patient.patient_id}.json"
+    pipeline.save_json(result, output_path)
+
 
 if __name__ == "__main__":
     main()
