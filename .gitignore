@@ -40,3 +40,5 @@ models/*.pt
 .DS_Store
 Thumbs.db
 venv/
+
+generated_drug.sdf
