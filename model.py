@@ -118,6 +118,8 @@ def main():
             )
 
     print("\nTraining complete! Latent space mapping converged successfully.")
+    torch.save(model.state_dict(), "models/model.pt")
+    print("Model saved to models/model.pt")
 
     # Fix 5: MC uncertainty metrics
     print("\nRunning Monte Carlo uncertainty estimation (50 samples)...")
