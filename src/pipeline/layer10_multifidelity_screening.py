@@ -28,7 +28,7 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 from rdkit import Chem
-from rdkit.Chem import Descriptors, QED, GraphDescriptors
+from rdkit.Chem import Descriptors, QED
 
 from src.llm.pipeline_layer9 import ValidationResult
 
@@ -110,7 +110,7 @@ def _l2_physicochemical(mol) -> float:
     logP_gap = max(0.0, max(LOGP_IDEAL_LO - logP, logP - LOGP_IDEAL_HI))
     logP_score = max(0.0, 1.0 - logP_gap / LOGP_PENALTY)
 
-    bertz       = GraphDescriptors.BertzCT(mol)
+    bertz       = Descriptors.BertzCT(mol)
     bertz_score = max(0.0, 1.0 - bertz / BERTZ_NORM)
 
     return round((qed + logP_score + bertz_score) / 3.0, 4)

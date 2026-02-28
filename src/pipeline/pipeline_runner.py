@@ -49,6 +49,7 @@ from src.pipeline.layer10_multifidelity_screening import (
 )
 from src.llm.pipeline_layer9 import Layer9FormalValidator, ValidationResult
 from src.llm.feedback_controller import FeedbackController
+from rdkit import Chem
 
 
 # ---------------------------------------------------------------------------
@@ -324,13 +325,20 @@ class DrugDiscoveryPipeline:
             return self._abort("L4", exc, timing, patient_record)
 
         # ── Layer 5: Target Identification ───────────────────────────────────
+        # disease_id stored here so Layer 6 can receive the correct EFO ID.
+        # Layer6TargetConfidence incorrectly populates disease_id from the gene
+        # Ensembl ID; we overwrite it after L6 completes.
+        # TODO: fix properly by adding disease_id to Layer5Result dataclass.
+        l5_disease_id = "EFO_0000183"   # default; future: map from patient.confirmed_diagnosis
         t0 = time.time()
         try:
             if self.demo_mode:
                 l5_result = _make_demo_l5(l4_result.candidate_targets)
             else:
                 from src.pipeline.layer5_target_identification import Layer5TargetID
-                l5_result = Layer5TargetID().run(l4_result.candidate_targets)
+                l5_result = Layer5TargetID(disease_id=l5_disease_id).run(
+                    l4_result.candidate_targets
+                )
             timing["L5"] = round(time.time() - t0, 2)
             self._step_ok("L5", "Target identification",
                           f"{len(l5_result.ranked_targets)} candidates")
@@ -342,6 +350,8 @@ class DrugDiscoveryPipeline:
         try:
             scorer    = Layer6TargetConfidence()
             l6_result = scorer.run(l3_result, l4_result, l5_result)
+            # Layer6 sets disease_id to the gene Ensembl ID by mistake; correct it.
+            l6_result.disease_id = l5_disease_id
             timing["L6"] = round(time.time() - t0, 2)
             top = l6_result.top_target
             self._step_ok("L6", "Target confidence",
@@ -373,16 +383,30 @@ class DrugDiscoveryPipeline:
             return self._abort("L8", exc, timing, patient_record)
 
         # ── Layer 9: Formal Validation ────────────────────────────────────────
+        # Pre-filter with L8 Lipinski gates to avoid spending LLM calls on
+        # molecules already known to violate hard property bounds.
+        l9_input = [
+            smi for smi in smiles_list
+            if smi in l8_props
+            and l8_props[smi]["MW"]["mean"]   <= 500
+            and l8_props[smi]["LogP"]["mean"]  <= 5
+            and l8_props[smi]["HBD"]["mean"]   <= 5
+            and l8_props[smi]["HBA"]["mean"]   <= 10
+        ] or smiles_list  # fallback: validate all if L8 produced no data
+
         t0 = time.time()
         try:
             validator  = Layer9FormalValidator()
-            l9_results = validator.validate_batch(smiles_list)
+            l9_results = validator.validate_batch(l9_input)
             timing["L9"] = round(time.time() - t0, 2)
 
             n_pass = sum(1 for r in l9_results if r.valid)
             n_fail = len(l9_results) - n_pass
-            self._step_ok("L9", "Formal validation",
-                          f"{n_pass} pass | {n_fail} fail")
+            filtered_count = len(smiles_list) - len(l9_input)
+            detail = f"{n_pass} pass | {n_fail} fail"
+            if filtered_count > 0:
+                detail += f"  (L8 pre-filtered {filtered_count} out)"
+            self._step_ok("L9", "Formal validation", detail)
 
             # Feed failures back into L7 constraints for future refinement
             failures = [r for r in l9_results if not r.valid]
