@@ -32,6 +32,9 @@ pip-wheel-metadata/
 data/*.pt
 data/*.json
 data/*.csv
+src/data/*.csv
+src/data/*.pt
+src/data/*.json
 
 # Model checkpoints
 models/*.pt

@@ -1,0 +1,6 @@
+data/*.csv linguist-generated=true
+data/*.json linguist-generated=true
+data/*.pt linguist-generated=true
+src/data/*.csv linguist-generated=true
+src/data/*.json linguist-generated=true
+src/data/*.pt linguist-generated=true
