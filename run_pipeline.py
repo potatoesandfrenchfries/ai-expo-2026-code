@@ -9,10 +9,10 @@ Knotworking AI — Verified Drug Discovery Pipeline
 """
 
 import subprocess
-import random
 import os
 import torch
 import numpy as np
+import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors, DataStructs
 
@@ -182,19 +182,36 @@ def main():
     ensure_output_dirs()
 
 
-    ### 1. Simulate receiving a molecule from the latent space of a generative model trained on drug-like molecules
-    print("\n[Layer 7] Generating candidate molecule...")
+    ### 1. Decode a molecule from the trained VAE's latent space
+    print("\n[Layer 7] Generating candidate molecule from VAE latent space...")
 
-    # Hardcoded pool of molecules - ideally this would come from the trained BayesianGraphVAE's decoder
-    ai_generated_pool = [
-        "C[NH+]1CCC(NC(=O)[C@H]2CCN(c3ccc(Cl)c(Cl)c3)C2=O)CC1",
-        "CC(C)(C)C(=O)Nc1sc(CC(N)=O)nc1-c1cccc(F)c1",
-        "O=C(Nc1cccc(Cl)c1)c1sc2c(c1)CCCC2",
-        "CC1(C)CC(=O)C2(C)C(O)CC3OCC3(C)C2C1",
-        "COc1ccc(S(=O)(=O)N2CCC(C(N)=O)CC2)cc1"
-    ]
+    if not os.path.exists(MODEL_PATH):
+        print(f"   ✗ Missing trained model checkpoint: '{MODEL_PATH}'")
+        print("   Run 'python model.py' first to train and save the model.")
+        return
 
-    target_smiles = random.choice(ai_generated_pool)
+    _gen_model = BayesianGraphVAE(input_dim=2048)
+    _gen_model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu", weights_only=True))
+    _gen_model.eval()
+
+    # Sample one latent vector from the prior and decode to a soft fingerprint
+    with torch.no_grad():
+        z_sample = torch.randn(1, 16)
+        soft_fp = _gen_model.decode(z_sample)          # (1, 2048) in [0, 1]
+        query_fp = (soft_fp > 0.5).float()             # binarise
+
+    # Nearest-neighbour lookup: find the training SMILES whose fingerprint has
+    # the highest Tanimoto similarity to the decoded binary fingerprint.
+    _train_fps = torch.load("data/X.pt", weights_only=True)   # (N, 2048) binary
+    _smiles_df = pd.read_csv("data/molecules_clean.csv")
+
+    inter = (query_fp * _train_fps).sum(dim=1)
+    union = query_fp.sum() + _train_fps.sum(dim=1) - inter
+    tanimoto = inter / union.clamp(min=1e-8)
+    best_idx = int(tanimoto.argmax())
+
+    target_smiles = _smiles_df.iloc[best_idx]["smiles"]
+    print(f"   Tanimoto similarity to nearest training molecule: {tanimoto[best_idx]:.4f}")
     print(f"   SMILES: {target_smiles}")
 
 

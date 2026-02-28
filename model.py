@@ -21,6 +21,11 @@ class BayesianGraphVAE(nn.Module):
         self.mu_head = nn.Linear(hidden_dim, input_dim)
         self.logvar_head = nn.Linear(hidden_dim, input_dim)
 
+    def decode(self, z):
+        """Decode a latent vector to a soft (sigmoid) fingerprint."""
+        h = self.decoder_hidden(z)
+        return torch.sigmoid(self.mu_head(h))
+
     def reparameterize(self, mu, logvar):
         std = torch.exp(0.5 * logvar)
         eps = torch.randn_like(std)
