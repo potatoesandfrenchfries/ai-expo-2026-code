@@ -1,9 +1,9 @@
 From Stdlib Require Import List.
 Import ListNotations.
-Require Import Coq.Reals.Reals.
+Require Import Stdlib.Reals.Reals.
 Open Scope R_scope.
 
-Require Import Coq.ZArith.ZArith.
+Require Import Stdlib.ZArith.ZArith.
 Require Import Chemistry.Atoms.
 Require Import Chemistry.Geometry.
 Require Import Chemistry.Bonds.
