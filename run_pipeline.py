@@ -10,12 +10,23 @@ Knotworking AI — Verified Drug Discovery Pipeline
 
 import subprocess
 import random
+import os
 import torch
 import numpy as np
 from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors, DataStructs
 
 from model import BayesianGraphVAE, mc_predict
+
+
+OUTPUT_DIR = "outputs"
+ROCQ_OUTPUT_DIR = os.path.join(OUTPUT_DIR, "rocq")
+MODEL_PATH = "models/model.pt"
+
+
+def ensure_output_dirs():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    os.makedirs(ROCQ_OUTPUT_DIR, exist_ok=True)
 
 
 # ──────────────────────────────────────────────
@@ -30,6 +41,18 @@ def molecule_to_fingerprint(mol, n_bits=2048):
     return torch.tensor(arr).unsqueeze(0)
 
 
+def rdkit_bond_to_rocq(rdkit_bond_type):
+    if rdkit_bond_type == Chem.rdchem.BondType.SINGLE:
+        return "SingleBond"
+    if rdkit_bond_type == Chem.rdchem.BondType.DOUBLE:
+        return "DoubleBond"
+    if rdkit_bond_type == Chem.rdchem.BondType.TRIPLE:
+        return "TripleBond"
+    if rdkit_bond_type == Chem.rdchem.BondType.AROMATIC:
+        return "AromaticBond"
+    return "SingleBond"
+
+
 # ──────────────────────────────────────────────
 # ROCQ CODE GENERATION & COMPILATION
 # ──────────────────────────────────────────────
@@ -38,8 +61,10 @@ def generate_structure_rocq(mol, conf):
     """Generate Rocq code to verify molecular structure (valid atoms, geometry)."""
 
     coq_code = "From Stdlib Require Import List.\nImport ListNotations.\n"
-    coq_code += "Require Import Coq.Reals.Reals.\nOpen Scope R_scope.\n\n"
-    coq_code += "Require Import Coq.ZArith.ZArith.\n"
+    coq_code += "Require Import Stdlib.Reals.Reals.\nOpen Scope R_scope.\n\n"
+    coq_code += "Require Import Stdlib.ZArith.ZArith.\n"
+    coq_code += "Require Import Stdlib.Arith.Arith.\n"
+    coq_code += "Require Import Stdlib.micromega.Lia.\n"
     coq_code += "Require Import Chemistry.Atoms.\n"
     coq_code += "Require Import Chemistry.Geometry.\n"
     coq_code += "Require Import Chemistry.Bonds.\n"
@@ -63,7 +88,21 @@ def generate_structure_rocq(mol, conf):
         )
 
     coq_code += " ;\n      ".join(atom_strings)
-    coq_code += " ]\n    [].\n"
+    coq_code += " ]\n    [ "
+
+    bond_strings = []
+    for i, bond in enumerate(mol.GetBonds()):
+        bond_strings.append(
+            f"mkBond {i} {bond.GetBeginAtomIdx()} {bond.GetEndAtomIdx()} {rdkit_bond_to_rocq(bond.GetBondType())} None"
+        )
+
+    coq_code += " ;\n      ".join(bond_strings)
+    coq_code += " ].\n\n"
+
+    coq_code += "Theorem generated_has_atoms : length (mol_atoms demo_molecule) > 0.\n"
+    coq_code += "Proof. compute; lia. Qed.\n\n"
+    coq_code += "Theorem generated_has_bonds : length (mol_bonds demo_molecule) > 0.\n"
+    coq_code += "Proof. compute; lia. Qed.\n"
 
     return coq_code
 
@@ -96,12 +135,16 @@ def generate_decision_rocq(mean_var, var_spread, mol):
     coq_code += "Theorem confidence_check : mean_variance < 0.5.\n"
     coq_code += "Proof. unfold mean_variance. lra. Qed.\n\n"
 
-    coq_code += "(* Lipinski Rule of Five: molecular weight < 500 *)\n"
-    coq_code += "Theorem lipinski_mw : mol_weight < 500.0.\n"
+    coq_code += "(* Uncertainty spread must also remain bounded *)\n"
+    coq_code += "Theorem spread_check : variance_spread < 0.5.\n"
+    coq_code += "Proof. unfold variance_spread. lra. Qed.\n\n"
+
+    coq_code += "(* Lipinski Rule of Five: molecular weight <= 500 *)\n"
+    coq_code += "Theorem lipinski_mw : mol_weight <= 500.0.\n"
     coq_code += "Proof. unfold mol_weight. lra. Qed.\n\n"
 
-    coq_code += "(* Lipinski Rule of Five: LogP < 5 *)\n"
-    coq_code += "Theorem lipinski_logp : mol_logP < 5.0.\n"
+    coq_code += "(* Lipinski Rule of Five: LogP <= 5 *)\n"
+    coq_code += "Theorem lipinski_logp : mol_logP <= 5.0.\n"
     coq_code += "Proof. unfold mol_logP. lra. Qed.\n\n"
 
     coq_code += "(* Lipinski Rule of Five: hydrogen bond donors <= 5 *)\n"
@@ -136,6 +179,8 @@ def main():
     print("  KNOTWORKING AI — Verified Drug Discovery Pipeline")
     print("=" * 60)
 
+    ensure_output_dirs()
+
 
     ### 1. Simulate receiving a molecule from the latent space of a generative model trained on drug-like molecules
     print("\n[Layer 7] Generating candidate molecule...")
@@ -158,22 +203,23 @@ def main():
     mol_with_h = Chem.AddHs(mol)
     AllChem.EmbedMolecule(mol_with_h, randomSeed=42)
     conf = mol_with_h.GetConformer()
-    Chem.MolToMolFile(mol_with_h, "generated_drug.sdf")
+    sdf_path = os.path.join(OUTPUT_DIR, "generated_drug.sdf")
+    Chem.MolToMolFile(mol_with_h, sdf_path)
     print(f"   Atoms: {mol_with_h.GetNumAtoms()} | Bonds: {mol_with_h.GetNumBonds()}")
-    print("   3D model saved as 'generated_drug.sdf'")
+    print(f"   3D model saved as '{sdf_path}'")
 
 
     ### 3. Verify molecular structure with Rocq (Layer 9a)
     print("\nVerifying molecular structure...")
 
     structure_code = generate_structure_rocq(mol_with_h, conf)
-    structure_file = "src/rocq/Demo.v"
+    structure_file = os.path.join(ROCQ_OUTPUT_DIR, "GeneratedDemo.v")
     with open(structure_file, "w") as f:
         f.write(structure_code)
 
     success, error = run_rocq(structure_file)
     if success:
-        print("   ✓ Structure verified — valid atoms and geometry")
+        print("   ✓ Rocq compilation succeeded for generated structure module")
     else:
         print("   ✗ Structure verification FAILED:")
         print(f"     {error}")
@@ -188,8 +234,13 @@ def main():
     fingerprint = molecule_to_fingerprint(mol)
 
     # Load the trained model
+    if not os.path.exists(MODEL_PATH):
+        print(f"   ✗ Missing trained model checkpoint: '{MODEL_PATH}'")
+        print("   Run 'python model.py' first to train and save the model.")
+        return
+
     model = BayesianGraphVAE(input_dim=2048)
-    model.load_state_dict(torch.load("models/model.pt", weights_only=True))
+    model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu", weights_only=True))
 
     # Monte Carlo uncertainty estimation — 50 forward passes through the VAE
     # Each pass samples different latent vectors due to reparameterization
@@ -209,7 +260,7 @@ def main():
     print("\n Verifying drug-likeness and prediction confidence...")
 
     decision_code = generate_decision_rocq(mean_var, var_spread, mol)
-    decision_file = "src/rocq/Decision.v"
+    decision_file = os.path.join(ROCQ_OUTPUT_DIR, "GeneratedDecision.v")
     with open(decision_file, "w") as f:
         f.write(decision_code)
 

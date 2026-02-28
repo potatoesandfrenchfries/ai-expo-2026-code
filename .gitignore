@@ -35,6 +35,7 @@ data/*.csv
 
 # Model checkpoints
 models/*.pt
+outputs/
 
 # OS
 .DS_Store

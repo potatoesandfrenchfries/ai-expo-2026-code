@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import os
 
 
 class BayesianGraphVAE(nn.Module):
@@ -118,6 +119,7 @@ def main():
             )
 
     print("\nTraining complete! Latent space mapping converged successfully.")
+    os.makedirs("models", exist_ok=True)
     torch.save(model.state_dict(), "models/model.pt")
     print("Model saved to models/model.pt")
 
