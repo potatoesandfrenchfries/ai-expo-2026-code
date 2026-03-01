@@ -72,16 +72,36 @@ def vae_loss_function(recon_mu, recon_logvar, x, mu, logvar, beta=1.0, free_bits
 
 # Fix 5: Monte Carlo Uncertainty Estimation
 def mc_predict(model, x, samples=50):
-    model.train()  # keep stochastic reparameterization active
-    preds = []
+    model.train()  # keep stochastic latent sampling active
+
+    mu_samples = []
+    var_samples = []
+
     with torch.no_grad():
         for _ in range(samples):
-            recon_mu, _, _, _ = model(x)
-            preds.append(recon_mu)
-    preds = torch.stack(preds)          # (samples, batch, input_dim)
-    mean = preds.mean(0)
-    variance = preds.var(0)
-    return mean, variance
+            recon_mu, recon_logvar, _, _ = model(x)
+
+            # Clamp log variance to prevent collapse
+            recon_logvar = torch.clamp(recon_logvar, -6, 3)
+
+            mu_samples.append(recon_mu)
+            var_samples.append(torch.exp(recon_logvar))
+
+    mu_samples = torch.stack(mu_samples)   # (samples, batch, dim)
+    var_samples = torch.stack(var_samples)
+
+    mean_prediction = mu_samples.mean(0)
+
+    # Epistemic uncertainty
+    epistemic_var = mu_samples.var(0)
+
+    # Aleatoric uncertainty
+    aleatoric_var = var_samples.mean(0)
+
+    # Total predictive variance
+    predictive_var = epistemic_var + aleatoric_var
+
+    return mean_prediction, predictive_var
 
 
 def main():
