@@ -47,10 +47,13 @@ def kl_divergence(mu, logvar, free_bits=0.5):
 
 # Fix 4: Gaussian NLL as reconstruction loss (replaces MSE)
 def gaussian_nll(x, mu, logvar):
+    # Clamp logvar to prevent exp() overflow/underflow → NaN loss
+    logvar = torch.clamp(logvar, -10, 10)
+    # Sum over features (not mean) so reconstruction and KL are on the same scale
     return 0.5 * (
         logvar +
         (x - mu) ** 2 / torch.exp(logvar)
-    ).mean()
+    ).sum(dim=1).mean()
 
 
 # Fix 2: Cyclical KL Annealing
