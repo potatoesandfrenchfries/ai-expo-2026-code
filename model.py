@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import os
+from torch.utils.data import DataLoader, TensorDataset
 
 
 class BayesianGraphVAE(nn.Module):
@@ -47,10 +48,13 @@ def kl_divergence(mu, logvar, free_bits=0.5):
 
 # Fix 4: Gaussian NLL as reconstruction loss (replaces MSE)
 def gaussian_nll(x, mu, logvar):
+    # Clamp logvar to prevent exp() overflow/underflow → NaN loss
+    logvar = torch.clamp(logvar, -10, 10)
+    # Sum over features (not mean) so reconstruction and KL are on the same scale
     return 0.5 * (
         logvar +
         (x - mu) ** 2 / torch.exp(logvar)
-    ).mean()
+    ).sum(dim=1).mean()
 
 
 # Fix 2: Cyclical KL Annealing
@@ -94,27 +98,36 @@ def main():
 
     free_bits = 0.5
     cycle_length = 100
+    batch_size = 512
     print(f"Training Bayesian Graph VAE (free_bits={free_bits}, cycle_length={cycle_length})...")
 
+    loader = DataLoader(TensorDataset(X_train), batch_size=batch_size, shuffle=True)
+
     for epoch in range(300):
-        optimizer.zero_grad()
-        recon_mu, recon_logvar, mu, logvar = model(X_train)
-
-        # Fix 2: cyclical beta replaces fixed kl_beta
         beta = cyclical_beta(epoch, cycle_length=cycle_length)
+        epoch_loss = epoch_recon = epoch_kl = 0.0
 
-        loss, recon_loss, kl_loss = vae_loss_function(
-            recon_mu, recon_logvar, X_train, mu, logvar,
-            beta=beta, free_bits=free_bits,
-        )
-        loss.backward()
-        optimizer.step()
+        for (batch,) in loader:
+            optimizer.zero_grad()
+            recon_mu, recon_logvar, mu, logvar = model(batch)
 
+            loss, recon_loss, kl_loss = vae_loss_function(
+                recon_mu, recon_logvar, batch, mu, logvar,
+                beta=beta, free_bits=free_bits,
+            )
+            loss.backward()
+            optimizer.step()
+
+            epoch_loss += loss.item()
+            epoch_recon += recon_loss.item()
+            epoch_kl += kl_loss.item()
+
+        n = len(loader)
         if (epoch + 1) % 50 == 0:
             print(
-                f"Epoch {epoch+1}/300 | Loss: {loss.item():.4f} "
-                f"| Recon (NLL): {recon_loss.item():.4f} "
-                f"| KL: {kl_loss.item():.4f} "
+                f"Epoch {epoch+1}/300 | Loss: {epoch_loss/n:.4f} "
+                f"| Recon (NLL): {epoch_recon/n:.4f} "
+                f"| KL: {epoch_kl/n:.4f} "
                 f"| Beta: {beta:.4f}"
             )
 
