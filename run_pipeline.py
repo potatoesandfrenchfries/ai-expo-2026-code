@@ -11,17 +11,21 @@ Knotworking AI — Verified Drug Discovery Pipeline
 import subprocess
 import random
 import os
+import argparse
 import torch
 import numpy as np
 from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors, DataStructs
 
 from model import BayesianGraphVAE, mc_predict
+from src.llm.feedback_controller import FeedbackController, GenerationConstraints
+from src.llm.pipeline_layer9 import Layer9FormalValidator
 
 
 OUTPUT_DIR = "outputs"
 ROCQ_OUTPUT_DIR = os.path.join(OUTPUT_DIR, "rocq")
 MODEL_PATH = "models/model.pt"
+MAX_GENERATION_ATTEMPTS = 3
 
 
 def ensure_output_dirs():
@@ -170,20 +174,35 @@ def run_rocq(filepath):
         return False, e.stderr
 
 
+def _smiles_satisfies_constraints(smiles: str, constraints: GenerationConstraints) -> bool:
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return False
+
+    mw = Descriptors.ExactMolWt(mol)
+    logp = Descriptors.MolLogP(mol)
+    hbd = Descriptors.NumHDonors(mol)
+    hba = Descriptors.NumHAcceptors(mol)
+
+    return (
+        mw <= constraints.max_mw
+        and logp <= constraints.max_logP
+        and hbd <= constraints.max_hbd
+        and hba <= constraints.max_hba
+    )
+
+
 # ──────────────────────────────────────────────
 # MAIN PIPELINE
 # ──────────────────────────────────────────────
 
-def main():
+def main(use_llm_mode: bool = True):
     print("=" * 60)
     print("  KNOTWORKING AI — Verified Drug Discovery Pipeline")
     print("=" * 60)
 
     ensure_output_dirs()
 
-
-    ### 1. Simulate receiving a molecule from the latent space of a generative model trained on drug-like molecules
-    print("\n[Layer 7] Generating candidate molecule...")
 
     # Hardcoded pool of molecules - ideally this would come from the trained BayesianGraphVAE's decoder
     ai_generated_pool = [
@@ -193,46 +212,6 @@ def main():
         "CC1(C)CC(=O)C2(C)C(O)CC3OCC3(C)C2C1",
         "COc1ccc(S(=O)(=O)N2CCC(C(N)=O)CC2)cc1"
     ]
-
-    target_smiles = random.choice(ai_generated_pool)
-    print(f"   SMILES: {target_smiles}")
-
-
-    ### 2. Generate 3D coordinates for the selected molecule using RDKit
-    mol = Chem.MolFromSmiles(target_smiles)
-    mol_with_h = Chem.AddHs(mol)
-    AllChem.EmbedMolecule(mol_with_h, randomSeed=42)
-    conf = mol_with_h.GetConformer()
-    sdf_path = os.path.join(OUTPUT_DIR, "generated_drug.sdf")
-    Chem.MolToMolFile(mol_with_h, sdf_path)
-    print(f"   Atoms: {mol_with_h.GetNumAtoms()} | Bonds: {mol_with_h.GetNumBonds()}")
-    print(f"   3D model saved as '{sdf_path}'")
-
-
-    ### 3. Verify molecular structure with Rocq (Layer 9a)
-    print("\nVerifying molecular structure...")
-
-    structure_code = generate_structure_rocq(mol_with_h, conf)
-    structure_file = os.path.join(ROCQ_OUTPUT_DIR, "GeneratedDemo.v")
-    with open(structure_file, "w") as f:
-        f.write(structure_code)
-
-    success, error = run_rocq(structure_file)
-    if success:
-        print("   ✓ Rocq compilation succeeded for generated structure module")
-    else:
-        print("   ✗ Structure verification FAILED:")
-        print(f"     {error}")
-        print("   Pipeline halted — molecule is structurally invalid.")
-        return
-
-
-    ### 4. Encode molecule as fingerprint and predict properties with BayesianGraphVAE (Layer 8)
-    print("\n[Layer 8] Predicting molecular properties...")
-
-    # Convert molecule to 2048-bit Morgan fingerprint (the format the VAE was trained on)
-    fingerprint = molecule_to_fingerprint(mol)
-
     # Load the trained model
     if not os.path.exists(MODEL_PATH):
         print(f"   ✗ Missing trained model checkpoint: '{MODEL_PATH}'")
@@ -242,48 +221,182 @@ def main():
     model = BayesianGraphVAE(input_dim=2048)
     model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu", weights_only=True))
 
-    # Monte Carlo uncertainty estimation — 50 forward passes through the VAE
-    # Each pass samples different latent vectors due to reparameterization
-    # Variance across passes = model's uncertainty about this molecule
-    mean_pred, variance = mc_predict(model, fingerprint, samples=50)
+    if not use_llm_mode:
+        print("\n[Mode] Non-LLM mode enabled (feedback loop disabled)")
+        target_smiles = random.choice(ai_generated_pool)
+        print("\n[Layer 7] Generating candidate molecule...")
+        print(f"   SMILES: {target_smiles}")
 
-    mean_var = variance.mean().item()       # average uncertainty across all fingerprint bits
-    var_spread = variance.std().item()      # how uneven the uncertainty is across bits
-    recon_error = ((mean_pred - fingerprint) ** 2).mean().item()
+        mol = Chem.MolFromSmiles(target_smiles)
+        mol_with_h = Chem.AddHs(mol)
+        AllChem.EmbedMolecule(mol_with_h, randomSeed=42)
+        conf = mol_with_h.GetConformer()
+        sdf_path = os.path.join(OUTPUT_DIR, "generated_drug.sdf")
+        Chem.MolToMolFile(mol_with_h, sdf_path)
+        print(f"   Atoms: {mol_with_h.GetNumAtoms()} | Bonds: {mol_with_h.GetNumBonds()}")
+        print(f"   3D model saved as '{sdf_path}'")
 
-    print(f"   Reconstruction error:   {recon_error:.6f}")
-    print(f"   Mean variance:          {mean_var:.6f}")
-    print(f"   Variance spread:        {var_spread:.6f}")
+        print("\nVerifying molecular structure...")
+        structure_code = generate_structure_rocq(mol_with_h, conf)
+        structure_file = os.path.join(ROCQ_OUTPUT_DIR, "GeneratedDemo.v")
+        with open(structure_file, "w") as f:
+            f.write(structure_code)
 
+        success, error = run_rocq(structure_file)
+        if not success:
+            print("   ✗ Structure verification FAILED:")
+            print(f"     {error}")
+            print("   Pipeline halted — molecule is structurally invalid.")
+            return
+        print("   ✓ Rocq compilation succeeded for generated structure module")
 
-    ### 5. Verify predictions and drug-likeness with Rocq (Layer 9b)
-    print("\n Verifying drug-likeness and prediction confidence...")
+        print("\n[Layer 8] Predicting molecular properties...")
+        fingerprint = molecule_to_fingerprint(mol)
+        mean_pred, variance = mc_predict(model, fingerprint, samples=50)
+        mean_var = variance.mean().item()
+        var_spread = variance.std().item()
+        recon_error = ((mean_pred - fingerprint) ** 2).mean().item()
 
-    decision_code = generate_decision_rocq(mean_var, var_spread, mol)
-    decision_file = os.path.join(ROCQ_OUTPUT_DIR, "GeneratedDecision.v")
-    with open(decision_file, "w") as f:
-        f.write(decision_code)
+        print(f"   Reconstruction error:   {recon_error:.6f}")
+        print(f"   Mean variance:          {mean_var:.6f}")
+        print(f"   Variance spread:        {var_spread:.6f}")
 
-    success, error = run_rocq(decision_file)
-    if success:
-        mw = Descriptors.MolWt(mol)
-        logp = Descriptors.MolLogP(mol)
-        hbd = Descriptors.NumHDonors(mol)
-        hba = Descriptors.NumHAcceptors(mol)
+        print("\n Verifying drug-likeness and prediction confidence...")
+        decision_code = generate_decision_rocq(mean_var, var_spread, mol)
+        decision_file = os.path.join(ROCQ_OUTPUT_DIR, "GeneratedDecision.v")
+        with open(decision_file, "w") as f:
+            f.write(decision_code)
 
-        print("   ✓ Confidence check passed")
-        print("   ✓ Lipinski Rule of Five satisfied")
+        success, error = run_rocq(decision_file)
+        if success:
+            mw = Descriptors.MolWt(mol)
+            logp = Descriptors.MolLogP(mol)
+            hbd = Descriptors.NumHDonors(mol)
+            hba = Descriptors.NumHAcceptors(mol)
+
+            print("   ✓ Confidence check passed")
+            print("   ✓ Lipinski Rule of Five satisfied")
+            print(f"\n{'=' * 60}")
+            print("  MOLECULE ACCEPTED")
+            print(f"  SMILES:      {target_smiles}")
+            print(f"  Uncertainty: {mean_var:.6f}")
+            print(f"  MW: {mw:.1f} | LogP: {logp:.2f} | HBD: {hbd} | HBA: {hba}")
+            print(f"{'=' * 60}")
+        else:
+            print("   ✗ Decision verification FAILED:")
+            print(f"     {error}")
+            print("\n  MOLECULE REJECTED — failed formal property verification")
+        return
+
+    try:
+        layer9_validator = Layer9FormalValidator()
+    except Exception as exc:
+        print("\n[Layer 9] Unable to initialize formal validator.")
+        print(f"  Reason: {exc}")
+        print("  Ensure Anthropic credentials and Rocq tooling are configured.")
+        print("  Tip: rerun with --non-llm to skip LLM validation.")
+        return
+
+    controller = FeedbackController()
+    accepted_result = None
+    target_smiles = None
+
+    for attempt in range(1, MAX_GENERATION_ATTEMPTS + 1):
+        print(f"\n[Layer 7] Generating candidate molecule (attempt {attempt}/{MAX_GENERATION_ATTEMPTS})...")
+
+        constrained_pool = [
+            s for s in ai_generated_pool
+            if _smiles_satisfies_constraints(s, controller.constraints)
+        ]
+        candidate_pool = constrained_pool if constrained_pool else ai_generated_pool
+        target_smiles = random.choice(candidate_pool)
+        print(f"   SMILES: {target_smiles}")
+
+        ### 2. Generate 3D coordinates for the selected molecule using RDKit
+        mol = Chem.MolFromSmiles(target_smiles)
+        mol_with_h = Chem.AddHs(mol)
+        AllChem.EmbedMolecule(mol_with_h, randomSeed=42)
+        conf = mol_with_h.GetConformer()
+        sdf_path = os.path.join(OUTPUT_DIR, "generated_drug.sdf")
+        Chem.MolToMolFile(mol_with_h, sdf_path)
+        print(f"   Atoms: {mol_with_h.GetNumAtoms()} | Bonds: {mol_with_h.GetNumBonds()}")
+        print(f"   3D model saved as '{sdf_path}'")
+
+        ### 3. Verify molecular structure with Rocq (Layer 9a)
+        print("\nVerifying molecular structure...")
+
+        structure_code = generate_structure_rocq(mol_with_h, conf)
+        structure_file = os.path.join(ROCQ_OUTPUT_DIR, "GeneratedDemo.v")
+        with open(structure_file, "w") as f:
+            f.write(structure_code)
+
+        success, error = run_rocq(structure_file)
+        if success:
+            print("   ✓ Rocq compilation succeeded for generated structure module")
+        else:
+            print("   ✗ Structure verification FAILED:")
+            print(f"     {error}")
+            print("   Applying feedback and retrying candidate generation.")
+            continue
+
+        ### 4. Encode molecule as fingerprint and predict properties with BayesianGraphVAE (Layer 8)
+        print("\n[Layer 8] Predicting molecular properties...")
+        fingerprint = molecule_to_fingerprint(mol)
+
+        mean_pred, variance = mc_predict(model, fingerprint, samples=50)
+        mean_var = variance.mean().item()
+        var_spread = variance.std().item()
+        recon_error = ((mean_pred - fingerprint) ** 2).mean().item()
+
+        print(f"   Reconstruction error:   {recon_error:.6f}")
+        print(f"   Mean variance:          {mean_var:.6f}")
+        print(f"   Variance spread:        {var_spread:.6f}")
+
+        ### 5. Layer 9 formal validation + feedback loop
+        print("\n[Layer 9] Running formal LLM validation...")
+        result = layer9_validator.validate_molecule(target_smiles)
+        if result.valid:
+            accepted_result = result
+            break
+
+        controller.extract_constraints_from_failures([result])
+        controller.update_vae_sampling(model, controller.constraints)
+
+        print("   ✗ Layer 9 validation failed; updated generation constraints:")
+        print(
+            "     "
+            f"MW<={controller.constraints.max_mw}, "
+            f"LogP<={controller.constraints.max_logP}, "
+            f"HBD<={controller.constraints.max_hbd}, "
+            f"HBA<={controller.constraints.max_hba}"
+        )
+        print(f"   Error type: {result.error_type} | Attempts: {result.attempts}")
+
+    if accepted_result:
+        mw = Descriptors.MolWt(Chem.MolFromSmiles(target_smiles))
+        logp = Descriptors.MolLogP(Chem.MolFromSmiles(target_smiles))
+        hbd = Descriptors.NumHDonors(Chem.MolFromSmiles(target_smiles))
+        hba = Descriptors.NumHAcceptors(Chem.MolFromSmiles(target_smiles))
+
+        print("\n   ✓ Formal LLM validation passed")
+        print("   ✓ Feedback loop converged")
         print(f"\n{'=' * 60}")
         print(f"  MOLECULE ACCEPTED")
         print(f"  SMILES:      {target_smiles}")
-        print(f"  Uncertainty: {mean_var:.6f}")
+        print(f"  Confidence:  {accepted_result.confidence:.2f}")
         print(f"  MW: {mw:.1f} | LogP: {logp:.2f} | HBD: {hbd} | HBA: {hba}")
         print(f"{'=' * 60}")
     else:
-        print("   ✗ Decision verification FAILED:")
-        print(f"     {error}")
-        print(f"\n  MOLECULE REJECTED — failed formal property verification")
+        print("\n  MOLECULE REJECTED — failed Layer 9 validation after feedback retries")
+        print(f"  Failure summary: {controller.failure_summary()}")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Knotworking AI demo pipeline")
+    parser.add_argument(
+        "--non-llm",
+        action="store_true",
+        help="Run without LLM formal validation and feedback loop.",
+    )
+    args = parser.parse_args()
+    main(use_llm_mode=not args.non_llm)
