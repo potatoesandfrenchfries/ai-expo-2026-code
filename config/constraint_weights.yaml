@@ -1,0 +1,36 @@
+# Adversarial feedback loop — constraint penalty weights
+#
+# penalty = sum_i( weight_i * violated_i * magnitude_i )
+#
+# PAINS and toxicity carry higher weights because they represent qualitative
+# showstoppers (hard-to-fix substructure alerts) rather than marginal numeric
+# violations (Baell & Holloway 2010, J Med Chem 53:2719).
+#
+# Constraint types:
+#   mw        — molecular weight > 500 Da       (Lipinski RO5)
+#   logp      — logP > 5                        (Lipinski RO5)
+#   hbd       — H-bond donors > 5               (Lipinski RO5)
+#   hba       — H-bond acceptors > 10           (Lipinski RO5)
+#   rot       — rotatable bonds > 10            (Veber rules)
+#   psa       — polar surface area > 140 Å²     (Veber rules)
+#   pains     — PAINS / Brenk structural alert  (binary)
+#   sa_score  — SA score > 6.0                  (hard to synthesise)
+#   toxicity  — toxicophore match               (binary)
+
+weights:
+  mw:       1.0
+  logp:     1.5
+  hbd:      1.0
+  hba:      1.0
+  rot:      0.8
+  psa:      0.8
+  pains:    5.0
+  sa_score: 2.0
+  toxicity: 5.0
+
+# Clip violation magnitudes to this maximum before weighting.
+# Prevents pathological molecules from dominating the reward signal.
+magnitude_clip: 10.0
+
+# Magnitude for binary constraints (pains, toxicity) — always 1.0 by default.
+binary_magnitude: 1.0

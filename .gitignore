@@ -39,6 +39,9 @@ src/data/*.json
 # Model checkpoints
 models/*.pt
 outputs/
+outputs/synthetic/
+outputs/synthetic/*.csv
+outputs/synthetic/*.png
 
 # OS
 .DS_Store
